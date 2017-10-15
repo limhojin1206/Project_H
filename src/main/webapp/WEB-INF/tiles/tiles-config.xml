@@ -13,4 +13,4 @@
 		<put-attribute name="title" expression="${title}"/>
 		<put-attribute name="section" expression="/WEB-INF/views/${section}.jsp"/>
 	</definition>
-</tiles-definitions>	
+</tiles-definitions>
