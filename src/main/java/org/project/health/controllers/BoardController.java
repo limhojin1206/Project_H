@@ -1,5 +1,6 @@
 package org.project.health.controllers;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,11 +19,33 @@ public class BoardController {
 	BoardDao dao;
 	
 	@RequestMapping("/list")
-	public ModelAndView listHandle() {
+	public ModelAndView listHandle(@RequestParam(name="page", defaultValue="1") int page) {
 		ModelAndView mav = new ModelAndView("t_expr");
-		List<Map> list = dao.readAll();
-		mav.addObject("section", "board/list");
+		int tot = dao.countAll();
+		int pageSize = 5;
+		int size = tot / pageSize;
+		if(tot % pageSize > 0) {
+			size++;
+		}
+		
+		mav.addObject("tot", tot);
+		mav.addObject("last", size);
+		mav.addObject("pb", (page - 1) / 10 * 10 + 1);	// 1 ~ 10 ==> 1
+		mav.addObject("pe", (page - 1) / 10 * 10 + 10 < size ? (page - 1) / 10 * 10 + 10 : size);	// 11 ~ 20 ==> 11
+		
+		if(page > size) {
+			page = size;
+		}
+		if(page < 0) { 
+			page = 1;
+		}
+		
+		Map map = new HashMap();
+		map.put("start", (page - 1) * pageSize + 1 );
+		map.put("end", page * pageSize);
+		List<Map> list = dao.readAll(map);
 		mav.addObject("title", "°Ô½ÃÆÇ");
+		mav.addObject("section", "board/list");
 		mav.addObject("list", list);
 		return mav;
 	}

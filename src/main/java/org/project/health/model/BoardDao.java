@@ -12,8 +12,8 @@ public class BoardDao {
 	@Autowired
 	SqlSessionTemplate template;
 	
-	public List<Map> readAll(){
-		return template.selectList("board.readAll");
+	public List<Map> readAll(Map map){
+		return template.selectList("board.readAll", map);
 	}
 	
 	public Map readOne(String no) {
@@ -22,5 +22,9 @@ public class BoardDao {
 	
 	public int addOne(Map map) {
 		return template.insert("board.addOne", map);
+	}
+	
+	public int countAll() {
+		return template.selectOne("board.countAll");
 	}
 }
