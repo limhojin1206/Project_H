@@ -15,4 +15,12 @@ public class BoardDao {
 	public List<Map> readAll(){
 		return template.selectList("board.readAll");
 	}
+	
+	public Map readOne(String no) {
+		return template.selectOne("board.readOne", no);
+	}
+	
+	public int addOne(Map map) {
+		return template.insert("board.addOne", map);
+	}
 }
