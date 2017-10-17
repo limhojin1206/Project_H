@@ -24,10 +24,10 @@ public class AlertWSHandler extends TextWebSocketHandler {
 				s.sendMessage(new TextMessage(message));
 			} catch (IOException e) {
 				e.printStackTrace();
+	
 			}
 		}
 	}
-	
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {

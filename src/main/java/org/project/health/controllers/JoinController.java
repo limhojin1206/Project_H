@@ -29,7 +29,7 @@ public class JoinController {
 	MemberDao memberDao;
 
 	@Autowired
-	AlertWSHandler aws;	// ������ �ڵ鷯�� AutoWired �ɾ ���� ���.
+	AlertWSHandler aws;	
 	
 	@Autowired
 	JavaMailSender sender;
@@ -47,14 +47,15 @@ public class JoinController {
 		String key = UUID.randomUUID().toString().substring(0,13);
 		session.setAttribute("authkey",key);
 		try {
+			
 			MimeMessage msg = sender.createMimeMessage();
 			msg.setRecipient(RecipientType.TO, new InternetAddress(target));
-			msg.setSubject("[SPRING HUB] ����Ű�Դϴ�. ");
+			msg.setSubject("[SPRING HUB] 인증키입니다. ");
 			RestTemplate tm = new RestTemplate();
 			// String text = tm.getForObject("/auth/mail", String.class);
 			String text ="<h1>SPRING HUB</h1>";
-			text +="�������������� ���� ����Ű�� �����帳�ϴ�.";
-			text += "����Ű : <b>"+key+"</b>";
+			text +="가입진행절차에 따라 인증키를 보내드립니다.";
+			text += "인증키 : <b>"+key+"</b>";
 			//
 			msg.setText(text,"utf-8","html");
 			sender.send(msg);
@@ -79,6 +80,7 @@ public class JoinController {
 		}
 	}
 	
+	
 	@PostMapping("/join")
 	public String joinPostHandle(@RequestParam Map map, HttpSession session, Model model) {
 		try {
@@ -88,9 +90,9 @@ public class JoinController {
 			session.setAttribute("auth_id", map.get("id"));
 			
 			/*
-			 * AlertWSHandler�� ���ؼ�, �޼����� ��������. 
+			 * AlertWSHandler를 통해서, 메세지를 보내보자. 
 			 */
-			aws.sendMessage("������ �����Ͽ����ϴ�"); 
+			aws.sendMessage("고객이 가입하였습니다"); 
 			return "redirect:/";
 		} catch (Exception e) {
 			e.printStackTrace();

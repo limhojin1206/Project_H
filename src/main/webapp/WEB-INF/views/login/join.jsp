@@ -16,7 +16,7 @@ b {
 		<h3> 회 원 가 입 </h3>
 		<h3 style="margin-top: 50px;"></h3>
 		<c:if test="${!empty temp }">
-			<b style="color:red">join failed..</b>	
+			<b style="color:red">로그인에 실패하였습니다.</b>	
 		</c:if>
 		<form action="/join" method="post" autocomplete="off">
 			<p>

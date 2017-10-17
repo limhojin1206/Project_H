@@ -18,13 +18,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@RequestMapping("/login")
 public class LoginController {
 	@Autowired
 	MemberDao memberDao;
 	
 	@GetMapping("/login")
 	public String loginHandle(Model model) {
-		model.addAttribute("section", "login/login");
+		model.addAttribute("section", "/login/main");
 		return "t_expr";
 	}
 	
@@ -32,17 +33,19 @@ public class LoginController {
 	public ModelAndView sessionHandle(@RequestParam Map param, HttpSession session,
 			@RequestParam(name="redirect", required=false) String url) throws SQLException {
 		ModelAndView mav = new ModelAndView();
+		System.out.println("param : " + param);
 		int t = memberDao.existOne(param);
+		System.out.println("t : " + t);
 		if (t == 1) {
-			HashMap u = memberDao.readOneByIdOrEmail((String)param.get("id"));
-			System.out.println(t);
+			HashMap u = memberDao.readOneByIdOrEmail((String)param.get("idmail"));
+			//System.out.println(t);
 			session.setAttribute("auth", u);
 			session.setAttribute("auth_id", u.get("ID"));
-			System.out.println("["+url+"]");
+			//System.out.println("["+url+"]");
 			if(url != null) {
 				mav.setViewName("redirect:"+url);
 			}else {
-				mav.setViewName("redirect:/");
+				mav.setViewName("redirect:/login/main");
 			}
 		} else {
 			mav.setViewName("t_expr");
@@ -61,6 +64,7 @@ public class LoginController {
 		session.invalidate();
 		
 		return "redirect:/";
+
 	}
 }
 
