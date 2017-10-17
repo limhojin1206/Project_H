@@ -4,10 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.project.health.model.BoardDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -60,11 +64,26 @@ public class BoardController {
 		return mav;
 	}
 	
-	@RequestMapping("/add")
-	public ModelAndView addHandle(@RequestParam Map map) {
-		ModelAndView mav = new ModelAndView("t_expr");
+	@PostMapping("/add")
+	public ModelAndView addPostHandle(@RequestParam Map map) {
+		ModelAndView mav = new ModelAndView("redirect:/board/list?page=1");
 		int rst = dao.addOne(map);
 		mav.addObject("rst", rst);
 		return mav;
 	}
+	
+	@GetMapping("/add")
+	public ModelAndView addGetHandle() {
+		ModelAndView mav = new ModelAndView("t_expr");
+		mav.addObject("title", "±Û¾²±â");
+		mav.addObject("section", "board/add");
+		return mav;
+	}
+	
+	@RequestMapping("/submit")
+	public void submit(@RequestParam Map param){
+		dao.addOne(param);
+	    System.out.println("¿¡µðÅÍ ÄÁÅÙÃ÷°ª:"+param);
+	}
+
 }

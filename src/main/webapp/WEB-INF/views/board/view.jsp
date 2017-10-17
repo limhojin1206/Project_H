@@ -10,7 +10,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><pre class="">${view.CONTENT }</pre></td>
+        <td><pre name="content" id="editor" rows="10" cols="100" style="width:766px; height:412px;">${view.CONTENT }</pre></td>
       </tr>
     </tbody>
   </table>  
