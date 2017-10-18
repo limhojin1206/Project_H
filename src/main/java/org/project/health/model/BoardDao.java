@@ -28,4 +28,12 @@ public class BoardDao {
 	public int countAll() {
 		return template.selectOne("board.countAll");
 	}
+	
+	public List<Map> search(Map map){
+		return template.selectList("board.search", map);
+	}
+	
+	public int countSearch(Map map) {
+		return template.selectOne("board.countSearch", map);
+	}
 }

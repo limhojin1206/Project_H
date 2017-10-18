@@ -22,7 +22,15 @@
 	<update id="countUp">
 		update boardnotice set cnt = cnt+1 where no=#{no}
 	</update>
-	<select id="search">
-		
+	<select id="search" resultType="java.util.HashMap">
+		select * from (
+    		select rownum r, t.* from (
+        		select b.*, r.c from boardnotice b left join (
+            		select bno, count(*) c from REPLYNOTICE group by bno) r on b.no = r.bno
+            			where ${type} like '%'||#{search}||'%' order by b.no desc) t )
+            			<!--  where r between #{start} and #{end}  -->
+	</select>
+	<select id="countSearch" resultType="java.lang.Integer">
+		select count(*) cnt from boardnotice where title like '%'||#{search}||'%'
 	</select>
 </mapper>

@@ -23,7 +23,7 @@
 	</c:choose>
 	<hr />
 	<a href="/board/list"><button>목록으로</button></a>
-	<a href="/delete.do?num=${view.NO }"><button>삭제</button></a>
+	<a href="#/${view.NO }"><button>삭제</button></a>
 	<hr/>
 	<div id="view" style="width: 80%" align="left">
 	</div>

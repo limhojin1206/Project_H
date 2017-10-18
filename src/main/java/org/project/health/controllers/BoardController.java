@@ -25,11 +25,16 @@ public class BoardController {
 	@PostMapping("/search")
 	public ModelAndView searchHandle(@RequestParam Map map) {
 		System.out.println(map);
-		String s = (String) map.get("search");
-		s = s.replace(" ",",");
-		System.out.println(s);
-		
-		ModelAndView mav = new ModelAndView();
+		//String s = (String) map.get("search");
+		//s = s.replace(" ",",");
+		//System.out.println(s);
+		int tot = dao.countSearch(map);
+		List<Map> list = dao.search(map);
+		System.out.println(list);
+		ModelAndView mav = new ModelAndView("t_expr");
+		mav.addObject("title", "검색결고");
+		mav.addObject("section", "board/list");
+		mav.addObject("list", list);
 				
 		return mav;
 	}
@@ -97,5 +102,4 @@ public class BoardController {
 		dao.addOne(param);
 	    System.out.println("에디터 컨텐츠값:"+param);
 	}
-
 }

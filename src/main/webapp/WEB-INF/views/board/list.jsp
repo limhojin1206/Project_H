@@ -27,6 +27,9 @@
 		</c:forEach>
 		</tbody>
 	</table>
+	<p align="right" style="margin-right: 30px;">
+		<a href="/board/add"><button type="button">글작성</button></a>
+	</p>
 	<div>
 		<c:if test="${param.page gt 1 }">
 			<a href="/board/list?page=${param.page -1 }" style="text-decoration: none">
@@ -53,6 +56,7 @@
 			<select name="type" style="size: 10px;">
 				<option value="title">제목</option>
 				<option value="content">내용</option>
+				<option value="id">ID</option>
 			</select>
 			<input id="search" name="search" type="text">
 			<button type="submit">검색</button>
