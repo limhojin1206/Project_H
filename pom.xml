@@ -29,6 +29,7 @@
 		    <artifactId>mail</artifactId>
 		    <version>1.4.7</version>
 		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/org.springframework.integration/spring-integration-mail -->
 		<dependency>
 		    <groupId>org.springframework.integration</groupId>
@@ -142,6 +143,7 @@
 		</dependency>	
 		
 		<!-- Logging -->
+		
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -245,6 +247,8 @@
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
                 </configuration>
+                
+                
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

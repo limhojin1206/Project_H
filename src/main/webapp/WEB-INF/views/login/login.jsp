@@ -1,14 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="row">
 	<div class="col-sm-8">
 		<div id="myCarousel" class="carousel slide" data-ride="carousel"
@@ -75,7 +67,7 @@ s
 		<c:if test="${!empty temp }">
 			<b style="color: red">로그인 실패</b>
 		</c:if>
-		<form action="/login/main" method="post" autocomplete="off">
+		<form action="/main" method="post" autocomplete="off">
 			<c:if test="${ !empty param.redirect }">
 				<input type="hidden" name="redirect" value="${param.redirect }" />
 			</c:if>
@@ -105,3 +97,11 @@ s
 	</div>
 </div>
 </div>
+</div>
+
+
+
+
+
+
+

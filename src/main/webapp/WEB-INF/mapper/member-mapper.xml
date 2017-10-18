@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+
+	<select id="searchById" resultType="java.util.HashMap">
+		select  * from member where id like #{id}
+	</select>
+	<insert id="addBasic">
+		insert into member(id, pass, email) values (#{id},#{pass}, #{email})		
+	</insert>
+	<insert id="addDetail">
+		insert into detail(id) values (#{id})		
+	</insert>
+	
+	<select id="checkByIdmailAndPass" resultType="java.lang.Integer">
+		select count(*) from member where (ID=#{idmail} or EMAIL=#{idmail})
+			 and PASSWORD=#{PASS, jdbcType=VARCHAR }
+	</select>
+	<select id="readOneByIdOrEmail" resultType="java.util.HashMap">
+		select m.*, d.* from member m join detail d on m.id = d.id
+			where (m.id=#{idmail} or m.email=#{idmail})
+	</select>
+	
+	<update id="updateOneDetail">
+		update detail set name=#{name} 
+			where id=#{id} 
+	</update>
+	
+	<select id="countAllMembers" resultType="java.lang.Integer">
+		select count(*) as cnt from member
+	</select>
+	
+
+
+
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
