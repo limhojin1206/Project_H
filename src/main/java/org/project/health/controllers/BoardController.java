@@ -22,6 +22,18 @@ public class BoardController {
 	@Autowired
 	BoardDao dao;
 	
+	@PostMapping("/search")
+	public ModelAndView searchHandle(@RequestParam Map map) {
+		System.out.println(map);
+		String s = (String) map.get("search");
+		s = s.replace(" ",",");
+		System.out.println(s);
+		
+		ModelAndView mav = new ModelAndView();
+				
+		return mav;
+	}
+	
 	@RequestMapping("/list")
 	public ModelAndView listHandle(@RequestParam(name="page", defaultValue="1") int page) {
 		ModelAndView mav = new ModelAndView("t_expr");

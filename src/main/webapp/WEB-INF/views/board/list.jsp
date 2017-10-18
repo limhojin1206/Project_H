@@ -48,4 +48,14 @@
 				<b>다음▶</b></a>
 		</c:if>
 	</div>
+	<div>
+		<form action="/board/search" method="post">
+			<select name="type" style="size: 10px;">
+				<option value="title">제목</option>
+				<option value="content">내용</option>
+			</select>
+			<input id="search" name="search" type="text">
+			<button type="submit">검색</button>
+		</form>
+	</div>
 </div>

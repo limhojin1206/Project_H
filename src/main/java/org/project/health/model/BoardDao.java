@@ -17,6 +17,7 @@ public class BoardDao {
 	}
 	
 	public Map readOne(String no) {
+		template.update("board.countUp", no);
 		return template.selectOne("board.readOne", no);
 	}
 	

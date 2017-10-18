@@ -14,9 +14,15 @@
 		select * from boardnotice where no=#{no}
 	</select>
 	<insert id="addOne">
-		insert into boardnotice values(boardnotice_seq.nextval, #{title}, #{id}, 0, sysdate, #{content})
+		insert into boardnotice values(boardnotice_seq.nextval, #{title}, #{id}, 0, sysdate+(9/24), #{content})
 	</insert>
 	<select id="countAll" resultType="java.lang.Integer">
 		select count(*) cnt from boardnotice
+	</select>
+	<update id="countUp">
+		update boardnotice set cnt = cnt+1 where no=#{no}
+	</update>
+	<select id="search">
+		
 	</select>
 </mapper>
