@@ -9,10 +9,11 @@
 		<thead>
 			<tr>
 				<th style="width: 10%">번호</th>
-				<th style="width: 50%">제목</th>
+				<th style="width: 40%">제목</th>
 				<th style="width: 10%">작성자</th>
 				<th style="width: 20%">작성일</th>
 				<th style="width: 10%">조회수</th>
+				<th style="width: 10%">추천수</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -23,6 +24,7 @@
 				<td>${obj.ID }</td>
 				<td><fmt:formatDate value="${obj.WDATE }" pattern="yyyy.MM.dd HH:mm"/></td>
 				<td><fmt:formatNumber value="${obj.CNT }" pattern="#,###" /></td>
+				<td><fmt:formatNumber value="${obj.RECOMMEND }" pattern="#,###" /></td>
 			</tr>
 		</c:forEach>
 		</tbody>
@@ -32,13 +34,24 @@
 	</p>
 	<div>
 		<c:if test="${param.page gt 1 }">
-			<a href="/board/list?page=${param.page -1 }" style="text-decoration: none">
-				<b>◀ 이전</b></a>	
+			<c:choose>
+				<c:when test="${empty mode }">
+					<a href="/board/list?page=${param.page -1 }" style="text-decoration: none">
+						<b>◀ 이전</b></a>
+				</c:when>
+				<c:otherwise>
+					<a href="/board/search?page=${param.page -1 }&type=${mode.type}&search=${mode.search}" style="text-decoration: none">
+						<b>◀ 이전</b></a>
+				</c:otherwise>
+			</c:choose>
 		</c:if>
 		<c:forEach var="i" begin="${pb }" end="${pe }" varStatus="vs">
 			<c:choose>
 				<c:when test="${i eq param.page }">
 					<b>${i }</b>
+				</c:when>
+				<c:when test="${!empty mode }">
+					<a href="/board/search?page=${i }&type=${mode.type}&search=${mode.search}" style="text-decoration: none">${i }</a>
 				</c:when>
 				<c:otherwise>
 					<a href="/board/list?page=${i }" style="text-decoration: none">${i }</a>
@@ -47,12 +60,20 @@
 			<c:if test="${!vs.last }">|</c:if>
 		</c:forEach>
 		<c:if test="${param.page lt last }">
-			<a href="/board/list?page=${param.page +1 }" style="text-decoration: none">
-				<b>다음▶</b></a>
+			<c:choose>
+				<c:when test="${empty mode }">
+					<a href="/board/list?page=${param.page +1 }" style="text-decoration: none">
+						<b>다음 ▶</b></a>	
+				</c:when>
+				<c:otherwise>
+					<a href="/board/search?page=${param.page +1 }&type=${mode.type}&search=${mode.search}" style="text-decoration: none">
+						<b>다음 ▶</b></a>
+				</c:otherwise>
+			</c:choose>
 		</c:if>
 	</div>
 	<div>
-		<form action="/board/search" method="post">
+		<form action="/board/search?page=1" method="post">
 			<select name="type" style="size: 10px;">
 				<option value="title">제목</option>
 				<option value="content">내용</option>

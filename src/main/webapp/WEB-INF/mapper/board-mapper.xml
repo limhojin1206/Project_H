@@ -14,7 +14,7 @@
 		select * from boardnotice where no=#{no}
 	</select>
 	<insert id="addOne">
-		insert into boardnotice values(boardnotice_seq.nextval, #{title}, #{id}, 0, sysdate+(9/24), #{content})
+		insert into boardnotice values(boardnotice_seq.nextval, #{title}, #{id}, 0, sysdate+(9/24), #{content}, 0)
 	</insert>
 	<select id="countAll" resultType="java.lang.Integer">
 		select count(*) cnt from boardnotice
@@ -28,9 +28,15 @@
         		select b.*, r.c from boardnotice b left join (
             		select bno, count(*) c from REPLYNOTICE group by bno) r on b.no = r.bno
             			where ${type} like '%'||#{search}||'%' order by b.no desc) t )
-            			<!--  where r between #{start} and #{end}  -->
+            				where r between #{start} and #{end}
 	</select>
 	<select id="countSearch" resultType="java.lang.Integer">
-		select count(*) cnt from boardnotice where title like '%'||#{search}||'%'
+		select count(*) cnt from boardnotice where ${type} like '%'||#{search}||'%'
 	</select>
+	<update id="recommendUp">
+		update boardnotice set recommend = recommend+1 where no=#{bno}
+	</update>
+	<insert id="addRecommend">
+		insert into recommendnotice values(#{bno}, #{id}, sysdate+(9/24))
+	</insert>
 </mapper>

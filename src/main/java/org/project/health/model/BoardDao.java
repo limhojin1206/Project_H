@@ -36,4 +36,13 @@ public class BoardDao {
 	public int countSearch(Map map) {
 		return template.selectOne("board.countSearch", map);
 	}
+	
+	public int addRecommend(Map map) {
+		try {
+			template.insert("board.addRecommend", map);
+			return template.update("board.recommendUp", map);
+		}catch(Exception e) {
+			return 0;
+		}
+	}
 }

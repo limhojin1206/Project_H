@@ -15,6 +15,7 @@
 					<small>작성자 : ${view.ID } | 작성일 : <fmt:formatDate
 							pattern="MM.dd.yyyy HH:mm:ss" value="${view.WDATE }" /> | 조회수
 						: <fmt:formatNumber value="${view.CNT }" pattern="#,###" />
+						| 추천수 : <fmt:formatNumber value="${view.RECOMMEND }" pattern="#,###" />
 					</small>
 				</p>
 				<pre style="font-family: 맑은 고딕; font-size: 10pt; min-height: 250px;">${view.CONTENT }</pre>
@@ -22,7 +23,9 @@
 		</c:otherwise>
 	</c:choose>
 	<hr />
+	<a><button id="rbt" type="submit">추천하기</button></a>
 	<a href="/board/list"><button>목록으로</button></a>
+	<a href="#"><button>수정</button></a>
 	<a href="#/${view.NO }"><button>삭제</button></a>
 	<hr/>
 	<div id="view" style="width: 80%" align="left">
@@ -42,6 +45,25 @@
 	<hr/>
 </div>
 <script>
+	$("#rbt").click(function(){
+		$.ajax({
+			"type" : "post",	// default : "get"
+			"async" : true,		// default : true
+			"url" : "/board/recommend",
+			"data" : {
+				"bno" : ${view.NO},
+				"id" : "asd"
+			}
+		}).done(function(r){
+			if(r == "YYYY"){
+				window.alert("추천 완료~");
+				location.reload();
+			}else{
+				window.alert("이미 추천한 글입니다.");			
+			};
+		});
+	});
+
 	document.getElementById("sbt").onclick = function() {
 		var parent = ${view.NO};
 		var writer = document.getElementById("writer").value;

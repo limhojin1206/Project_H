@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.project.health.model.BoardDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 @Controller
 @RequestMapping("/board")
@@ -22,19 +23,49 @@ public class BoardController {
 	@Autowired
 	BoardDao dao;
 	
-	@PostMapping("/search")
-	public ModelAndView searchHandle(@RequestParam Map map) {
+	@RequestMapping(path="/recommend", produces="text/plain;charset=utf-8") // application/json;charset=utf-8
+	@ResponseBody
+	public String recommendHandle(@RequestParam Map map) {
 		System.out.println(map);
-		//String s = (String) map.get("search");
-		//s = s.replace(" ",",");
-		//System.out.println(s);
-		int tot = dao.countSearch(map);
-		List<Map> list = dao.search(map);
-		System.out.println(list);
+		int r = dao.addRecommend(map);
+		if(r == 1) {
+			return "YYYY";
+		}else {
+			return "NNNN";
+		}
+	}
+	
+	@RequestMapping("/search")
+	public ModelAndView searchHandle(@RequestParam(name="page", defaultValue="1") int page, @RequestParam Map map) {
 		ModelAndView mav = new ModelAndView("t_expr");
-		mav.addObject("title", "검색결고");
+		int tot = dao.countSearch(map);
+		int pageSize = 5;
+		int size = tot / pageSize;
+		if(tot % pageSize > 0) {
+			size++;
+		}
+		
+		mav.addObject("tot", tot);
+		mav.addObject("last", size);
+		mav.addObject("pb", (page - 1) / 10 * 10 + 1);	// 1 ~ 10 ==> 1
+		mav.addObject("pe", (page - 1) / 10 * 10 + 10 < size ? (page - 1) / 10 * 10 + 10 : size);	// 11 ~ 20 ==> 11
+		
+		if(page > size) {
+			page = size;
+		}
+		if(page < 0) { 
+			page = 1;
+		}
+		
+		//Map map = new HashMap();
+		map.put("start", (page - 1) * pageSize + 1 );
+		map.put("end", page * pageSize);
+		
+		List<Map> list = dao.search(map);
+		mav.addObject("title", "검색결과");
 		mav.addObject("section", "board/list");
 		mav.addObject("list", list);
+		mav.addObject("mode", map);
 				
 		return mav;
 	}
@@ -42,7 +73,7 @@ public class BoardController {
 	@RequestMapping("/list")
 	public ModelAndView listHandle(@RequestParam(name="page", defaultValue="1") int page) {
 		ModelAndView mav = new ModelAndView("t_expr");
-		int tot = dao.countAll();
+		int	tot = dao.countAll();
 		int pageSize = 5;
 		int size = tot / pageSize;
 		if(tot % pageSize > 0) {
@@ -64,6 +95,7 @@ public class BoardController {
 		Map map = new HashMap();
 		map.put("start", (page - 1) * pageSize + 1 );
 		map.put("end", page * pageSize);
+		
 		List<Map> list = dao.readAll(map);
 		mav.addObject("title", "게시판");
 		mav.addObject("section", "board/list");
