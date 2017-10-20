@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memo">
+	<insert id="send" >
+		insert into memo values(memo_seq.nextval, #{sender}, #{receiver}, #{content}, 'n',sysdate)
+	</insert>
+	
+	<select id="totreadReceiveMemo" resultType="java.util.HashMap">
+		select * from memo where receiver=#{receiver} order by memo.no desc
+	</select>
+	
+	<select id="pagereceiveList" resultType="java.util.HashMap">
+		<![CDATA[select * from (select rownum as r, t.* from(select * from memo where RECEIVER=#{RECEIVER} ORDER BY no DESC)t) where r>= #{START} and r<=#{END}]]>
+	</select>
+	
+	
+	
+	<select id="readSendMemo" resultType="java.util.HashMap">
+		select * from memo where sender=#{sender} order by memo.no desc
+	</select>
+	
+	<delete id="deleteMemo">
+		delete FROM memo WHERE no in (#{no})
+	</delete>
+	
+	
+	
+	<select id="readAll" resultType="java.util.HashMap">
+		select * from memo where receiver=#{receiver} order by memo.no desc
+	</select>
+	
+	<select id="readBlist" resultType="java.util.HashMap">
+		<![CDATA[select * from (select ROWNUM as r, t.* from(select * from memo where receiver=#{receiver} order by memo.no desc) t )where r>= #{START} and r<=#{END}]]>
+	</select>
+</mapper>

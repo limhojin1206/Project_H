@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="friend">
+
+	<insert id="send" >
+		insert into friendmake values(friendmake_seq.nextval, #{sender}, #{receiver}, #{content}, 'n',sysdate)
+	</insert>
+	
+	<select id="totreadReceiveMemo" resultType="java.util.HashMap">
+		select * from friendmake where receiver=#{receiver} order by friendmake.no desc
+	</select>
+	
+	<select id="pagereceiveList" resultType="java.util.HashMap">
+		<![CDATA[select * from (select rownum as r, t.* from(select * from friendmake where RECEIVER=#{RECEIVER} ORDER BY no DESC)t) where r>= #{START} and r<=#{END}]]>
+	</select>
+	
+	<select id="existfriend" resultType="java.lang.Integer">
+		select count(*) as cnt from friend where one=#{one} and other=#{other}
+	</select>
+	
+	<insert id="agree1friend">
+		insert into friend values(friend_seq.nextval, #{one}, #{other},sysdate)
+	</insert>
+	
+	<insert id="agree2friend">
+		insert into friend values(friend_seq.nextval, #{other}, #{one},sysdate)
+	</insert>
+	
+	<select id="myfriendlist" resultType="java.util.HashMap">
+		select * from friend where one = #{id}
+	</select>
+	
+	<select id="friendlist" resultType="java.util.HashMap">
+		select * from friend where one like #{id}
+	</select>
+	
+	<delete id="deletemsg">
+		delete from FRIENDMAKE where receiver=#{other} and sender=#{one}
+	</delete>
+</mapper>

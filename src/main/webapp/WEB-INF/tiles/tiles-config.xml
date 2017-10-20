@@ -13,4 +13,18 @@
 		<put-attribute name="title" expression="${title}"/>
 		<put-attribute name="section" expression="/WEB-INF/views/${section}.jsp"/>
 	</definition>
+	
+	<!-- sub -->
+	<!-- 서브타일 사용법
+	section, nav, title 만 설절하면 됨
+	 -->
+	<definition name="t_sub_expr" extends="t_base">
+		<put-attribute name="title" expression="${title}"/>
+		<put-attribute name="section">
+			<definition template="/WEB-INF/views/template/template_sub.jsp">
+				<put-attribute name="sub_nav" expression="/WEB-INF/views/${nav}.jsp"/>
+				<put-attribute name="sub_section" expression="/WEB-INF/views/${section}.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition>
 </tiles-definitions>	

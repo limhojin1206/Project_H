@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:c="http://www.springframework.org/schema/c"
 	xmlns:websocket="http://www.springframework.org/schema/websocket"
 	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
@@ -13,16 +10,31 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
-	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	<!-- DispatcherServlet Context: defines this servlet's request-processing 
+		infrastructure -->
 	<!-- Enables the Spring MVC @Controller programming model -->
-	<mvc:annotation-driven/>
-	<mvc:default-servlet-handler/>
+	<mvc:annotation-driven />
+	<mvc:default-servlet-handler />
 	<context:component-scan base-package="org.project.health" />
+
+	<!-- websocket handler -->
+	<websocket:handlers>
+		<websocket:mapping handler="memows" path="/ws/login" />
+		<websocket:handshake-interceptors>
+			<bean
+				class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
+		</websocket:handshake-interceptors>
+	</websocket:handlers>
+
+
+
+
+
 	<!-- mailSender -->
 	<bean class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="smtp.gmail.com"/>
-		<property name="port" value="587"/>
-		<property name="username" value="estrellatestmail"/>
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="estrellatestmail" />
 		<property name="password" value="estrella214"></property>
 		<property name="javaMailProperties">
 			<props>
@@ -31,22 +43,24 @@
 			</props>
 		</property>
 	</bean>
-	
+
 	<!-- multipartresolver 등록 -->
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="uploadTempDir" value="/temp"/>
-		<property name="defaultEncoding" value="utf-8"/>
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="uploadTempDir" value="/temp" />
+		<property name="defaultEncoding" value="utf-8" />
 	</bean>
-	
+
 	<!-- Mapper -->
 	<bean class="com.fasterxml.jackson.databind.ObjectMapper" />
 	<bean class="java.text.SimpleDateFormat">
-		<constructor-arg name="pattern" value="yyyyMMddHHmmss"/>
+		<constructor-arg name="pattern" value="yyyyMMddHHmmss" />
 	</bean>
-	
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
+		in the /WEB-INF/views directory -->
 	<bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
-		<property name="order" value="1"/>
+		<property name="order" value="1" />
 	</bean>
 	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">
@@ -55,41 +69,45 @@
 			</list>
 		</property>
 	</bean>
-	
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
-		<property name="order" value="9"/>
+		<property name="order" value="9" />
 	</bean>
-	
-	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="classpath:jdbc.properties"></property>
 	</bean>
 
 	<!-- datasource -->
 	<bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="ds">
-		<property name="driverClass" value="${jdbc.driver}"/>
-		<property name="jdbcUrl" value="${jdbc.url}"/>
-		<property name="user" value="${jdbc.username}"/>
-		<property name="password" value="${jdbc.password}"/>
+		<property name="driverClass" value="${jdbc.driver}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
 	</bean>
 
 	<!-- transactionManager -->
-	<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
-		<property name="dataSource" ref="ds"/>
+	<bean
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		id="transactionManager">
+		<property name="dataSource" ref="ds" />
 	</bean>
 	<tx:advice id="tx" transaction-manager="transactionManager">
 		<tx:attributes>
-			<tx:method name="*" rollback-for="Exception"/>
+			<tx:method name="*" rollback-for="Exception" />
 		</tx:attributes>
 	</tx:advice>
-	
+
 	<!-- aop config -->
-	<aop:aspectj-autoproxy/>
+	<aop:aspectj-autoproxy />
 	<aop:config>
-		<aop:advisor advice-ref="tx" pointcut="bean(*Dao)"/>
+		<aop:advisor advice-ref="tx" pointcut="bean(*Dao)" />
 	</aop:config>
-	
+
 	<!-- mybatis config -->
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="factory">
 		<property name="dataSource" ref="ds" />
@@ -100,5 +118,6 @@
 		</property>
 	</bean>
 
- 	<bean class="org.mybatis.spring.SqlSessionTemplate" c:sqlSessionFactory-ref="factory" />
+	<bean class="org.mybatis.spring.SqlSessionTemplate"
+		c:sqlSessionFactory-ref="factory" />
 </beans>
