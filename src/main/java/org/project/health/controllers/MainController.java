@@ -15,12 +15,4 @@ public class MainController {
 		return "index";
 	}
 	
-	@RequestMapping("/main")
-	public ModelAndView mainHandle() {
-		ModelAndView mav = new ModelAndView("t_expr");
-		mav.addObject("title", "PROJECT_H");
-		mav.addObject("section", "main/main");
-		return mav;
-	}
-	
 }
