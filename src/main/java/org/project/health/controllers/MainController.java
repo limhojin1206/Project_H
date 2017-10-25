@@ -34,5 +34,4 @@ public class MainController {
 		mav.addObject("section", "main/main");
 		return mav;
 	}
-	
 }

@@ -23,7 +23,7 @@
 			</ul></li>
 		<li><a href="/#">계획설계</a></li>
 		
-		<li><a href="/board/list">공지사항</a></li>
+		<li><a href="/board/list?page=1">공지사항</a></li>
 		
 		<li><a href="/memo/memobox">MEMO</a></li>
 	</ul>
@@ -39,7 +39,7 @@
 			<c:otherwise>
 				<li><a href="/my/info"><span
 						class="glyphicon glyphicon-user"></span> INFO</a></li>
-				<li><a href="/member/logout"><span
+				<li><a href="/login/logout"><span
 						class="glyphicon glyphicon-log-out"></span> LOGOUT</a></li>
 			</c:otherwise>
 		</c:choose>

@@ -7,7 +7,72 @@
 		select * from member where id like #{id}
 	</select>
 	
+	<insert id="add" parameterType="java.util.HashMap">
+		insert into member(id,pass,email,gender,age) 
+		values (#{id},#{pass},#{email},#{gender},#{age})
+		
+	</insert>
 
+	<select id="countByGender" resultType="java.util.HashMap">
+		select nvl(gender, '미설정') as gender, count(*) as cnt from detail group by gender	
+	</select>
+
+	<select id="searchById" resultType="java.util.HashMap">
+		select  * from member where id like #{id}
+	</select>
+	
+	<select id="readSomeProfileById" resultType="java.util.HashMap">
+		select * from (
+			select rownum as r, t* from (
+				select * from profile where id=#{id} order by regdate desc
+			) t 
+		) where r &gt;=#{start}  and r&lt;=#{end}
+	</select>
+	
+	<insert id="join">
+		insert into member(id,pass,email,age,gender) 
+		values(#{id},#{pass},#{email},#{age},#{gender})
+	</insert>
+	
+	<select id="idcheck" resultType="java.util.HashMap">
+		select * from member where id=#{id, jdbcType=VARCHAR}
+	</select>
+	
+	<select id="emailcheck" resultType="java.util.HashMap">
+		select * from member where email=#{email, jdbcType=VARCHAR}
+	</select>
+	
+	<insert id="addBasic">
+		insert into member(id, pass,age,gender,email ) values (#{id},#{pass}, #{age}# {gender} #{age})
+	</insert>
+	
+	<insert id="addDetail">
+		insert into detail(id) values (#{id})		
+	</insert>
+	
+	<select id="checkByIdmailAndPass" resultType="java.lang.Integer">
+		select count(*) from member where (ID=#{idmail} or EMAIL=#{idmail})
+			 and PASSWORD=#{pass, jdbcType=VARCHAR }
+	</select>
+	
+	<select id="readOneByIdOrEmail" resultType="java.util.HashMap">
+		select * from member where (ID=#{idmail} or EMAIL=#{idmail})
+	</select>
+	
+	<update id="updateOneDetail">
+		update detail set name=#{name} 
+			where id=#{id} 
+			
+	</update>
+	
+	<select id="countAllMembers" resultType="java.lang.Integer">
+		select count(*) as cnt from member
+	</select>
+	
+
+	<select id="existCheck" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		select count(*) from member where (id=#{idmail} or email=#{idmail}) and password=#{pass}
+	</select>
 	
 	
 </mapper>
