@@ -4,16 +4,9 @@
 <div>
 	<h2>쪽지 보내기</h2>
 	<form action="/memo/send" method="post">
-		<!-- 
 		<input type="hidden" name="sender" value="${auth.ID}"/>
-		 -->
 		<table>
 			<tbody>
-				<tr>
-					<td style="width: 30%"><b>보내는 사람</b></td>
-					<td style="width: 70%" align="right"><input type="text"
-						name="sender" placeholder="보내는 사람" required="required" style="width: 100%;"/></td>
-				</tr>
 				<tr>
 					<td><b>받는 사람</b></td>
 					<td align="right"><c:choose>

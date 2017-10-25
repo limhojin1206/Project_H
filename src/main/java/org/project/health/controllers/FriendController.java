@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.project.health.controllers.ws.WSHandler;
 import org.project.health.models.FriendDao;
 import org.project.health.models.MemoDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,106 +24,99 @@ public class FriendController {
 
 	@Autowired
 	FriendDao fdao;
+	@Autowired
+	WSHandler ws;
 	
-	@PostMapping("/makefriend")
-	@ResponseBody
-	public int makefriendPostHandle(@RequestParam Map map) {
-		System.out.println("친구인지 확인 : " + fdao.existfriend(map));
-		System.out.println(map.toString());
-		if(fdao.existfriend(map) != 0) {
-			fdao.deletemsg(map);
-			return -1;
-		}
-		fdao.deletemsg(map);
-		return fdao.send(map);
-	}
-	
+	// 친구 요청 리스트
 	@GetMapping("/makefriend")
-	public ModelAndView receiveboxHandle(HttpSession session, @RequestParam(name="page", defaultValue="1") int page) {
+	public ModelAndView receiveboxHandle(HttpSession session) {
 		ModelAndView mav = new ModelAndView("t_sub_expr");
-		// 임시
-		//String id = (String)((Map)session.getAttribute("auth")).get("ID");
-		String id = "asd";
-		
-		
+		String id = (String)((Map)session.getAttribute("auth")).get("ID");
 		List<Map> totreceiveList = fdao.totreadReceiveMemo(id);
-		int pagecontroll = 0;
-		if(totreceiveList.size()%5.0 == 0) {
-			pagecontroll = totreceiveList.size()/5;
-		}else {
-			pagecontroll = (totreceiveList.size()/5)+1;
-		}
-		
-		if(page < 1) {
-			page = 1;
-		}else if(page > pagecontroll) {
-			page = pagecontroll;
-		}
-		
-		Map pagelist = new HashMap();
-		if(page==1) {
-			pagelist.put("RECEIVER", id);
-			pagelist.put("START", 1);
-			pagelist.put("END", 10);
-			
-		}else {
-			pagelist.put("RECEIVER", id);
-			pagelist.put("START", ((page-1)*10)+1);
-			pagelist.put("END", ((page-1)*10)+10);
-		}
-		int tot = totreceiveList.size();
-		int pagesize = 10;
-		int size= tot/ pagesize;
-		
-		if(size % pagesize > 0 ) {
-			size++;
-		}
-		
-		mav.addObject("page",page);
 		mav.addObject("totreceiveList",totreceiveList);
-		mav.addObject("pagereceiveList",fdao.pagereceiveList(pagelist));
-		mav.addObject("pb", ((page-1)/10)*10+1 );
-		mav.addObject("pe", (page-1)/10*10+10 <size ? (page-1)/10*10+10  : size );
-		mav.addObject("last", size);
 		mav.addObject("title", "친구 요청");
 		mav.addObject("nav","memo/memonav");
 		mav.addObject("section", "friend/makefriend");
 		return mav; 
-		
 	}
 	
+	// 친구 요청
+	@PostMapping("/makefriend")
+	@ResponseBody
+	public int makefriendPostHandle(@RequestParam Map map) {
+		//친구인지 확인
+		if(fdao.existfriend(map) != 0) {
+			return -1;
+		}
+		//요청을 보낸적 있는지 확인
+		if(fdao.existmakefriend(map) != 0) {
+			return -2;
+		}
+		//메세지 전송
+		fdao.deletemsg(map);
+		int r = fdao.send(map);
+		if(r==1) {
+			map.put("mode", "confirm");
+			map.put("msg", "친구요청을 확인하시겠습니까?");
+			map.put("href", "/friend/makefriend");
+			ws.sendMessage(map);
+		}
+		return r;
+	}
+	
+	// 친구 수락 버튼
 	@PostMapping("/agreefriend")
 	@ResponseBody
 	public int agreefriendHandle(@RequestParam Map map) {
 		System.out.println("친구인지 확인 : " + fdao.existfriend(map));
 		System.out.println(map.toString());
 		if(fdao.existfriend(map) != 0) {
-			fdao.deletemsg(map);
+			fdao.deleteremsg(map);
 			return -1;
 		}
-		fdao.deletemsg(map);
-		return fdao.agreefriend(map);
+		fdao.deleteremsg(map);
+		int r = fdao.agreefriend(map);
+		if(r==2) {
+			map.put("mode", "alert");
+			map.put("msg", map.get("sender")+"님께서 친구요청을 수락하셨습니다.");
+			ws.sendMessage(map);
+		}
+		return r;
 	}
 	
+	// 친구 거절 버튼
 	@PostMapping("/rejectfriend")
 	@ResponseBody
 	public int rejectfriendHandle(@RequestParam Map map) {
-		System.out.println("친구인지 확인 : " + fdao.existfriend(map));
 		System.out.println(map.toString());
-		if(fdao.existfriend(map) != 0) {
-			fdao.deletemsg(map);
-			return -1;
+		int r = fdao.deleteremsg(map);
+		if(r==1) {
+			map.put("mode", "alert");
+			map.put("msg", map.get("sender")+"님께서 친구요청을 거절하셨습니다.");
+			ws.sendMessage(map);
 		}
-		fdao.deletemsg(map);
-		return fdao.agreefriend(map);
+		return r;
 	}
 	
+	// 친구 취소 버튼
+	@PostMapping("/endfriend")
+	@ResponseBody
+	public int endfriendHandle(@RequestParam Map map) {
+		int r = fdao.endfriend(map); 
+		
+		if(r==2) {
+			map.put("mode", "alert");
+			map.put("msg", map.get("sender")+"님께서 친구를 취소하셨습니다.");
+			ws.sendMessage(map);
+		}
+		return r;
+	}
+	
+	// 친구 목록
 	@RequestMapping("/myfriendlist")
 	public ModelAndView myfriendlistHandle(HttpSession session, @RequestParam(name="page", defaultValue="1") int page) {
 		ModelAndView mav = new ModelAndView("t_sub_expr");
-		// 임시
-		//String id = (String)((Map)session.getAttribute("auth")).get("ID");
-		String id = "asd";
+		String id = (String)((Map)session.getAttribute("auth")).get("ID");
 		List<Map> totreceiveList = fdao.myfriendlist(id);
 		System.out.println("길이 : " + totreceiveList.size());
 		System.out.println(totreceiveList.toString());
@@ -134,6 +128,7 @@ public class FriendController {
 		
 	}
 	
+	// 친구 검색
 	@RequestMapping("/searchAjax")
 	@ResponseBody
 	public List<Map> searchIdAjaxHandle(@RequestParam Map map) {

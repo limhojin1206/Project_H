@@ -32,6 +32,13 @@ public class FriendDao {
 		return rst;
 	}
 	
+	public int endfriend(Map map) {
+		int rst = 0;
+		rst += template.delete("friend.end1friend", map);
+		rst += template.delete("friend.end2friend", map);
+		return rst;
+	}
+	
 	public List<Map> myfriendlist(String id){
 		return template.selectList("friend.myfriendlist", id);
 	}
@@ -40,11 +47,20 @@ public class FriendDao {
 		return template.selectList("friend.friendlist", map);
 	}
 	
+	public int deletemsg(Map map) {
+		return template.delete("friend.deletemsg", map);
+	}
+	
+	public int deleteremsg(Map map) {
+		return template.delete("friend.deleretemsg", map);
+	}
+	
 	public int existfriend(Map map) {
 		return template.selectOne("friend.existfriend",map);
 	}
 	
-	public int deletemsg(Map map) {
-		return template.delete("friend.deletemsg", map);
+	public int existmakefriend(Map map) {
+		return template.selectOne("friend.existmakefriend",map);
 	}
+	
 }

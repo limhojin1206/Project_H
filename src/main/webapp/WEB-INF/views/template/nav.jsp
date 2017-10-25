@@ -23,7 +23,7 @@
 			</ul></li>
 		<li><a href="/#">계획설계</a></li>
 		
-		<li><a href="/#">공지사항</a></li>
+		<li><a href="/board/list">공지사항</a></li>
 		
 		<li><a href="/memo/memobox">MEMO</a></li>
 	</ul>

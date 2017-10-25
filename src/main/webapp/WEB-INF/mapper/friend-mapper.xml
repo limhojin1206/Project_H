@@ -16,10 +16,6 @@
 		<![CDATA[select * from (select rownum as r, t.* from(select * from friendmake where RECEIVER=#{RECEIVER} ORDER BY no DESC)t) where r>= #{START} and r<=#{END}]]>
 	</select>
 	
-	<select id="existfriend" resultType="java.lang.Integer">
-		select count(*) as cnt from friend where one=#{one} and other=#{other}
-	</select>
-	
 	<insert id="agree1friend">
 		insert into friend values(friend_seq.nextval, #{one}, #{other},sysdate)
 	</insert>
@@ -27,6 +23,13 @@
 	<insert id="agree2friend">
 		insert into friend values(friend_seq.nextval, #{other}, #{one},sysdate)
 	</insert>
+	
+	<delete id="end1friend">
+		delete from friend where one=#{one} and other=#{other}
+	</delete>
+	<delete id="end2friend">
+		delete from friend where one=#{other} and other=#{one}
+	</delete>
 	
 	<select id="myfriendlist" resultType="java.util.HashMap">
 		select * from friend where one = #{id}
@@ -37,6 +40,18 @@
 	</select>
 	
 	<delete id="deletemsg">
-		delete from FRIENDMAKE where receiver=#{other} and sender=#{one}
+		delete from FRIENDMAKE where sender=#{sender} and receiver=#{receiver}
 	</delete>
+	
+	<delete id="deleretemsg">
+		delete from FRIENDMAKE where sender=#{receiver} and receiver=#{sender}
+	</delete>
+	
+	<select id="existfriend" resultType="java.lang.Integer">
+		select count(*) as cnt from friend where one=#{one} and other=#{other}
+	</select>
+	
+	<select id="existmakefriend" resultType="java.lang.Integer">
+		select count(*) as cnt from friendmake where sender=#{sender} and receiver=#{receiver}
+	</select>
 </mapper>

@@ -7,7 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.project.health.controllers.ws.MemoWSHandler;
+import org.project.health.controllers.ws.WSHandler;
 import org.project.health.models.MemoDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -26,7 +26,7 @@ public class MemoController {
 	@Autowired
 	MemoDao mdao;
 	@Autowired
-	MemoWSHandler memows;
+	WSHandler ws;
 	
 	//======================================================= 쪽지함
 	@RequestMapping("/memobox")
@@ -51,7 +51,10 @@ public class MemoController {
 		int rst = mdao.send(map);
 		if(rst == 1) {
 			System.out.println("쪽지 전송 성공");
-			memows.sendMessage(map);
+			map.put("mode", "confirm");
+			map.put("msg", "새 쪽지가 왔습니다. 확인하시겠습니까?");
+			map.put("href", "/memo/receivebox");
+			ws.sendMessage(map);
 		}else{
 			System.out.println("쪽지 전송 실패");
 		}
@@ -62,9 +65,7 @@ public class MemoController {
 	@RequestMapping("/receivebox")
 	public ModelAndView receiveboxHandle(HttpSession session, @RequestParam(name="page", defaultValue="1") int page) {
 		ModelAndView mav = new ModelAndView("t_sub_expr");
-		// 임시
-		//String id = (String)((Map)session.getAttribute("auth")).get("ID");
-		String id = "asd";
+		String id = (String)((Map)session.getAttribute("auth")).get("ID");
 		List<Map> totreceiveList = mdao.totreadReceiveMemo(id);
 		int pagecontroll = 0;
 		if(totreceiveList.size()%5.0 == 0) {
@@ -113,9 +114,7 @@ public class MemoController {
 	@RequestMapping("/sendbox")
 	public ModelAndView sendboxHandle(HttpSession session, @RequestParam(name="page", defaultValue="1") int page) {
 		ModelAndView mav = new ModelAndView("t_sub_expr");
-		// 임시
-		//String id = (String)((Map)session.getAttribute("auth")).get("ID");
-		String id = "asd";
+		String id = (String)((Map)session.getAttribute("auth")).get("ID");
 		List<Map> sendList = mdao.readSendMemo(id);
 		mav.addObject("sendList",sendList);
 		mav.addObject("title", "SENDBOX");

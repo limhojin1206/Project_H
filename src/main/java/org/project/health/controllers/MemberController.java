@@ -31,6 +31,7 @@ public class MemberController {
 	@RequestMapping("/searchAjax")
 	@ResponseBody
 	public List<Map> searchIdAjaxHandle(@RequestParam String id) {
+		System.out.println("id : " + id);
 		return mdao.friendList(id+"%");
 	}
 }
