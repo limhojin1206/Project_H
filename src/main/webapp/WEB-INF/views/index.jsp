@@ -95,6 +95,7 @@ b {
 				<p>
 				<input type='checkbox' name='keep' value="keep"/> 자동로그인
 				
+				
 				</p>
 				<button id="sbt" type="submit" >확 인</button>
 		</form>
