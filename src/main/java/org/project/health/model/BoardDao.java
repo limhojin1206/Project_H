@@ -12,6 +12,14 @@ public class BoardDao {
 	@Autowired
 	SqlSessionTemplate template;
 	
+	public int edit(Map map) {
+		return template.update("board.edit", map);
+	}
+	
+	public int delete(String no) {
+		return template.delete("board.delete", no);
+	}
+	
 	public List<Map> readAll(Map map){
 		return template.selectList("board.readAll", map);
 	}
@@ -44,5 +52,17 @@ public class BoardDao {
 		}catch(Exception e) {
 			return 0;
 		}
+	}
+	
+	public List<Map> checkRecommend(Map map){
+		return template.selectList("board.checkRecommend", map);
+	}
+	
+	public List<Map> readRecommend(){
+		return template.selectList("board.readRecommend");
+	}
+	
+	public Map prevAndNext(String no) {
+		return template.selectOne("prevAndNext",no);
 	}
 }

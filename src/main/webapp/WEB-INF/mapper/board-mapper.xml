@@ -3,6 +3,12 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board">
+	<update id="edit">
+		update boardnotice set title=#{title}, id=#{id}, content=#{content} where no=#{no}  
+	</update>
+	<delete id="delete">
+		delete boardnotice where no=#{no}
+	</delete>
 	<select id="readAll" resultType="java.util.HashMap">
 		select * from (
     		select rownum r, t.* from (
@@ -27,11 +33,11 @@
     		select rownum r, t.* from (
         		select b.*, r.c from boardnotice b left join (
             		select bno, count(*) c from REPLYNOTICE group by bno) r on b.no = r.bno
-            			where ${type} like '%'||#{search}||'%' order by b.no desc) t )
+            			where ${sql} order by b.no desc) t )
             				where r between #{start} and #{end}
-	</select>
+    </select>
 	<select id="countSearch" resultType="java.lang.Integer">
-		select count(*) cnt from boardnotice where ${type} like '%'||#{search}||'%'
+		select count(*) cnt from boardnotice where ${sql}
 	</select>
 	<update id="recommendUp">
 		update boardnotice set recommend = recommend+1 where no=#{bno}
@@ -39,4 +45,21 @@
 	<insert id="addRecommend">
 		insert into recommendnotice values(#{bno}, #{id}, sysdate+(9/24))
 	</insert>
+	<select id="checkRecommend" resultType="java.util.HashMap">
+		select * from recommendnotice where bno=#{bno} and id=#{id}
+	</select>
+	<select id="readRecommend" resultType="java.util.HashMap">
+		select * from (
+    		select rownum r, t.* from (
+        		select b.*, r.c from boardnotice b left join (
+            		select bno, count(*) c from REPLYNOTICE group by bno) r on b.no = r.bno 
+                		where b.recommend > 2 order by b.recommend desc) t ) where r between 1 and 3
+	</select>
+	<select id="prevAndNext" resultType="java.util.HashMap">
+		select * from (
+			select no, 
+				LAG(no, 1) OVER (order by no) as next,
+				LEAD(no, 1) OVER (order by no) as prev
+				from boardnotice) where no=#{no}
+	</select>
 </mapper>
