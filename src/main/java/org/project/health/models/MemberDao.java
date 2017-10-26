@@ -26,6 +26,10 @@ public class MemberDao {
 		return rst;
 	}
 	
+	public Map getDetail (Map map) {
+		return sql.selectOne("member.getDetail", map);
+	}
+	
 	
 	public List<Map> countByGender() {
 		return sql.selectList("member.countByGender");
@@ -36,7 +40,6 @@ public class MemberDao {
 	} 
 	
 	
-	// 
 	public List<Map> searchById(String id) {
 		return sql.selectList("member.searchById", id);
 	}
@@ -76,7 +79,7 @@ public class MemberDao {
 		return sql.selectOne("member.readOneByIdOrEmail", idmail);
 	}
 
-	// id�� email�� �Ӱ�, pass�� ���� �����Ͱ� �ִ��� Ȯ���Ҷ�
+	
 	public HashMap readOneById(String id) {
 		return sql.selectOne("member.readOneById", id);
 	}
