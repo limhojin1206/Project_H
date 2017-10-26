@@ -58,7 +58,7 @@
 			</table>
 		
 		<a href="/my/adjust"><button type="submit" style="width: 150px;">정보수정</button></a>
-		<a href="/"><button type="button" style="width: 150px;">메인으로</button></a>
+		<a href="/login/main"><button type="button" style="width: 150px;">메인으로</button></a>
 		<a href="/member/drop"><button type="submit" style="width: 150px;">탈퇴하기</button></a>
 		
 	</div>

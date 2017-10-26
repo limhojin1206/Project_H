@@ -46,7 +46,7 @@ public class MyController {
 		}
 		session.setAttribute("auth", dmap);
 		
-		map.put("title", "������");
+		map.put("title", "session");
 		map.put("section", "/my/info");
 		return "t_expr";
 		
@@ -67,6 +67,7 @@ public class MyController {
 	@PostMapping("/profile")
 	public ModelAndView profilePostHandle(@RequestParam Map param, @RequestParam(name="profile") MultipartFile f, HttpSession session) throws InterruptedException {
 		//System.out.println(request.getParameter("nick"));
+		
 		System.out.println(application.getRealPath("/profiles"));
 		
 		ModelAndView mav = new ModelAndView("redirect:/my/info");
@@ -93,7 +94,7 @@ public class MyController {
 			int r = mdao.addPic(picMap);
 		System.out.println("R : " + r);
 		
-		mav.addObject("title", "������ ����");
+		mav.addObject("title", "session");
 		mav.addObject("section", "/my/info");
 		return mav;
 	}
@@ -101,8 +102,9 @@ public class MyController {
 	@GetMapping("/adjust")
 	public ModelAndView adjustGetHandle() {
 		ModelAndView mav = new ModelAndView("t_expr");
-		mav.addObject("title", "������ ����");
+		mav.addObject("title", "session");
 		mav.addObject("section", "my/adjust");
+		
 		return mav;
 	}
 }

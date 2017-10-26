@@ -49,6 +49,7 @@ public class MemberDao {
 	public List<Map> idcheck(String map) {
 		return sql.selectList("member.idcheck", map);
 	}
+	
 	//
 	public List<Map> emailcheck(String map) {
 		return sql.selectList("member.emailcheck", map);
