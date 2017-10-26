@@ -40,6 +40,10 @@ public class FriendController {
 		ModelAndView mav = new ModelAndView("t_sub_expr");
 		String id = (String)((Map)session.getAttribute("auth")).get("ID");
 		List<Map> totreceiveList = fdao.totreadReceiveMemo(id);
+		
+		
+		
+		
 		mav.addObject("totreceiveList",totreceiveList);
 		mav.addObject("title", "친구 요청");
 		mav.addObject("nav","memo/memonav");
