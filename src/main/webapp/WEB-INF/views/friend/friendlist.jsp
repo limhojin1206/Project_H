@@ -54,9 +54,8 @@
 			$("#list").html("")
 			return;
 		}
-		
 		$.ajax({
-			"url" : "searchAjax",
+			"url" : "/friend/searchAjax",
 			"data" : {
 				"one" : "${auth.ID}",
 				"other" : $("#srch").val()

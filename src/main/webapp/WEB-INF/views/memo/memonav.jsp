@@ -9,7 +9,7 @@
 			<br />
 			<li><a href="/friend/makefriend" style="color: silver;">친구요청</a></li>
 			<br />
-			<li><a href="/friend/myfriendlist" style="color: silver;">친구 검색</a></li>
+			<li><a href="/friend/friendlist" style="color: silver;">친구 검색</a></li>
 			<br />
 		</div>
 	</ul>

@@ -1,24 +1,29 @@
 package org.project.health.controllers;
 
 import java.io.File;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.project.health.models.MemberDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
 
 @Controller
 @RequestMapping("/member")
@@ -33,68 +38,93 @@ public class MemberController {
 	@Autowired
 	ServletContext application;
 	
-	@RequestMapping("/searchmember")
-	public ModelAndView searchmemberHandle() {
-		ModelAndView mav = new ModelAndView("t_sub_expr");
-		mav.addObject("title", "회원검색");
-		mav.addObject("nav", "memo/memonav");
-		mav.addObject("section","member/memberlist");
-		return mav;
-	}
-	
-	@RequestMapping("/searchAjax")
-	@ResponseBody
-	public List<Map> searchIdAjaxHandle(@RequestParam String id) {
-		System.out.println("id : " + id);
-		return mdao.friendList(id+"%");
-	}
-	
-	@GetMapping("/profile")
-	public ModelAndView profileGetHandle() {
-		ModelAndView mav = new ModelAndView("myprofile/profile");
-		mav.addObject("title", "내 프로필");
-		return mav;
-	}
-	
-	
-	
-	@PostMapping("/profile")
-	public ModelAndView profilePostHandle(@RequestParam Map param, @RequestParam(name="profile") MultipartFile f, HttpSession session) throws InterruptedException {
-		//System.out.println(request.getParameter("nick"));
-		System.out.println(application.getRealPath("/myprofile/profiles"));
+	// 회원가입
+		@GetMapping("/join")
+		public ModelAndView joinGetHandle(Map map) {
+			ModelAndView mav = new ModelAndView("/member/join");
+			map.put("title", "JOIN");
+			return mav;
+		}  
 		
-		ModelAndView mav = new ModelAndView("redirect:/myprofile/info");
-		
-		
-		System.out.println("��������==================");
-		System.out.println(f.toString());
-		System.out.println(f.isEmpty());
-		System.out.println(f.getContentType());
-		System.out.println(f.getName());
-		System.out.println(f.getOriginalFilename());
-		System.out.println(f.getSize());
-		//transferTo(File f) .. ���� ���ε�. getInputStream()
-		String fileName = ((Map)session.getAttribute("auth")).get("ID")+"_"
-		+sdf.format(System.currentTimeMillis());
-		
-		File dst = new File(application.getRealPath("/profiles"), fileName);
-		try {
-			f.transferTo(dst);
-		} catch (Exception e) {
-			e.printStackTrace();
+		@PostMapping("/join")
+		public ModelAndView joinPostHandle(@RequestParam Map map, HttpServletRequest request, HttpSession session) {
+			ModelAndView mav = new ModelAndView();
+			int r = mdao.join(map);
+			//성공은 r=1 실패는 r=0
+			//System.out.println("r : " + r);
+			if(r == 1) {
+				System.out.println("회원가입 성공");
+			// 2. session auth에 id 등록하기
+				Map auth = mdao.authsetting(map);
+				session.setAttribute("auth", auth);
+				mav.setViewName("t_expr");
+				mav.addObject("title", "PROJECT_H");
+				mav.addObject("section", "main/main");
+			}else {
+				System.out.println("회원가입 실패");
+				mav.setViewName("redirect:member/join");
+			}
+			return mav;
+		}
+
+		// 회원가입 체크
+		@PostMapping(path="/signup_check/{mode}", produces="text/html;charset=UTF-8")
+		@ResponseBody
+		public String signupHandle(@PathVariable String mode, @RequestBody(required=false) String body) {
+			String msg="";
+			if(mode.equals("id")) {
+				List list = mdao.idcheck(body);
+				if(list.size() == 0) {
+					msg = "true";
+				}else {
+					msg = "false";
+				}
+			}
+			if(mode.equals("email")) {
+				List list = mdao.emailcheck(body);
+				if(list.size() == 0) {
+					msg = "true";
+				}else {
+					msg = "false";
+				}
+			}
+			return msg;
 		}
 		
-		Map picMap = new HashMap<>();
-			picMap.put("id", ((Map)session.getAttribute("auth")).get("ID"));
-			picMap.put("uri", "myprofile/profiles/"+ fileName);
-			int r = mdao.addPic(picMap); 
-			System.out.println("R : " + r);
-		
-		mav.addObject("title", "������ ����");
-		mav.addObject("section", "/myprofile/info");
-		
+	// 로그인
+	@GetMapping("/login")
+	public String loginHandle() {
+		return "/index";
+	}
+	
+	@PostMapping("/login")
+	public ModelAndView sessionHandle(@RequestParam Map param, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		int r = mdao.login(param);
+		System.out.println("r : " + r);
+		if (r == 1) {
+			//session 추가
+			Map auth = mdao.authsetting(param);
+			session.setAttribute("auth", auth);
+			// redirect
+			if(param.get("redirect") != null) {
+				mav.setViewName("redirect:"+param.get("redirect"));
+			}else {
+				mav.setViewName("t_expr");
+				mav.addObject("title", "PROJECT_H");
+				mav.addObject("section", "main/main");
+			}
+		} else {
+			mav.addObject("temp", "temp");
+		}
 		return mav;
 	}
 	
+	@GetMapping("/logout")
+	public String logoutHandle(HttpSession session) {
+		session.invalidate();
+		System.out.println("로그아웃 성공");
+		return "index";
+	}
 	
 }

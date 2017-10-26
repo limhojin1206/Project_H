@@ -52,9 +52,13 @@ public class MemoController {
 		if(rst == 1) {
 			System.out.println("쪽지 전송 성공");
 			map.put("mode", "confirm");
-			map.put("msg", "새 쪽지가 왔습니다. 확인하시겠습니까?");
+			map.put("content", "새 쪽지가 왔습니다. 확인하시겠습니까?");
 			map.put("href", "/memo/receivebox");
-			ws.sendMessage(map);
+			try {
+				ws.sendMessage(map);
+			}catch(Exception e) {
+				System.out.println(e);
+			}
 		}else{
 			System.out.println("쪽지 전송 실패");
 		}

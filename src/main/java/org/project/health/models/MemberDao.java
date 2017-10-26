@@ -14,74 +14,29 @@ public class MemberDao {
 	@Autowired
 	SqlSessionTemplate sql;
 
-	public List<Map> friendList(String id){
-		return sql.selectList("member.friendlist", id);
-	}
-	
-	//
+	// 회원가입
 	public int join (Map map) {
-		int rst = 0;
-		rst += sql.insert("member.join", map);
-		rst += sql.insert("member.addDetail",map);
-		return rst;
+		return sql.insert("member.join", map);
 	}
 	
-	
-	public List<Map> countByGender() {
-		return sql.selectList("member.countByGender");
-	}
-	
-	public Map login (Map map) {
-		return sql.selectOne("member.login", map);
-	} 
-	
-	
-	// 
-	public List<Map> searchById(String id) {
-		return sql.selectList("member.searchById", id);
-	}
-	
-	
-	//
 	public List<Map> idcheck(String map) {
 		return sql.selectList("member.idcheck", map);
 	}
-	//
 	public List<Map> emailcheck(String map) {
 		return sql.selectList("member.emailcheck", map);
-	}
-	
-	
-	public int addPic(Map map) {
-		return sql.selectOne("my.addPic", map);
-	}
-	
-	public List<Map> prePic(Map map) {
-		return sql.selectList("my.prePic", map);
-	}
-	
-	
-	
-	public boolean addOne(Map map) {
-		sql.insert("member.addBasic", map);
-		sql.insert("member.addDetail", map);
-		return true;
-	}
+	}	
 
-	public int existOne(Map map) {
-		return sql.selectOne("member.checkByIdmailAndPass", map);
+	// 로그인
+	public int login (Map map) {
+		return sql.selectOne("member.login", map);
+	} 
+	
+	public Map authsetting (Map map ) {
+		return sql.selectOne("member.authsetting", map);
 	}
 	
-	public HashMap readOneByIdOrEmail(String idmail) {
-		return sql.selectOne("member.readOneByIdOrEmail", idmail);
-	}
-
-	// id�� email�� �Ӱ�, pass�� ���� �����Ͱ� �ִ��� Ȯ���Ҷ�
-	public HashMap readOneById(String id) {
-		return sql.selectOne("member.readOneById", id);
-	}
-
-	public int addProfile(Map map) {
-		return sql.insert("member.addProfile", map);
+	// 친구 리스트
+	public List<Map> friendList(String id){
+		return sql.selectList("member.friendlist", id);
 	}
 }

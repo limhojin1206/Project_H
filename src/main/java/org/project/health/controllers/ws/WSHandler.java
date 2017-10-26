@@ -22,16 +22,16 @@ public class WSHandler extends TextWebSocketHandler {
 	/*
 	 * 	소켓 사용법
 	 * 	mode : confirm / alert
-	 * 	msg : 상대 창에 보일 메세지
+	 * 	content : 상대 창에 보일 메세지
 	 * 	href : 확인 눌렀을때 경로
 	 * 
 	 *  예 :
 	 *  mode : confirm
-	 *  msg : 확인하시겠습니까?
+	 *  content : 확인하시겠습니까?
 	 *  href : "/memo/receivebox"
 	 *  
 	 *  mode : alert
-	 *  msg : "map.receiver" + 님께서 요청을 수락하셨습니다.
+	 *  content : "map.receiver" + 님께서 요청을 수락하셨습니다.
 	 */
 	
 	@Autowired

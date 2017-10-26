@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.project.health.controllers.ws.WSHandler;
 import org.project.health.models.FriendDao;
+import org.project.health.models.MemberDao;
 import org.project.health.models.MemoDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,12 @@ public class FriendController {
 
 	@Autowired
 	FriendDao fdao;
+	@Autowired
+	MemoDao mdao;
+	
+	@Autowired
+	MemberDao memberdao;
+	
 	@Autowired
 	WSHandler ws;
 	
@@ -57,7 +64,7 @@ public class FriendController {
 		int r = fdao.send(map);
 		if(r==1) {
 			map.put("mode", "confirm");
-			map.put("msg", "친구요청을 확인하시겠습니까?");
+			map.put("content", "친구요청을 확인하시겠습니까?");
 			map.put("href", "/friend/makefriend");
 			ws.sendMessage(map);
 		}
@@ -78,8 +85,13 @@ public class FriendController {
 		int r = fdao.agreefriend(map);
 		if(r==2) {
 			map.put("mode", "alert");
-			map.put("msg", map.get("sender")+"님께서 친구요청을 수락하셨습니다.");
-			ws.sendMessage(map);
+			map.put("content", map.get("sender")+"님께서 친구요청을 수락하셨습니다.");
+			try {
+				ws.sendMessage(map);
+			}catch(Exception e) {
+				System.out.println(e);
+			}
+			mdao.send(map);
 		}
 		return r;
 	}
@@ -92,8 +104,13 @@ public class FriendController {
 		int r = fdao.deleteremsg(map);
 		if(r==1) {
 			map.put("mode", "alert");
-			map.put("msg", map.get("sender")+"님께서 친구요청을 거절하셨습니다.");
-			ws.sendMessage(map);
+			map.put("content", map.get("sender")+"님께서 친구요청을 거절하셨습니다.");
+			mdao.send(map);
+			try {
+				ws.sendMessage(map);
+			}catch(Exception e) {
+				System.out.println(e);
+			}
 		}
 		return r;
 	}
@@ -106,14 +123,19 @@ public class FriendController {
 		
 		if(r==2) {
 			map.put("mode", "alert");
-			map.put("msg", map.get("sender")+"님께서 친구를 취소하셨습니다.");
-			ws.sendMessage(map);
+			map.put("content", map.get("sender")+"님께서 친구를 취소하셨습니다.");
+			mdao.send(map);
+			try {
+				ws.sendMessage(map);
+			}catch(Exception e) {
+				System.out.println(e);
+			}
 		}
 		return r;
 	}
 	
 	// 친구 목록
-	@RequestMapping("/myfriendlist")
+	@RequestMapping("/friendlist")
 	public ModelAndView myfriendlistHandle(HttpSession session, @RequestParam(name="page", defaultValue="1") int page) {
 		ModelAndView mav = new ModelAndView("t_sub_expr");
 		String id = (String)((Map)session.getAttribute("auth")).get("ID");
@@ -123,16 +145,28 @@ public class FriendController {
 		mav.addObject("totreceiveList",totreceiveList);
 		mav.addObject("title", "친구 요청");
 		mav.addObject("nav","memo/memonav");
-		mav.addObject("section", "member/memberlist");
+		mav.addObject("section", "friend/friendlist");
 		return mav; 
 		
 	}
 	
+	
+	// 친구
+	@RequestMapping("/searchmember")
+	public ModelAndView searchmemberHandle() {
+		ModelAndView mav = new ModelAndView("t_sub_expr");
+		mav.addObject("title", "회원검색");
+		mav.addObject("nav", "memo/memonav");
+		mav.addObject("section","friend/friendlist");
+		return mav;
+	}
+		
 	// 친구 검색
 	@RequestMapping("/searchAjax")
 	@ResponseBody
 	public List<Map> searchIdAjaxHandle(@RequestParam Map map) {
-		map.put("other", (String)map.get("other")+"%");
-		return fdao.friendList(map);
+		map.put("id", "%"+(String)map.get("id")+"%");
+		return fdao.searchlist(map);
 	}
+	
 }

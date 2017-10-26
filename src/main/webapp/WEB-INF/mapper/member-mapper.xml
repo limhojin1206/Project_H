@@ -3,35 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
-	<select id="friendlist" resultType="java.util.HashMap">
-		select * from member where id like #{id}
-	</select>
-	
-	<insert id="add" parameterType="java.util.HashMap">
-		insert into member(id,pass,email,gender,age) 
-		values (#{id},#{pass},#{email},#{gender},#{age})
-		
-	</insert>
-
-	<select id="countByGender" resultType="java.util.HashMap">
-		select nvl(gender, '미설정') as gender, count(*) as cnt from detail group by gender	
-	</select>
-
-	<select id="searchById" resultType="java.util.HashMap">
-		select  * from member where id like #{id}
-	</select>
-	
-	<select id="readSomeProfileById" resultType="java.util.HashMap">
-		select * from (
-			select rownum as r, t* from (
-				select * from profile where id=#{id} order by regdate desc
-			) t 
-		) where r &gt;=#{start}  and r&lt;=#{end}
-	</select>
-	
-	<insert id="join">
-		insert into member(id,pass,email,age,gender) 
-		values(#{id},#{pass},#{email},#{age},#{gender})
+	<!-- 회원 가입 -->
+	<insert id="join" parameterType="java.util.HashMap">
+		insert into member(id,password,email,gender,age) 
+		values (#{id},#{password},#{email},#{gender},#{age})
 	</insert>
 	
 	<select id="idcheck" resultType="java.util.HashMap">
@@ -42,37 +17,19 @@
 		select * from member where email=#{email, jdbcType=VARCHAR}
 	</select>
 	
-	<insert id="addBasic">
-		insert into member(id, pass,age,gender,email ) values (#{id},#{pass}, #{age}# {gender} #{age})
-	</insert>
-	
-	<insert id="addDetail">
-		insert into detail(id) values (#{id})		
-	</insert>
-	
-	<select id="checkByIdmailAndPass" resultType="java.lang.Integer">
-		select count(*) from member where (ID=#{idmail} or EMAIL=#{idmail})
-			 and PASSWORD=#{pass, jdbcType=VARCHAR }
+	<!-- 로그인 -->
+	<select id="login" resultType="java.lang.Integer">
+		select count(*) from member where (id=#{idmail} or email=#{idmail}) and password=#{password}
 	</select>
 	
-	<select id="readOneByIdOrEmail" resultType="java.util.HashMap">
-		select * from member where (ID=#{idmail} or EMAIL=#{idmail})
-	</select>
-	
-	<update id="updateOneDetail">
-		update detail set name=#{name} 
-			where id=#{id} 
-			
-	</update>
-	
-	<select id="countAllMembers" resultType="java.lang.Integer">
-		select count(*) as cnt from member
-	</select>
-	
-
-	<select id="existCheck" parameterType="java.util.HashMap" resultType="java.lang.Integer">
-		select count(*) from member where (id=#{idmail} or email=#{idmail}) and password=#{pass}
+	<select id="authsetting" resultType="java.util.HashMap">
+		select id,email from member where (id=#{idmail, jdbcType=VARCHAR} or email=#{idmail, jdbcType=VARCHAR} or id=#{id, jdbcType=VARCHAR})
 	</select>
 	
 	
+	
+	<!-- 친구 -->
+	<select id="friendlist" resultType="java.util.HashMap">
+		select * from member where id like #{id}
+	</select>
 </mapper>

@@ -10,12 +10,12 @@ var lws = new WebSocket("ws://"+ip+"/ws/login");
 
 		switch (obj.mode) {
 		case "confirm" :
-			if (window.confirm(obj.msg)) {
+			if (window.confirm(obj.content)) {
 				location.href = obj.href;
 			}
 			break;
 		case "alert" : 
-			window.alert(obj.msg)		
+			window.alert(obj.content)		
 			break;
 		}
 	}

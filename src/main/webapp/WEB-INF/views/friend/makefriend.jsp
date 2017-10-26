@@ -29,12 +29,13 @@
 			return;
 		}
 		$.ajax({
-			"url" : "../member/searchAjax",
+			"url" : "/friend/searchAjax",
 			"async" : false,
 			"data" : {
 				"id" : $("#srch").val()
 			}
 		}).done(function(obj) {
+			console.log(obj);
 			for (var i = 0; i < obj.length; i++) {
 				var t = "<span class=\"friend\" role=\""+ obj[i].ID+"\"><b>"+ obj[i].ID+ "</b> ("+ obj[i].EMAIL+ ")</span><br/>";
 				$("#list").append(t);
@@ -44,7 +45,6 @@
 					if ("${auth.ID}" == $(this).attr("role")) {
 						window.alert("자신을 친구 초대할 수 없습니다.");
 					} else {
-						
 						$.ajax({
 							"type" : "post",
 							"async" : false,

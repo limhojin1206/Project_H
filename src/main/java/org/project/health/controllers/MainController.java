@@ -14,24 +14,17 @@ import org.springframework.web.servlet.ModelAndView;
 public class MainController {
 
 	
-	@RequestMapping("/")
+	@RequestMapping({"/","/index"})
 	public String indexHandle() {
 		return "index";
 	}
 	
 	@RequestMapping("/main")
-	public ModelAndView mainHandle(HttpSession session, @RequestParam Map param) {
+	public ModelAndView mainHomeHandle() {
 		ModelAndView mav = new ModelAndView("t_expr");
-		Map map = new HashMap();
-		System.out.println(param.toString());
-		if(param.get("ID").equals("asd")) {
-			map.put("ID", "asd");
-		}else {
-			map.put("ID", "qwe");
-		}
-		session.setAttribute("auth", map);
 		mav.addObject("title", "PROJECT_H");
 		mav.addObject("section", "main/main");
 		return mav;
 	}
+	
 }

@@ -39,6 +39,10 @@
 		select * from friend where one like #{id}
 	</select>
 	
+	<select id="searchlist" resultType="java.util.HashMap">
+		select * from member where id like #{id}
+	</select>
+	
 	<delete id="deletemsg">
 		delete from FRIENDMAKE where sender=#{sender} and receiver=#{receiver}
 	</delete>

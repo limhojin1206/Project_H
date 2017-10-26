@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="container-fluid">	<ul class="nav navbar-nav">
-		<li class="active"><a href="/">Home</a></li>
+		<li class="active"><a href="/main">Home</a></li>
 
 		<li class="dropdown"><a class="dropdown-toggle"
 			data-toggle="dropdown" href="#">일정 <span
@@ -37,9 +37,9 @@
 						class="glyphicon glyphicon-log-in"></span> Login</a>
 			</c:when>
 			<c:otherwise>
-				<li><a href="/my/info"><span
+				<li><a href="/#"><span
 						class="glyphicon glyphicon-user"></span> INFO</a></li>
-				<li><a href="/login/logout"><span
+				<li><a href="/member/logout"><span
 						class="glyphicon glyphicon-log-out"></span> LOGOUT</a></li>
 			</c:otherwise>
 		</c:choose>
