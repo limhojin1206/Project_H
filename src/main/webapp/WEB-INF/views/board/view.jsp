@@ -17,16 +17,24 @@
 						: <fmt:formatNumber value="${view.CNT }" pattern="#,###" />
 						| 추천수 : <fmt:formatNumber value="${view.RECOMMEND }" pattern="#,###" />
 					</small>
+					<c:if test="${!empty pnPage.PREV }">
+						<a href="/board/view/${pnPage.PREV }"><button>이전글</button></a>
+					</c:if>
+					<c:if test="${!empty pnPage.NEXT }">
+						<a href="/board/view/${pnPage.NEXT }"><button>다음글</button></a>
+					</c:if>
 				</p>
 				<pre style="font-family: 맑은 고딕; font-size: 10pt; min-height: 250px;">${view.CONTENT }</pre>
 			</div>
 		</c:otherwise>
 	</c:choose>
 	<hr />
-	<a><button id="rbt" type="submit">추천하기</button></a>
-	<a href="/board/list"><button>목록으로</button></a>
-	<a href="#"><button>수정</button></a>
-	<a href="#/${view.NO }"><button>삭제</button></a>
+	<c:if test="${empty check }">
+		<a><button id="rbt" type="submit">추천하기</button></a>
+	</c:if>
+	<a href="/board/list?page=1"><button>목록으로</button></a>
+	<a href="/board/edit/${view.NO }"><button>수정</button></a>
+	<a><button id="del">삭제</button></a>
 	<hr/>
 	<div id="view" style="width: 80%" align="left">
 	</div>
@@ -45,14 +53,31 @@
 	<hr/>
 </div>
 <script>
+	$("#del").click(function(){
+		if(confirm("정말 삭제 하시겠습니까?")){
+			$.ajax({
+				"type" : "post",
+				"async" : true,
+				"url" : "/board/delete/${view.NO}",
+			}).done(function(r){
+				if(r == "YYYY"){
+					window.alert("삭제 완료~");
+					$(location).attr('href', '/board/list?page=1');
+				}else{
+					window.alert("삭제 실패~");
+				}
+			});
+		}
+	});
+
 	$("#rbt").click(function(){
 		$.ajax({
 			"type" : "post",	// default : "get"
 			"async" : true,		// default : true
 			"url" : "/board/recommend",
 			"data" : {
-				"bno" : ${view.NO},
-				"id" : "asd"
+				"bno" : $("#num").val(),
+				"id" : "qwe"
 			}
 		}).done(function(r){
 			if(r == "YYYY"){
