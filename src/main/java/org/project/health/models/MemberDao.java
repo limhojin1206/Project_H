@@ -39,4 +39,18 @@ public class MemberDao {
 	public List<Map> friendList(String id){
 		return sql.selectList("member.friendlist", id);
 	}
+	
+	//프로필
+	public Map getDetail (Map map) {
+		return sql.selectOne("member.getDetail", map);
+	}
+	//프로필 사진
+	public Map prePic(Map map) {
+		return sql.selectOne("my.prePic", map);
+	}
+	//사진변경
+	public int addPic(Map map) {
+		return sql.insert("my.addPic", map);
+	}
+	
 }

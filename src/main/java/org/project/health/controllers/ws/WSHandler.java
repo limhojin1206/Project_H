@@ -17,7 +17,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@Component("ws")
+@Component("ws") 
 public class WSHandler extends TextWebSocketHandler {
 	/*
 	 * 	소켓 사용법

@@ -5,7 +5,7 @@
 아이디 : ${auth.ID} <br/>
 이메일 : ${auth.EMAIL} <br/>
 섹션 저장 정보 : ${auth }<br/>
-<a href="/member/profile"><button>프로필 수정</button></a><br/>
+<a href="/"><button>프로필 수정</button></a><br/>
 
 
 
