@@ -7,6 +7,9 @@
 	<h2>받은 쪽지함</h2>
 	<div>
 		<button id="removebt">선택 삭제</button>
+		<a href="send">
+		<button id="sendbt">쪽지보내기</button>
+		</a>
 		<table class="table table-hover">
 			<thead>
 				<tr style="background-color: gray;">

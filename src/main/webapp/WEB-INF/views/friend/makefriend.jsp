@@ -19,10 +19,10 @@
 		<div align="center" id="list"></div>
 
 	</div>
-<!-- 친구 검색 -->
+<!-- 회원 검색 -->
 <script>
 	$("#srch").keyup(function() {
-		console.log($("#srch").val());
+		//console.log($("#srch").val());
 		$("#list").html("")
 		if ($("#srch").val().length == 0) {
 			$("#list").html("")
@@ -35,7 +35,8 @@
 				"id" : $("#srch").val()
 			}
 		}).done(function(obj) {
-			console.log(obj);
+			var title = "<h3><b>검색결과</b></h3><br/>";
+			$("#list").append(title);
 			for (var i = 0; i < obj.length; i++) {
 				var t = "<span class=\"friend\" role=\""+ obj[i].ID+"\"><b>"+ obj[i].ID+ "</b> ("+ obj[i].EMAIL+ ")</span><br/>";
 				$("#list").append(t);
@@ -83,6 +84,39 @@
 			<h4>받은 요청</h4>
 			<table class="table table-hover">
 				<thead>
+<!-- 페이징 부분 -->
+	<tr>
+	<td colspan="3" align="center">
+	<!-- 시작 페이지 -->
+		<c:if test="${viewpage.startPage > 1}">
+			<a href="?page=1">처음</a>
+		</c:if>
+	<!-- 이전 페이지 -->
+		<c:if test="${viewpage.page > 1}">
+			<a href="?page=${viewpage.page -1 }">◀</a>
+		</c:if>
+	<!-- 현재 페이지 -->
+		<c:forEach var="t" begin="${viewpage.startPage }" end="${viewpage.endPage }" >
+			<c:choose>
+			<c:when test="${t eq viewpage.page }">
+				<b>${t }</b>
+			</c:when>
+			<c:otherwise>
+				<a href="?page=${t }">${t }</a>
+			</c:otherwise>
+			</c:choose>
+		</c:forEach>
+	<!-- 다음 페이지 -->
+		<c:if test="${viewpage.page < viewpage.totalPage}">
+			<a href="?page=${viewpage.page + 1 }">▶</a>
+		</c:if>
+	<!-- 끝 페이지 -->
+		<c:if test="${viewpage.endPage < viewpage.totalPage}">
+			<a href="?page=${viewpage.totalPage}">끝</a>
+		</c:if>
+	</td>	
+	</tr>
+<!-- 페이징 부분 -->
 					<tr style="background-color: gray;">
 						<th style="width: 30%">보낸사람</th>
 						<th style="width: 40%">수락/거절</th>
@@ -91,19 +125,20 @@
 				</thead>
 				<tbody>
 					<c:choose>
-						<c:when test="${fn:length(totreceiveList) == 0 }">
+						<c:when test="${fn:length(viewlist) == 0 }">
 							<tr>
 								<td colspan="4" align="center"><h4>친구 신청 없음</h4>
 							</tr>
 						</c:when>
 						<c:otherwise>
-							<c:forEach var="t" items="${totreceiveList}" varStatus="tn">
+							<c:forEach var="t" items="${viewlist}" varStatus="tn">
 							<tr>
 								<td><a href="/memo/send?target=${t.SENDER }" class="sender" value="${t.SENDER }">${t.SENDER }</a></td>
 								<td>${t.CONTENT }</td>
 								<td><fmt:formatDate value="${t.FMDATE}" pattern="yy.MM.dd HH:mm" /></td>
 							</tr>
 							</c:forEach>
+
 						</c:otherwise>
 					</c:choose>
 				</tbody>

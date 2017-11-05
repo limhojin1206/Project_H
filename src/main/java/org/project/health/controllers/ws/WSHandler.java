@@ -56,16 +56,5 @@ public class WSHandler extends TextWebSocketHandler {
 			}
 		}
 	}
-	/*
-	public void confirmMessage(Map map) {
-		if(users.containsKey(map.get("sender"))) {
-			try {
-				String json = mapper.writeValueAsString(map);
-				users.get(map.get("sender")).sendMessage(new TextMessage(json));
-			} catch (IOException e) {
-			}
-		}
-	}
-	*/
 	
 }

@@ -19,11 +19,11 @@ public class MemberDao {
 		return sql.insert("member.join", map);
 	}
 	
-	public List<Map> idcheck(String map) {
-		return sql.selectList("member.idcheck", map);
+	public int idcheck(String map) {
+		return sql.selectOne("member.idcheck", map);
 	}
-	public List<Map> emailcheck(String map) {
-		return sql.selectList("member.emailcheck", map);
+	public int emailcheck(String map) {
+		return sql.selectOne("member.emailcheck", map);
 	}	
 
 	// 로그인
@@ -33,10 +33,5 @@ public class MemberDao {
 	
 	public Map authsetting (Map map ) {
 		return sql.selectOne("member.authsetting", map);
-	}
-	
-	// 친구 리스트
-	public List<Map> friendList(String id){
-		return sql.selectList("member.friendlist", id);
 	}
 }

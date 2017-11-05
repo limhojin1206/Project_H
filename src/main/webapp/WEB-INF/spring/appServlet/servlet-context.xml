@@ -17,8 +17,8 @@
 	<mvc:default-servlet-handler /> 
 	<context:component-scan base-package="org.project.health" />
 
+
 	<!-- websocket handler -->
-	
 	<websocket:handlers>
 		<websocket:mapping handler="ws" path="/ws/login"/>
 		<websocket:handshake-interceptors>
@@ -114,6 +114,5 @@
 		</property>
 	</bean>
 
-	<bean class="org.mybatis.spring.SqlSessionTemplate"
-		c:sqlSessionFactory-ref="factory" />
+	<bean class="org.mybatis.spring.SqlSessionTemplate" c:sqlSessionFactory-ref="factory" />
 </beans>

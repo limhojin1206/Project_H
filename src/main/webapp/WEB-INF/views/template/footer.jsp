@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<div align="center" style="color: gray">LHJ Copyright &copy; LHJ</div>
+<div align="center" style="color: gray">Project_H Copyright &copy; Project_H</div>
 <script>
 var ip = location.hostname;
 var lws = new WebSocket("ws://"+ip+"/ws/login");

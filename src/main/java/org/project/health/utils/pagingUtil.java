@@ -8,15 +8,23 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class pagingUtil {
 	
-	public Map paging(Map data) {
+	public Map list(int page, String id) {
+		Map map = new HashMap<>();
+		map.put("id", id);
+		map.put("start", (page-1)*10 + 1);
+		map.put("end", (page-1)*10 + 10);
+		return map;
+	}
+	
+	public Map paging(int page, int totalCount) {
 		// 현재 페이지 번호
-		int page = (int)data.get("page");				// 입력 받아와야 함
+		//int page = (int)data.get("page");				// 입력 받아와야 함
 		// 한 페이지에 출력될 게시물 수
 		int countList = 10;
 		// 한 화면에 출력될 페이지 수
 		int countPage = 10;
 		// 전체 글 수
-		int totalCount = (int)data.get("totalCount");	// 입력 받아와야 함
+		//int totalCount = (int)data.get("totalCount");	// 입력 받아와야 함
 		// 전체 페이지 수
 		int totalPage = totalCount / countList;
 		if (totalCount % countList > 0) {
@@ -44,34 +52,33 @@ public class pagingUtil {
 		/*
 		 *  	뷰페이지 부분
 		
-		// 시작 페이지
-		if (startPage > 1) {
-		    System.out.print("<a href=\"?page=1\">처음</a>");
-		}
-		
-		// 이전 페이지
-		if (page > 1) {
-		    System.out.println("<a href=\"?page=" + (page - 1)  + "\">이전</a>");
-		}
-		
-		// 현재 페이지
-		for (int iCount = startPage; iCount <= endPage; iCount++) {
-		    if (iCount == page) {
-		        System.out.print(" <b>" + iCount + "</b>");
-		    } else {
-		        System.out.print(" " + iCount + " ");
-		    }
- 		}
-		
-		// 다음 페이지
-		if (page < totalPage) {
-		    System.out.println("<a href=\"?page=" + (page + 1)  + "\">다음</a>");
-		}
-		
-		// 끝 페이지
-		if (endPage < totalPage) {
-		    System.out.print("<a href=\"?page=" + totalPage + "\">끝</a>");
-		}
+		<!-- 시작 페이지 -->
+		<c:if test="${viewpage.startPage > 1}">
+			<a href="?page=1">처음</a>
+		</c:if>
+		<!-- 이전 페이지 -->
+			<c:if test="${viewpage.page > 1}">
+				<a href="?page=${viewpage.page -1 }">◀</a>
+			</c:if>
+		<!-- 현재 페이지 -->
+			<c:forEach var="t" begin="${viewpage.startPage }" end="${viewpage.endPage }" >
+				<c:choose>
+				<c:when test="${t eq viewpage.page }">
+					<b>${t }</b>
+				</c:when>
+				<c:otherwise>
+					<a href="?page=${t }">${t }</a>
+				</c:otherwise>
+				</c:choose>
+			</c:forEach>
+		<!-- 다음 페이지 -->
+			<c:if test="${viewpage.page < viewpage.totalPage}">
+				<a href="?page=${viewpage.page + 1 }">▶</a>
+			</c:if>
+		<!-- 끝 페이지 -->
+		<c:if test="${viewpage.endPage < viewpage.totalPage}">
+			<a href="?page=${viewpage.totalPage}">끝</a>
+		</c:if>
 		 */
 		
 		

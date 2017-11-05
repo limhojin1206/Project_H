@@ -17,14 +17,14 @@
 			</thead>
 			<tbody>
 				<c:choose>
-					<c:when test="${fn:length(totreceiveList) == 0 }">
+					<c:when test="${fn:length(viewlist) == 0 }">
 						<tr>
-							<td colspan="2" align="center"><h4>등록된 친구가 없습니다.</h4>
+							<td colspan="4" align="center"><h4>등록된 친구가 없습니다.</h4>
 						</tr>
 					</tbody>
 					</c:when>
 					<c:otherwise>
-						<c:forEach var="t" items="${totreceiveList}" varStatus="tn">
+						<c:forEach var="t" items="${viewlist}" varStatus="tn">
 							<tr>
 								<td style="padding: 0;"><a href="/memo/send?target=${t.OTHER }">${t.OTHER }</a></td>
 								<td style="padding: 0;"><button class="pbt" role="${t.OTHER }">친구정보</button></td>
@@ -33,41 +33,48 @@
 							</tr>
 						</c:forEach>
 						</tbody>
+<!-- 페이징 부분 -->
+	<tr>
+	<td colspan="4" align="center">
+	<!-- 시작 페이지 -->
+		<c:if test="${viewpage.startPage > 1}">
+			<a href="?page=1">처음</a>
+		</c:if>
+	<!-- 이전 페이지 -->
+		<c:if test="${viewpage.page > 1}">
+			<a href="?page=${viewpage.page -1 }">◀</a>
+		</c:if>
+	<!-- 현재 페이지 -->
+		<c:forEach var="t" begin="${viewpage.startPage }" end="${viewpage.endPage }" >
+			<c:choose>
+			<c:when test="${t eq viewpage.page }">
+				<b>${t }</b>
+			</c:when>
+			<c:otherwise>
+				<a href="?page=${t }">${t }</a>
+			</c:otherwise>
+			</c:choose>
+		</c:forEach>
+	<!-- 다음 페이지 -->
+		<c:if test="${viewpage.page < viewpage.totalPage}">
+			<a href="?page=${viewpage.page + 1 }">▶</a>
+		</c:if>
+	<!-- 끝 페이지 -->
+		<c:if test="${viewpage.endPage < viewpage.totalPage}">
+			<a href="?page=${viewpage.totalPage}">끝</a>
+		</c:if>
+	</td>	
+	</tr>
+<!-- 페이징 부분 -->						
 					</c:otherwise>
 			</c:choose>
 		</table>
 		<hr/>
-		<h3>친구 검색</h3>
-		<p>
-			<input type="text" id="srch" style="padding:2px;width:40%; font-size:16pt;"/> 
-		</p>
+		
 		<div align="center" id="list" ></div>		
 	</div>
 	
-<!-- 친구 검색 -->
 <script>
-	$("#srch").keyup(function(){
-		$("#list").html("<h4>검색결과</h4>")
-		var a = $("#srch").val();
-		//console.log(a);
-		if(a.length==0){
-			$("#list").html("")
-			return;
-		}
-		$.ajax({
-			"url" : "/friend/searchAjax",
-			"data" : {
-				"one" : "${auth.ID}",
-				"other" : $("#srch").val()
-			}
-		}).done(function(obj){
-			for (var i = 0; i < obj.length; i++) {
-				var t =  "<b>"+obj[i].OTHER +"<br/>";
-				$("#list").append(t);	
-			}
-		});
-	});
-	
 	$(".pbt").click(function(){
 		window.alert($(this).attr("role") + " 프로필 보기");
 	});
@@ -76,6 +83,9 @@
 <!-- 친구 취소 -->
 <script>
 	$(".ebt").click(function(){
+		if(!window.confirm("친구 취소 하시겠습니까?")){
+			return;
+		}
 		$.ajax({
 			"type" : "post",
 			"async" : false,

@@ -9,27 +9,20 @@
 		values (#{id},#{password},#{email},#{gender},#{age})
 	</insert>
 	
-	<select id="idcheck" resultType="java.util.HashMap">
-		select * from member where id=#{id, jdbcType=VARCHAR}
+	<select id="idcheck" resultType="java.lang.Integer">
+		select count(*) from member where id=#{id, jdbcType=VARCHAR}
 	</select>
 	
-	<select id="emailcheck" resultType="java.util.HashMap">
-		select * from member where email=#{email, jdbcType=VARCHAR}
+	<select id="emailcheck" resultType="java.lang.Integer">
+		select count(*) from member where email=#{email, jdbcType=VARCHAR}
 	</select>
 	
 	<!-- 로그인 -->
 	<select id="login" resultType="java.lang.Integer">
-		select count(*) from member where (id=#{idmail} or email=#{idmail}) and password=#{password}
+		select count(*) from member where (id=#{idmail, jdbcType=VARCHAR} or email=#{idmail, jdbcType=VARCHAR}) and password=#{password, jdbcType=VARCHAR}
 	</select>
 	
 	<select id="authsetting" resultType="java.util.HashMap">
-		select id,email from member where (id=#{idmail, jdbcType=VARCHAR} or email=#{idmail, jdbcType=VARCHAR} or id=#{id, jdbcType=VARCHAR})
-	</select>
-	
-	
-	
-	<!-- 친구 -->
-	<select id="friendlist" resultType="java.util.HashMap">
-		select * from member where id like #{id}
+		select id from member where (id=#{idmail, jdbcType=VARCHAR} or email=#{idmail, jdbcType=VARCHAR} or id=#{ID, jdbcType=VARCHAR})
 	</select>
 </mapper>

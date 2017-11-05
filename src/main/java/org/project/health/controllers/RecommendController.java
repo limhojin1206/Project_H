@@ -15,7 +15,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.project.health.model.RecommendDao;
+import org.project.health.models.RecommendDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -92,7 +92,7 @@ public class RecommendController {
 		System.out.println(str08);
 		
 		for(int i=1;i<5;i++) {
-			if(str08.equals("ÁÖÀÇ »çÇ×")) {
+			if(str08.equals("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½")) {
 				Element p02 = dc.getElementsByClass("txt").get(i);
 				String str09 = p02.text();
 				System.out.println(str09);

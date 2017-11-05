@@ -1,4 +1,4 @@
-package org.project.health.model;
+package org.project.health.models;
 
 import java.util.List;
 import java.util.Map;

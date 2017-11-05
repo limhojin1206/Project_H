@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.project.health.model.BoardDao;
+import javax.servlet.http.HttpSession;
+
+import org.project.health.models.BoardDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,11 +24,12 @@ public class BoardController {
 	@Autowired
 	BoardDao dao;
 	
+	
 	@RequestMapping("/test")
 	public ModelAndView testHandle() {
 		ModelAndView mav = new ModelAndView("t_expr");
 		mav.addObject("section", "/test");
-		mav.addObject("title", "Ä¶¸°´õ");
+		mav.addObject("title", "calender");
 		
 		return mav;
 	}
@@ -35,7 +38,7 @@ public class BoardController {
 	public ModelAndView editGetHandle(@PathVariable String no) {
 		ModelAndView mav = new ModelAndView("t_expr");
 		Map view = dao.readOne(no);
-		mav.addObject("title", "±Û ¼öÁ¤");
+		mav.addObject("title", "ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		mav.addObject("section", "board/edit");
 		mav.addObject("view", view);
 		
@@ -139,7 +142,7 @@ public class BoardController {
 		
 		//map.put("searchs", searchs);
 		List<Map> list = dao.search(map);
-		mav.addObject("title", "°Ë»ö°á°ú");
+		mav.addObject("title", "ï¿½Ë»ï¿½ï¿½ï¿½ï¿½");
 		mav.addObject("section", "board/list");
 		mav.addObject("list", list);
 		mav.addObject("searchs", searchs);
@@ -151,7 +154,7 @@ public class BoardController {
 	
 	@RequestMapping("/list")
 	public ModelAndView listHandle(@RequestParam(name="page", defaultValue="1") int page) {
-		ModelAndView mav = new ModelAndView("t_expr");
+		ModelAndView mav = new ModelAndView("t_sub_expr");
 		List<Map> recommendList = dao.readRecommend();
 		
 		int	tot = dao.countAll();
@@ -175,34 +178,34 @@ public class BoardController {
 		
 		int blockSize = 10;
 		int totBlock = (int)Math.ceil(size / blockSize);
-		 // *ÇöÀç ÆäÀÌÁö°¡ ¸î¹øÂ° ÆäÀÌÁö ºí·Ï¿¡ ¼ÓÇÏ´ÂÁö °è»ê
-        // (ÇöÀçÆäÀÌÁö-1)/ÆäÀÌÁö ºí·Ï´ÜÀ§+1
-        // 1ÆäÀÌÁö => 1ºí·Ï (1-1)/10 + 1 => 1
-        // 9ÆäÀÌÁö =>     1ºí·Ï (9-1)/10 + 1 => 1
-        // 11ÆäÀÌÁö => 2ºí·Ï (11-1)/10 + 1 => 2
-        // 57ÆäÀÌÁö => 6ºí·Ï (57-1)/10 + 1 => 6 
+		 // *ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+        // (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-1)/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ï´ï¿½ï¿½ï¿½+1
+        // 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ => 1ï¿½ï¿½ï¿½ (1-1)/10 + 1 => 1
+        // 9ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ =>     1ï¿½ï¿½ï¿½ (9-1)/10 + 1 => 1
+        // 11ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ => 2ï¿½ï¿½ï¿½ (11-1)/10 + 1 => 2
+        // 57ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ => 6ï¿½ï¿½ï¿½ (57-1)/10 + 1 => 6 
         int curBlock = (int)Math.ceil((page-1) / blockSize)+1;
-        // *ÇöÀç ÆäÀÌÁö ºí·ÏÀÇ ½ÃÀÛ, ³¡ ¹øÈ£ °è»ê
-        // ÆäÀÌÁö ºí·ÏÀÇ ½ÃÀÛ¹øÈ£
-        // (ÇöÀçºí·Ï-1)*ºí·Ï´ÜÀ§+1
-        // 1ºí·Ï => (1-1)*10 + 1 => 1
-        // 2ºí·Ï => (2-1)*10 + 1 => 11
-        // 6ºí·Ï => (6-1)*10 + 1 => 51
+        // *ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ ï¿½ï¿½È£ ï¿½ï¿½ï¿½
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Û¹ï¿½È£
+        // (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-1)*ï¿½ï¿½Ï´ï¿½ï¿½ï¿½+1
+        // 1ï¿½ï¿½ï¿½ => (1-1)*10 + 1 => 1
+        // 2ï¿½ï¿½ï¿½ => (2-1)*10 + 1 => 11
+        // 6ï¿½ï¿½ï¿½ => (6-1)*10 + 1 => 51
         int blockBegin = (curBlock-1)*blockSize+1;
-        // ÆäÀÌÁö ºí·ÏÀÇ ³¡¹øÈ£
-        // ºí·Ï½ÃÀÛ¹øÈ£+ºí·Ï´ÜÀ§-1;
-        // 1ºí·Ï => 1+10-1 => 10
-        // 2ºí·Ï => 11+10-1 => 20
-        // 6ºí·Ï => 51+10-1 => 60     
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È£
+        // ï¿½ï¿½Ï½ï¿½ï¿½Û¹ï¿½È£+ï¿½ï¿½Ï´ï¿½ï¿½ï¿½-1;
+        // 1ï¿½ï¿½ï¿½ => 1+10-1 => 10
+        // 2ï¿½ï¿½ï¿½ => 11+10-1 => 20
+        // 6ï¿½ï¿½ï¿½ => 51+10-1 => 60     
         int blockEnd = blockBegin+blockSize-1;
-        // *¸¶Áö¸· ºí·ÏÀÌ ¹üÀ§¸¦ ÃÊ°úÇÏÁö ¾Êµµ·Ï °è»ê
-        // [ÀÌÀü] 61 62 => ÀÌ·¯ÇÑ °æ¿ì 70¹ø±îÁö ³ª¿ÀÁö ¾Êµµ·ÏÇÏ±â À§ÇØ¼­
+        // *ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Êµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+        // [ï¿½ï¿½ï¿½ï¿½] 61 62 => ï¿½Ì·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 70ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Êµï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½
         if(blockEnd > tot) blockEnd = tot;
-        // *ÀÌÀüÀ» ´­·¶À» ¶§ ÀÌµ¿ÇÒ ÆäÀÌÁö ¹øÈ£
+        // *ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
         int prevPage = (page == 1)? 1:(curBlock-1)*blockSize;
-        // *´ÙÀ½À» ´­·¶À» ¶§ ÀÌµ¿ÇÒ ÆäÀÌÁö ¹øÈ£
+        // *ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
         int nextPage = curBlock > totBlock ? (curBlock*blockSize) : (curBlock*blockSize)+1;
-        // ¸¶Áö¸· ÆäÀÌÁö°¡ ¹üÀ§¸¦ ÃÊ°úÇÏÁö ¾Êµµ·Ï Ã³¸®
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Êµï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
         if(nextPage >= tot) nextPage = size;
 		mav.addObject("totBlock",totBlock);
 		mav.addObject("curBlock",curBlock);
@@ -217,10 +220,12 @@ public class BoardController {
 		map.put("end", page * pageSize);
 		
 		List<Map> list = dao.readAll(map);
-		mav.addObject("title", "°Ô½ÃÆÇ");
-		mav.addObject("section", "board/list");
-		mav.addObject("list", list);
 		mav.addObject("recommendList", recommendList);
+		mav.addObject("list", list);
+		
+		mav.addObject("title", "BOARD");
+		mav.addObject("nav", "board/boardnav");
+		mav.addObject("section", "board/list");
 		return mav;
 	}
 	
@@ -235,7 +240,7 @@ public class BoardController {
 		map.put("id", "qwe");
 		List<Map> check = dao.checkRecommend(map);
 		mav.addObject("view", view);	
-		mav.addObject("title", "»ó¼¼º¸±â");
+		mav.addObject("title", "ï¿½ó¼¼ºï¿½ï¿½ï¿½");
 		mav.addObject("section", "board/view");
 		mav.addObject("pnPage", pnPage);
 		mav.addObject("check", check);
@@ -253,7 +258,7 @@ public class BoardController {
 	@GetMapping("/add")
 	public ModelAndView addGetHandle() {
 		ModelAndView mav = new ModelAndView("t_expr");
-		mav.addObject("title", "±Û¾²±â");
+		mav.addObject("title", "ï¿½Û¾ï¿½ï¿½ï¿½");
 		mav.addObject("section", "board/add");
 		return mav;
 	}
@@ -261,6 +266,6 @@ public class BoardController {
 	@RequestMapping("/submit")
 	public void submit(@RequestParam Map param){
 		dao.addOne(param);
-	    System.out.println("¿¡µðÅÍ ÄÁÅÙÃ÷°ª:"+param);
+	    System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:"+param);
 	}
 }

@@ -14,7 +14,6 @@ b {
 <div align="center">
 	<div style="width: 380px;" align="left">
 		<form action="/member/join" method="post" autocomplete="off">
-		<h1>회 원 가 입 </h1>
 		<p>
 				<b>ID</b>
 				<br /> <input type="text"  id="ick"  name=id required id="id" autocomplete="off"/><br />
@@ -93,19 +92,15 @@ b {
 		}
 	}
 </script>
-
 		<p>
 		<b>YEAR </b><br/>
-		<select name="age" style="width: 100%;padding: 5px;font-family: 맑은 고딕; ">
-			<c:forEach var="i" begin="0" end="${2017-1900}"> 
-				<option value="${2017-i}" ${2017-i == 1990 ? 'selected="selected"' : '' } >${2017-i}</option>
-			</c:forEach>
-		</select>
+		<input id="age" name="age" type="number" value="1990" />
         </p>
         
 		<p>
 		<b>GENDER </b><br/>
-		남 <input type="radio" name="gender" value="남자" checked="checked" style="width: 40%" />여<input type="radio" name="gender" value="여자" style="width: 40%"/>
+		남자 <input type="radio" name="gender" value="남자" checked="checked" style="width: 40%" />
+		여자<input type="radio" name="gender" value="여자" style="width: 40%"/>
 		</p>
 
 		<p>
@@ -146,9 +141,8 @@ b {
 			}
 		}
 </script>
-		<button type="reset">R E S E T </button><br/>
+		<button type="reset" id="reset">R E S E T </button><br/><br/>
 		<button id="join" type="submit" disabled="disabled">C R E A T E</button><br/>
- 		<a href="/"><button id="" type="button" > C E N C E L </button></a>
 		</form>
  	</div>
 </div>
@@ -168,4 +162,9 @@ b {
 			document.getElementById("join").disabled=true;
 		}
 	}
+	$("#reset").click(function(){
+		$("#idck").html("");
+		$("#passck").html("");
+		$("#eckv").html("");
+	})
 </script>

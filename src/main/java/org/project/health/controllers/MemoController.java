@@ -27,12 +27,11 @@ public class MemoController {
 	MemoDao mdao;
 	@Autowired
 	WSHandler ws;
-	
 	//======================================================= 쪽지함
 	@RequestMapping("/memobox")
 	public String memoboxHandle(Map map) {
 		map.put("title", "memo");
-		map.put("nav", "memo/memonav");
+		map.put("nav", "my/mynav");
 		map.put("section", "memo/memobox");
 		return "t_sub_expr";
 	}
@@ -41,7 +40,7 @@ public class MemoController {
 	@GetMapping("/send")
 	public String sendGetHandle(Map map) {
 		map.put("title", "MEMO");
-		map.put("nav", "memo/memonav");
+		map.put("nav", "my/mynav");
 		map.put("section", "memo/send");
 		return "t_sub_expr";
 	}
@@ -109,7 +108,7 @@ public class MemoController {
 		mav.addObject("pe", (page-1)/10*10+10 <size ? (page-1)/10*10+10  : size );
 		mav.addObject("last", size);
 		mav.addObject("title", "RECEIVEBOX");
-		mav.addObject("nav","memo/memonav");
+		mav.addObject("nav","my/mynav");
 		mav.addObject("section", "memo/receivebox");
 		return mav; 
 		
@@ -122,7 +121,7 @@ public class MemoController {
 		List<Map> sendList = mdao.readSendMemo(id);
 		mav.addObject("sendList",sendList);
 		mav.addObject("title", "SENDBOX");
-		mav.addObject("nav","memo/memonav");
+		mav.addObject("nav","my/mynav");
 		mav.addObject("section", "memo/sendbox");
 		return mav; 
 		

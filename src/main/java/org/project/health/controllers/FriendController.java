@@ -10,6 +10,7 @@ import org.project.health.controllers.ws.WSHandler;
 import org.project.health.models.FriendDao;
 import org.project.health.models.MemberDao;
 import org.project.health.models.MemoDao;
+import org.project.health.utils.pagingUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+
 @Controller
 @RequestMapping("/friend")
 public class FriendController {
@@ -27,26 +29,38 @@ public class FriendController {
 	FriendDao fdao;
 	@Autowired
 	MemoDao mdao;
-	
 	@Autowired
 	MemberDao memberdao;
-	
 	@Autowired
 	WSHandler ws;
+	@Autowired
+	pagingUtil pu;
 	
 	// 친구 요청 리스트
 	@GetMapping("/makefriend")
-	public ModelAndView receiveboxHandle(HttpSession session) {
+	public ModelAndView receiveboxHandle(HttpSession session, @RequestParam(name="page", defaultValue="1") int page) {
 		ModelAndView mav = new ModelAndView("t_sub_expr");
 		String id = (String)((Map)session.getAttribute("auth")).get("ID");
-		List<Map> totreceiveList = fdao.totreadReceiveMemo(id);
+		Map map = new HashMap<>();
+		map.put("id", id);
+		// 현재 페이지
+		System.out.println("page : " + page);
+		// 전체 글 수
+		int totalCount = fdao.mftotalCount( map); 
+		System.out.println("totalCount : " + totalCount);
+
+		// 현재페이지 리스트
+		List<Map> viewlist = fdao.mfviewpage(pu.list(page, id));
+		System.out.println("viewlist : " + viewlist);
 		
+		// 페이징 번호
+		Map viewpage = pu.paging(page, totalCount);
+		System.out.println("viewpage : " + viewpage);
 		
-		
-		
-		mav.addObject("totreceiveList",totreceiveList);
+		mav.addObject("viewpage",viewpage);
+		mav.addObject("viewlist",viewlist);
 		mav.addObject("title", "친구 요청");
-		mav.addObject("nav","memo/memonav");
+		mav.addObject("nav","my/mynav");
 		mav.addObject("section", "friend/makefriend");
 		return mav; 
 	}
@@ -124,7 +138,7 @@ public class FriendController {
 	@ResponseBody
 	public int endfriendHandle(@RequestParam Map map) {
 		int r = fdao.endfriend(map); 
-		
+		System.out.println("r : " +r);
 		if(r==2) {
 			map.put("mode", "alert");
 			map.put("content", map.get("sender")+"님께서 친구를 취소하셨습니다.");
@@ -143,34 +157,47 @@ public class FriendController {
 	public ModelAndView myfriendlistHandle(HttpSession session, @RequestParam(name="page", defaultValue="1") int page) {
 		ModelAndView mav = new ModelAndView("t_sub_expr");
 		String id = (String)((Map)session.getAttribute("auth")).get("ID");
-		List<Map> totreceiveList = fdao.myfriendlist(id);
-		System.out.println("길이 : " + totreceiveList.size());
-		System.out.println(totreceiveList.toString());
-		mav.addObject("totreceiveList",totreceiveList);
+		Map map = new HashMap<>();
+		map.put("id", id);
+		// 현재 페이지
+		System.out.println("page : " + page);
+		// 전체 글 수
+		int totalCount = fdao.ftotalCount(map); 
+		System.out.println("totalCount : " + totalCount);
+
+		// 현재페이지 리스트
+		List<Map> viewlist = fdao.fviewpage(pu.list(page, id));
+		System.out.println("viewlist : " + viewlist);
+		
+		// 페이징 번호
+		Map viewpage = pu.paging(page, totalCount);
+		System.out.println("viewpage : " + viewpage);
+		
+		mav.addObject("viewpage",viewpage);
+		mav.addObject("viewlist",viewlist);
 		mav.addObject("title", "친구 요청");
-		mav.addObject("nav","memo/memonav");
+		mav.addObject("nav","my/mynav");
 		mav.addObject("section", "friend/friendlist");
 		return mav; 
 		
 	}
-	
-	
-	// 친구
-	@RequestMapping("/searchmember")
-	public ModelAndView searchmemberHandle() {
-		ModelAndView mav = new ModelAndView("t_sub_expr");
-		mav.addObject("title", "회원검색");
-		mav.addObject("nav", "memo/memonav");
-		mav.addObject("section","friend/friendlist");
-		return mav;
-	}
-		
-	// 친구 검색
+
+	// 회원 검색
 	@RequestMapping("/searchAjax")
 	@ResponseBody
 	public List<Map> searchIdAjaxHandle(@RequestParam Map map) {
 		map.put("id", "%"+(String)map.get("id")+"%");
-		return fdao.searchlist(map);
+		List list = fdao.searchlist(map);
+		return list;
 	}
 	
+	// 친구 검색
+	@RequestMapping("/searchFriend")
+	@ResponseBody
+	public List<Map> searchFriendHandle(@RequestParam Map map) {
+		map.put("other", "%"+(String)map.get("other")+"%");
+		List viewlist = fdao.searchfriendlist(map);
+		
+		return viewlist;
+	}
 }

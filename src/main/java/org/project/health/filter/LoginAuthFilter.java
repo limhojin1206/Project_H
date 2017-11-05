@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebFilter("/*")
 @SuppressWarnings("serial")
 public class LoginAuthFilter extends HttpFilter  {
+	
 	@Override
 	protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
 		if(request.getSession().getAttribute("auth") == null) {
