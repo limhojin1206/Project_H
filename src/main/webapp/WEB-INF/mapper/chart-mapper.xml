@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="exercise">
+	<select id="MyRatioExMu" resultType="java.util.HashMap">
+		select exmu, count(*) as cnt from exercise group by exmu
+	</select>
+	
+	<select id="MyRatioExPart" resultType="java.util.HashMap">
+		select nvl(expart ,'미설정') expart, count(*) as cnt from exercise group by expart
+	</select>
+</mapper>

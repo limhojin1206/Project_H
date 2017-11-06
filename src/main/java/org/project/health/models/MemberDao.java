@@ -34,4 +34,12 @@ public class MemberDao {
 	public Map authsetting (Map map ) {
 		return sql.selectOne("member.authsetting", map);
 	}
+	
+	public List<Map> countByGender(){
+		return sql.selectList("member.countByGender");
+	}
+	
+	public List<Map> countByAge(){
+		return sql.selectList("member.countByAge");
+	}
 }

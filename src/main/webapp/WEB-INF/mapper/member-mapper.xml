@@ -25,4 +25,12 @@
 	<select id="authsetting" resultType="java.util.HashMap">
 		select id from member where (id=#{idmail, jdbcType=VARCHAR} or email=#{idmail, jdbcType=VARCHAR} or id=#{ID, jdbcType=VARCHAR})
 	</select>
+	
+	<select id="countByGender" resultType="java.util.HashMap">
+		select gender, count(*) as cnt from member group by gender
+	</select>
+	
+	<select id="countByAge" resultType="java.util.HashMap">
+		select age, count(*) as cnt from member group by age
+	</select>
 </mapper>
