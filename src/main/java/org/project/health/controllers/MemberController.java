@@ -81,12 +81,15 @@ public class MemberController {
 	}
 
 	// 회원가입 체크
-	@PostMapping(path="/signup_check/{mode}", produces="text/html;charset=UTF-8")
+	@PostMapping(path="/signup_check/{mode}")
 	@ResponseBody
-	public String signupHandle(@PathVariable String mode, @RequestBody(required=false) String body) {
+	public String signupHandle(@PathVariable String mode, @RequestParam(required=false) String param) {
 		String msg="";
+		System.out.println("mode : " + mode);
+		System.out.println("param : " + param);
 		if(mode.equals("id")) {
-			int r = mdao.idcheck(body);
+			int r = mdao.idcheck(param);
+			System.out.println("r : " + r);
 			if(r == 1) {
 				msg = "true";
 			}else {
@@ -94,7 +97,7 @@ public class MemberController {
 			}
 		}
 		if(mode.equals("email")) {
-			int r = mdao.emailcheck(body);
+			int r = mdao.emailcheck(param);
 			if(r == 1) {
 				msg = "true";
 			}else {

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div align="center">
 	<h1>회원정보수정</h1>
 
@@ -60,8 +60,11 @@
 							<label class="radio-inline"><input type="radio" name="gender" value="여자" checked="checked" required />여</label><br />
 						</c:when>
 					</c:choose>
-					<h5>생일</h5>
-					<input id="age" name="age" type="number" value="${ myinfo.AGE}" />
+					<h5>생년 ${myinfo.AGE}</h5>
+					<select name="age">
+						<c:forEach begin="10" end="100" step="10" var="y">
+							<option ${ fn:substring(myinfo.AGE, 0 ,2 ) == y ? 'selected' : ''}>${y}대</option>
+						</c:forEach>
 					</select>
 					<button type="submit" id="change" style="display: none;" >정보 변경</button>
 				</form>

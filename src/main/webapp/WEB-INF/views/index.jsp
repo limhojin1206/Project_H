@@ -197,7 +197,7 @@ $("#findpass").click(function(){
   </div>
 </div>
 
-<!-- 비밀번호 Modal -->
+<!-- 비밀번호찾기 Modal -->
 <!-- Modal -->
 <div id="myModal3" class="modal fade" role="dialog" style="margin: 10%;">
   <div class="modal-dialog" align="center">

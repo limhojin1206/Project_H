@@ -94,7 +94,11 @@ b {
 </script>
 		<p>
 		<b>YEAR </b><br/>
-		<input id="age" name="age" type="number" value="1990" />
+			<select>
+				<c:forEach begin="10" end="100" step="10" var="age">
+					<option>${age}대</option>
+				</c:forEach>
+			</select>
         </p>
         
 		<p>

@@ -12,11 +12,11 @@
 					<td align="right"><c:choose>
 							<c:when test="${empty param.target }">
 								<input type="text" name="receiver" placeholder="받는 사람"
-									required="required" style="width: 100%;"/>
+									required="required" style="width: 100%;" id="receiver"/>
 							</c:when>
 							<c:otherwise>
-								<input type="text" name="receiver" value="${param.target }"
-									required="required" style="width: 100%;"/>
+								<input type="text" name="receiver" value="${param.target }" placeholder="받는 사람"
+									required="required" style="width: 100%;" id="receiver"/>
 							</c:otherwise>
 						</c:choose></td>
 				</tr>
@@ -27,9 +27,36 @@
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="2" align="right"><button type="submit" style="width: 173px;">보내기</button></td>
+					<td colspan="2" align="right"><button type="submit" style="width: 173px;display: none" id="sendbt">보내기</button></td>
 				</tr>
 			</tfoot>
 		</table>
 	</form>
+		<div>
+			<button type="button" style="width: 173px;" id="idck">보내기</button>
+		</div>
 </div>
+<script>
+$("#idck").click(function(){
+	window.alert($("#receiver").val());
+	$.ajax({
+		"type" : "post",
+		"async" : false,
+		"url" : "/member/signup_check/id",
+		"data" : {
+			"param" : $("#receiver").val()
+		}
+		//왜 데이터 반대쪽에 "="이 붙는가?
+	}).done(function(r) {
+		window.alert("r : " +r);
+		if(r=="true"){
+			window.alert("전송성공");
+			$("#sendbt").trigger('click');
+		}else{
+			window.alert("탈퇴하거나 없는 아이디 입니다.");
+			$("#receiver").val("");
+		}
+	});
+});
+
+</script>

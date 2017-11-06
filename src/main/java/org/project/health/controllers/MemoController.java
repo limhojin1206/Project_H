@@ -61,7 +61,7 @@ public class MemoController {
 		}else{
 			System.out.println("쪽지 전송 실패");
 		}
-		return "redirect:/memo/memobox";
+		return "redirect:/memo/receivebox";
 	}
 	
 	//===================================================== 받은 쪽지함
@@ -132,44 +132,5 @@ public class MemoController {
 	@ResponseBody
 	public int memoRemoveHandle(@RequestParam Map param) {
 		return mdao.deleteMemo(param);
-	}
-	
-	
-	//===========================================
-	
-	@RequestMapping("/list")
-	public String listHandle(Map map, HttpSession session, HttpServletRequest request, @RequestParam(name="page", defaultValue="1") int page ) {
-		String id = (String)((Map)session.getAttribute("auth")).get("ID");
-		List<Map> memoAllList = mdao.readAll(id);
-		request.setAttribute("memolist", memoAllList);
-		
-		int pagecontroll = 0;
-		if(memoAllList.size()%5.0 == 0) {
-			pagecontroll = memoAllList.size()/5;
-		}else {
-			pagecontroll = (memoAllList.size()/5)+1;
-		}
-		
-		if(page < 1) {
-			page = 1;
-		}else if(page > pagecontroll) {
-			
-			page = pagecontroll;
-		}
-		
-		Map bmap = new HashMap();
-			bmap.put("receiver", id);
-		if(page==1) {
-			bmap.put("START", 1);
-			bmap.put("END", 5);
-		}else {
-			bmap.put("START", ((page-1)*5)+1);
-			bmap.put("END", ((page-1)*5)+5);
-		}
-		request.setAttribute("memoBlist", mdao.readBlist(bmap));
-		
-		map.put("title", "MEMOLIST");
-		map.put("section", "memo/list");
-		return "t_expr";
 	}
 }
