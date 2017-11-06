@@ -4,7 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div align="center">
-	<h2>게시판</h2>
 	<table class="table">
 		<thead>
 			<tr>
@@ -17,14 +16,30 @@
 			</tr>
 		</thead>
 		<tbody>
-		<c:if test="${!empty recommendList and param.page eq 1}">
-			<c:forEach var="obj" items="${recommendList }">
+		<c:if test="${!empty noticeList and param.page eq 1 and param.bgno eq 1}">
+			<c:forEach var="obj" items="${noticeList }">
 				<tr class="danger">
-					<td><b>추천글</b></td>
+					<td><span class="label label-danger">공지</span></td>
 					<c:if test="${fn:length(obj.TITLE) ge 17 }">
 						<c:set target="${obj }" property="TITLE" value="${fn:substring(obj.TITLE, 0, 17) }.." />
 					</c:if>
-					<td><a href="/board/view/${obj.NO}">${obj.TITLE }</a> <c:if test="${obj.C ne null }">[${obj.C }]</c:if></td>
+					<td><a href="/board/view/${obj.NO}?bgno=${param.bgno }"><b style="color: red;">${obj.TITLE }</b></a> <c:if test="${obj.C ne null }">[${obj.C }]</c:if></td>
+					<td>${obj.ID }</td>
+					<td><fmt:formatDate value="${obj.WDATE }" pattern="yyyy.MM.dd HH:mm"/></td>
+					<td><fmt:formatNumber value="${obj.CNT }" pattern="#,###" /></td>
+					<td><fmt:formatNumber value="${obj.RECOMMEND }" pattern="#,###" /></td>
+				</tr>
+			</c:forEach>
+		</c:if>
+		
+		<c:if test="${!empty recommendList and param.page eq 1 and param.bgno eq 1}">
+			<c:forEach var="obj" items="${recommendList }">
+				<tr class="active">
+					<td><span class="label label-default">추천</span></td>
+					<c:if test="${fn:length(obj.TITLE) ge 17 }">
+						<c:set target="${obj }" property="TITLE" value="${fn:substring(obj.TITLE, 0, 17) }.." />
+					</c:if>
+					<td><a href="/board/view/${obj.NO}?bgno=${param.bgno }"><b style="color: gray;">${obj.TITLE }</b></a> <c:if test="${obj.C ne null }">[${obj.C }]</c:if></td>
 					<td>${obj.ID }</td>
 					<td><fmt:formatDate value="${obj.WDATE }" pattern="yyyy.MM.dd HH:mm"/></td>
 					<td><fmt:formatNumber value="${obj.CNT }" pattern="#,###" /></td>
@@ -33,29 +48,53 @@
 			</c:forEach>
 		</c:if>
 		<c:forEach var="obj" items="${list }">
-			<tr>
-				<td>${obj.NO }</td>
-				<c:if test="${fn:length(obj.TITLE) ge 17 }">
-					<c:set target="${obj }" property="TITLE" value="${fn:substring(obj.TITLE, 0, 17) }.." />
-				</c:if>
-				<c:forEach var="w" items="${searchs }">
-					<c:set var="ch" value="<b>${w }</b>"/>
-					<c:set target="${obj }" property="TITLE" value="${fn:replace(obj.TITLE, w, ch) }" />
-				</c:forEach>
-				<td><a href="/board/view/${obj.NO}">${obj.TITLE }</a> <c:if test="${obj.C ne null }">[${obj.C }]</c:if></td>
-				<!-- 
-				<td><a href="/board/view/${obj.NO}">${fn:substring(obj.TITLE, 0, 12) }</a> <c:if test="${obj.C ne null }">[${obj.C }]</c:if></td>
-				 -->
-				<td>${obj.ID }</td>
-				<td><fmt:formatDate value="${obj.WDATE }" pattern="yyyy.MM.dd HH:mm"/></td>
-				<td><fmt:formatNumber value="${obj.CNT }" pattern="#,###" /></td>
-				<td><fmt:formatNumber value="${obj.RECOMMEND }" pattern="#,###" /></td>
-			</tr>
+			<c:choose>
+				<c:when test="${param.bgno eq 0}">
+					<tr class="danger">
+					<td><span class="label label-danger">공지</span></td>
+					<c:if test="${fn:length(obj.TITLE) ge 17 }">
+						<c:set target="${obj }" property="TITLE" value="${fn:substring(obj.TITLE, 0, 17) }.." />
+					</c:if>
+					<c:forEach var="w" items="${searchs }">
+						<c:set var="ch" value="<b>${w }</b>"/>
+						<c:set target="${obj }" property="TITLE" value="${fn:replace(obj.TITLE, w, ch) }" />
+					</c:forEach>
+					<td><a href="/board/view/${obj.NO}?bgno=${param.bgno }"><b style="color: red;">${obj.TITLE }</b></a> <c:if test="${obj.C ne null }">[${obj.C }]</c:if></td>
+										<!-- 
+					<td><a href="/board/view/${obj.NO}">${fn:substring(obj.TITLE, 0, 12) }</a> <c:if test="${obj.C ne null }">[${obj.C }]</c:if></td>
+					 -->
+					<td>${obj.ID }</td>
+					<td><fmt:formatDate value="${obj.WDATE }" pattern="yyyy.MM.dd HH:mm"/></td>
+					<td><fmt:formatNumber value="${obj.CNT }" pattern="#,###" /></td>
+					<td><fmt:formatNumber value="${obj.RECOMMEND }" pattern="#,###" /></td>
+				</tr>
+				</c:when>
+				<c:otherwise>
+					<tr>
+						<td>${obj.NO }</td>
+					<c:if test="${fn:length(obj.TITLE) ge 17 }">
+						<c:set target="${obj }" property="TITLE" value="${fn:substring(obj.TITLE, 0, 17) }.." />
+					</c:if>
+					<c:forEach var="w" items="${searchs }">
+						<c:set var="ch" value="<b>${w }</b>"/>
+						<c:set target="${obj }" property="TITLE" value="${fn:replace(obj.TITLE, w, ch) }" />
+					</c:forEach>
+					<td><a href="/board/view/${obj.NO}?bgno=${param.bgno }">${obj.TITLE }</a> <c:if test="${obj.C ne null }">[${obj.C }]</c:if></td>
+					<!-- 
+					<td><a href="/board/view/${obj.NO}">${fn:substring(obj.TITLE, 0, 12) }</a> <c:if test="${obj.C ne null }">[${obj.C }]</c:if></td>
+					 -->
+					<td>${obj.ID }</td>
+					<td><fmt:formatDate value="${obj.WDATE }" pattern="yyyy.MM.dd HH:mm"/></td>
+					<td><fmt:formatNumber value="${obj.CNT }" pattern="#,###" /></td>
+					<td><fmt:formatNumber value="${obj.RECOMMEND }" pattern="#,###" /></td>
+				</tr>
+				</c:otherwise>
+			</c:choose>
 		</c:forEach>
 		</tbody>
 	</table>
 	<p align="right" style="margin-right: 30px;">
-		<a href="/board/add"><button type="button">글작성</button></a>
+		<a href="/board/add?bgno=${param.bgno }"><button type="button">글작성</button></a>
 	</p>
 	<div>
 		<%-- 
@@ -91,11 +130,11 @@
 		<c:if test="${param.page gt 1 }">
 			<c:choose>
 				<c:when test="${empty mode }">
-					<a href="/board/list?page=${param.page -1 }" style="text-decoration: none">
+					<a href="/board/list?bgno=${param.bgno }&page=${param.page -1 }" style="text-decoration: none">
 						<b>◀ 이전</b></a>
 				</c:when>
 				<c:otherwise>
-					<a href="/board/search?page=${param.page -1 }&type=${mode.type}&search=${mode.search}" style="text-decoration: none">
+					<a href="/board/search?bgno=${param.bgno }&page=${param.page -1 }&type=${mode.type}&search=${mode.search}" style="text-decoration: none">
 						<b>◀ 이전</b></a>
 				</c:otherwise>
 			</c:choose>
@@ -106,10 +145,10 @@
 					<b>${i }</b>
 				</c:when>
 				<c:when test="${!empty mode }">
-					<a href="/board/search?page=${i }&type=${mode.type}&search=${mode.search}" style="text-decoration: none">${i }</a>
+					<a href="/board/search?bgno=${param.bgno }&page=${i }&type=${mode.type}&search=${mode.search}" style="text-decoration: none">${i }</a>
 				</c:when>
 				<c:otherwise>
-					<a href="/board/list?page=${i }" style="text-decoration: none">${i }</a>
+					<a href="/board/list?bgno=${param.bgno }&page=${i }" style="text-decoration: none">${i }</a>
 				</c:otherwise>
 			</c:choose>
 			<c:if test="${!vs.last }">|</c:if>
@@ -117,11 +156,11 @@
 		<c:if test="${param.page lt last }">
 			<c:choose>
 				<c:when test="${empty mode }">
-					<a href="/board/list?page=${param.page +1 }" style="text-decoration: none">
+					<a href="/board/list?bgno=${param.bgno }&page=${param.page +1 }" style="text-decoration: none">
 						<b>다음 ▶</b></a>	
 				</c:when>
 				<c:otherwise>
-					<a href="/board/search?page=${param.page +1 }&type=${mode.type}&search=${mode.search}" style="text-decoration: none">
+					<a href="/board/search?bgno=${param.bgno }&page=${param.page +1 }&type=${mode.type}&search=${mode.search}" style="text-decoration: none">
 						<b>다음 ▶</b></a>
 				</c:otherwise>
 			</c:choose>
@@ -129,7 +168,7 @@
  
 	</div>
 	<div>
-		<form action="/board/search?page=1" method="post">
+		<form action="/board/search?bgno=${param.bgno }&page=1" method="post">
 			<select name="type" style="size: 10px;">
 				<option value="title">제목</option>
 				<option value="content">내용</option>

@@ -18,10 +18,10 @@
 						| 추천수 : <fmt:formatNumber value="${view.RECOMMEND }" pattern="#,###" />
 					</small>
 					<c:if test="${!empty pnPage.PREV }">
-						<a href="/board/view/${pnPage.PREV }"><button>이전글</button></a>
+						<a href="/board/view/${pnPage.PREV }?bgno=${param.bgno }"><button>이전글</button></a>
 					</c:if>
 					<c:if test="${!empty pnPage.NEXT }">
-						<a href="/board/view/${pnPage.NEXT }"><button>다음글</button></a>
+						<a href="/board/view/${pnPage.NEXT }?bgno=${param.bgno }"><button>다음글</button></a>
 					</c:if>
 				</p>
 				<pre style="font-family: 맑은 고딕; font-size: 10pt; min-height: 250px;">${view.CONTENT }</pre>
@@ -32,8 +32,8 @@
 	<c:if test="${empty check }">
 		<a><button id="rbt" type="submit">추천하기</button></a>
 	</c:if>
-	<a href="/board/list?page=1"><button>목록으로</button></a>
-	<a href="/board/edit/${view.NO }"><button>수정</button></a>
+	<a href="/board/list?bgno=${param.bgno }&page=1"><button>목록으로</button></a>
+	<a href="/board/edit/${view.NO }?bgno=${param.bgno}"><button>수정</button></a>
 	<a><button id="del">삭제</button></a>
 	<hr/>
 	<div id="view" style="width: 80%" align="left">
@@ -62,7 +62,7 @@
 			}).done(function(r){
 				if(r == "YYYY"){
 					window.alert("삭제 완료~");
-					$(location).attr('href', '/board/list?page=1');
+					$(location).attr('href', '/board/list?bgno=${param.bgno}&page=1');
 				}else{
 					window.alert("삭제 실패~");
 				}

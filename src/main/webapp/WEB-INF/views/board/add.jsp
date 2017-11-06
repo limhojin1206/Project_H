@@ -4,7 +4,7 @@
 <script type="text/javascript" src="/resource/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 
 <!-- action : 에디터에 입력한 html 코드를 전달받을 Controller페이지 URL -->
-<form action="/board/add" method="post" id="frm">
+<form action="/board/add?bgno=${param.bgno }" method="post" id="frm">
 	<b>제목 </b><input type="text" name="title" style="margin: 8px;"/>
 	<b>작성자 </b><input type="text" name="id" style="margin: 8px;" />
     <textarea name="content" id="editor" rows="10" cols="100" style="width:766px; height:412px;">${boardVO.content}</textarea>

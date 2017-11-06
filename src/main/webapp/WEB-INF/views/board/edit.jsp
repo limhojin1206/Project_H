@@ -13,7 +13,7 @@
 </form>
 <script>
 	$("#bt").click(function(){
-		$(location).attr('href', '/board/list?page=1');
+		$(location).attr('href', '/board/list?bgno=${param.bgno}&page=1');
 	});
 	
 	$(function(){
@@ -51,7 +51,7 @@
 				}).done(function(r){
 					if(r == "YYYY"){
 						window.alert("수정 완료~");
-						$(location).attr('href', '/board/view/${view.NO}');
+						$(location).attr('href', '/board/view/${view.NO}?bgno=${param.bgno}');
 					}else{
 						window.alert("수정 실패~");
 					}

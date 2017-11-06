@@ -36,13 +36,13 @@ public class MainController {
 				mav.setViewName("t_sub_expr");
 				mav.addObject("title", "PROJECT_H");
 				mav.addObject("nav", "main/mainnav");
-				mav.addObject("section", "calendar/calendar");
+				mav.addObject("section", "calendar/view");
 			}
 		}else {
 			mav.setViewName("t_sub_expr");
 			mav.addObject("title", "PROJECT_H");
 			mav.addObject("nav", "main/mainnav");
-			mav.addObject("section", "calendar/calendar");
+			mav.addObject("section", "calendar/view");
 		}
 		return mav;
 	}
@@ -52,7 +52,7 @@ public class MainController {
 		ModelAndView mav = new ModelAndView("t_sub_expr");
 		mav.addObject("title", "PROJECT_H");
 		mav.addObject("nav", "main/mainnav");
-		mav.addObject("section", "calendar/calendar");
+		mav.addObject("section", "calendar/view");
 		
 		return mav;
 	}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="calendar">
+	<insert id="addOne">
+		insert into exercise (no, exname, exmu, expart, excnt, extime, id, exst, exed, exset, content)
+			values(exercise_seq.nextval, #{title}, #{type}, #{part}, #{cnt}, #{time}, #{id, jdbcType=VARCHAR}, #{start}, #{end}, #{set}, #{content})
+	</insert>
+	<select id="readAll" resultType="java.util.HashMap">
+		select no, exmu, exname as title, TO_CHAR(exst, 'YYYY-MM-DD') exst, TO_CHAR(exed, 'YYYY-MM-DD') exed  from exercise
+	</select>
+	<select id="readOne" resultType="java.util.HashMap">
+		select no as id, exname, exmu, expart, excmplt, excnt, extime, id as userid, exset, content, 
+		TO_CHAR(exst, 'YYYY-MM-DD') exst, TO_CHAR(exed, 'YYYY-MM-DD') exed from exercise where no=#{no}
+	</select>
+	<delete id="deleteOne">
+		delete exercise where no=#{no}
+	</delete>
+	<update id="editOne">
+		update exercise set exname=#{title}, exmu=#{type}, expart=#{part}, excnt=#{cnt}, extime=#{time}, id=#{id, jdbcType=VARCHAR},
+			exst=#{start}, exed=#{end}, exset=#{set}, content=#{content} where no=#{no}
+	</update>
+	<update id="success">
+		update exercise set excmplt='y' where no=#{no}
+	</update>	
+</mapper>
