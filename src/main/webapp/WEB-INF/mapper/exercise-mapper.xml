@@ -10,4 +10,7 @@
 	<select id="readAll" resultType="java.util.HashMap">
 		select * from boardexercise where parent=#{parent}
 	</select>
+	<select id="readOne">
+		select * from boardexercise where no=#{no}
+	</select>
 </mapper>

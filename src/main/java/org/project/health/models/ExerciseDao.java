@@ -19,4 +19,8 @@ public class ExerciseDao {
 	public List<Map> readAll(String parent){
 		return template.selectList("exercise.readAll", parent);
 	}
+	
+	public Map readOne(String no) {
+		return template.selectOne("exercise.readOne", no);
+	}
 }

@@ -22,6 +22,16 @@ public class BoardController {
 	@Autowired
 	BoardDao dao;
 	
+	@RequestMapping("/exList")
+	public ModelAndView exerciseListHandle() {
+		ModelAndView mav = new ModelAndView("t_sub_expr");
+		mav.addObject("title", "게시판");
+		mav.addObject("section", "board/list");
+		mav.addObject("nav", "board/boardnav");
+		
+		return mav;
+	}
+	
 	@RequestMapping("/edit/{no}")
 	public ModelAndView editGetHandle(@PathVariable String no) {
 		ModelAndView mav = new ModelAndView("t_sub_expr");
@@ -30,7 +40,6 @@ public class BoardController {
 		mav.addObject("section", "board/edit");
 		mav.addObject("view", view);
 		mav.addObject("nav", "board/boardnav");
-		
 		return mav;
 	}
 	
@@ -72,7 +81,6 @@ public class BoardController {
 	public ModelAndView searchHandle(@RequestParam(name="page", defaultValue="1") int page, @RequestParam Map map) {
 		ModelAndView mav = new ModelAndView("t_sub_expr");
 		//System.out.println(map);
-		
 		String search = (String) map.get("search");
 		String[] searchs = search.split("\\s");
 		String sql = "";
@@ -170,34 +178,12 @@ public class BoardController {
 		
 		int blockSize = 10;
 		int totBlock = (int)Math.ceil(size / blockSize);
-		 // *占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占승� 占쏙옙占쏙옙占쏙옙 占쏙옙臼占� 占쏙옙占싹댐옙占쏙옙 占쏙옙占�
-        // (占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙-1)/占쏙옙占쏙옙占쏙옙 占쏙옙求占쏙옙占�+1
-        // 1占쏙옙占쏙옙占쏙옙 => 1占쏙옙占� (1-1)/10 + 1 => 1
-        // 9占쏙옙占쏙옙占쏙옙 =>     1占쏙옙占� (9-1)/10 + 1 => 1
-        // 11占쏙옙占쏙옙占쏙옙 => 2占쏙옙占� (11-1)/10 + 1 => 2
-        // 57占쏙옙占쏙옙占쏙옙 => 6占쏙옙占� (57-1)/10 + 1 => 6 
         int curBlock = (int)Math.ceil((page-1) / blockSize)+1;
-        // *占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占� 占쏙옙占쏙옙, 占쏙옙 占쏙옙호 占쏙옙占�
-        // 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占� 占쏙옙占쌜뱄옙호
-        // (占쏙옙占쏙옙占쏙옙-1)*占쏙옙求占쏙옙占�+1
-        // 1占쏙옙占� => (1-1)*10 + 1 => 1
-        // 2占쏙옙占� => (2-1)*10 + 1 => 11
-        // 6占쏙옙占� => (6-1)*10 + 1 => 51
         int blockBegin = (curBlock-1)*blockSize+1;
-        // 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占� 占쏙옙占쏙옙호
-        // 占쏙옙絿占쏙옙膀占싫�+占쏙옙求占쏙옙占�-1;
-        // 1占쏙옙占� => 1+10-1 => 10
-        // 2占쏙옙占� => 11+10-1 => 20
-        // 6占쏙옙占� => 51+10-1 => 60     
         int blockEnd = blockBegin+blockSize-1;
-        // *占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙 占십곤옙占쏙옙占쏙옙 占십듸옙占쏙옙 占쏙옙占�
-        // [占쏙옙占쏙옙] 61 62 => 占싱뤄옙占쏙옙 占쏙옙占� 70占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占십듸옙占쏙옙占싹깍옙 占쏙옙占쌔쇽옙
         if(blockEnd > tot) blockEnd = tot;
-        // *占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙 占싱듸옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙호
         int prevPage = (page == 1)? 1:(curBlock-1)*blockSize;
-        // *占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙 占싱듸옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙호
         int nextPage = curBlock > totBlock ? (curBlock*blockSize) : (curBlock*blockSize)+1;
-        // 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占십곤옙占쏙옙占쏙옙 占십듸옙占쏙옙 처占쏙옙
         if(nextPage >= tot) nextPage = size;
 		mav.addObject("totBlock",totBlock);
 		mav.addObject("curBlock",curBlock);
@@ -205,7 +191,6 @@ public class BoardController {
 		mav.addObject("blockEnd",blockEnd);
 		mav.addObject("prevPage",prevPage);
 		mav.addObject("nextPage",nextPage);
-		
         
 		Map map = new HashMap();
 		map.put("start", (page - 1) * pageSize + 1 );

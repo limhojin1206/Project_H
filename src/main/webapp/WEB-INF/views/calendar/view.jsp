@@ -20,6 +20,7 @@
 			editable : true,
 			googleCalendarApiKey : "AIzaSyDcnW6WejpTOCffshGDDb4neIrXVUA1EAE",
 			eventLimit : true,
+			eventStartEditable: false,
 			eventSources : [{
 			// 대한민국의 공휴일
 				googleCalendarId : "ko.south_korea#holiday@group.v.calendar.google.com"
@@ -44,6 +45,7 @@
 					}else{
 						$("#success").css("display","");
 					}
+					$("#shbt").css("display","");
 					$("#bt").css("display","none");
 					$("#dbt").css("display","");
 					$("#ebt").css("display","");
@@ -74,6 +76,7 @@
 						location.reload();
 					});
 					$("#ebt").click(function(){
+						$("#shbt").css("display","none");
 						$("#bt").css("display","none");
 						$("#dbt").css("display","none");
 						$("#ebt").css("display","none");
@@ -275,7 +278,7 @@ body {
 			
 				</div>
 				<div class="modal-footer">
-					<button id="shbt" type="button" class="btn btn-default">운동 공유</button>
+					<button id="shbt" type="button" class="btn btn-default" style="display: none;">운동 공유</button>
 					<button id="obt" type="button" class="btn btn-default" style="display: none;">달성</button>
 					<button id="ebt" type="button" class="btn btn-default" style="display: none;">edit</button>
 					<button id="dbt" type="button" class="btn btn-default" style="display: none;">delete</button>

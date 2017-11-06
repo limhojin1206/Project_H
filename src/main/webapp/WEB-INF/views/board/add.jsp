@@ -7,7 +7,7 @@
 <form action="/board/add?bgno=${param.bgno }" method="post" id="frm">
 	<b>제목 </b><input type="text" name="title" style="margin: 8px;"/>
 	<b>작성자 </b><input type="text" name="id" style="margin: 8px;" />
-    <textarea name="content" id="editor" rows="10" cols="100" style="width:766px; height:412px;">${boardVO.content}</textarea>
+    <textarea name="content" id="editor" rows="10" cols="100" style="width:766px; height:412px;">${boardVO.content}123123</textarea>
     <input type="button" id="savebutton" value="글쓰기" style="margin-top: 8px;" />
 </form>
 
