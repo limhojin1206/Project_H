@@ -275,6 +275,7 @@ body {
 			
 				</div>
 				<div class="modal-footer">
+					<button id="shbt" type="button" class="btn btn-default">운동 공유</button>
 					<button id="obt" type="button" class="btn btn-default" style="display: none;">달성</button>
 					<button id="ebt" type="button" class="btn btn-default" style="display: none;">edit</button>
 					<button id="dbt" type="button" class="btn btn-default" style="display: none;">delete</button>
