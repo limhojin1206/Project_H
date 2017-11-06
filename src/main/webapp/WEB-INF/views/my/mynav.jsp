@@ -23,8 +23,7 @@
 <script>
 $("#drop").click(function() {
 	if(window.confirm("정말 탈퇴하시겠습니까?")){
-		
-		
+		$(location).attr('href',"/my/drop");
 	}
 });
 

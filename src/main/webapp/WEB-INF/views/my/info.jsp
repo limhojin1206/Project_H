@@ -22,7 +22,7 @@
 					<img id="infopre" src="/profiles/default.png" alt="기본이미지" 	style="width: 200; height: 200" class="img-circle"/>
 				</c:otherwise>
 			</c:choose>
-		</div>
+		</div><br/>
 		<!-- 개인정보 -->
 		<table class="table">
 			<tbody>

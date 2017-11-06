@@ -24,7 +24,7 @@
 	</update>
 	<!-- 회원탈퇴 -->
     <delete id="drop" >
-        delete FROM member WHERE id in (#{id})
+        delete FROM member WHERE id=#{id}
 	</delete>
 
 </mapper>

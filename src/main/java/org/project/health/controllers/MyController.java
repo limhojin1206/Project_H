@@ -105,17 +105,18 @@ public class MyController {
 
     //================================================================================
 	//회원탈퇴 
-        @GetMapping("/drop")
-	    public ModelAndView dropGetHandle(@RequestParam Map map, HttpSession session ) {
-        	System.out.println(map.toString());
+        @RequestMapping("/drop")
+	    public ModelAndView dropGetHandle( HttpSession session ) {
         	ModelAndView mav = new ModelAndView();
-			int r = mydao.drop(map.get("id")); 
+        	String id = (String)((Map)session.getAttribute("auth")).get("ID");
+        	System.out.println(id);
+			int r = mydao.drop(id); 
 			//성공했을 시 r=1, 실패했을 시 r=0으로 출력 
 			System.out.println("r : "+ r );
 
 			if(r == 1) { 
 				session.invalidate();
-				mav.setViewName("/index");
+				mav.setViewName("/redirect:/index");
 			}else { 
 				 System.out.println("회원탈퇴에 실패하였습니다.");
 				

@@ -61,7 +61,7 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		int r = mdao.join(map);
 		//성공은 r=1 실패는 r=0
-		//System.out.println("r : " + r);
+		System.out.println("회원가입 결과 : " + r);
 		if(r == 1) {
 			System.out.println("회원가입 성공");
 		// 2. session auth에 id 등록하기
@@ -85,8 +85,8 @@ public class MemberController {
 	@ResponseBody
 	public String signupHandle(@PathVariable String mode, @RequestParam(required=false) String param) {
 		String msg="";
-		System.out.println("mode : " + mode);
-		System.out.println("param : " + param);
+		//System.out.println("mode : " + mode);
+		//System.out.println("param : " + param);
 		if(mode.equals("id")) {
 			int r = mdao.idcheck(param);
 			System.out.println("r : " + r);
