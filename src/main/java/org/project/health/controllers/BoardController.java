@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.project.health.models.BoardDao;
+import org.project.health.models.ExerciseDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class BoardController {
 	@Autowired
 	BoardDao dao;
+	
+	ExerciseDao exdao;
 	
 	@RequestMapping("/exList")
 	public ModelAndView exerciseListHandle() {
@@ -249,6 +252,20 @@ public class BoardController {
 		mav.addObject("section", "board/add");
 		mav.addObject("bgno", bgno);
 		mav.addObject("nav", "board/boardnav");
+		return mav;
+	}
+	
+	@RequestMapping("/exAdd")
+	public ModelAndView exAddGetHandle(@RequestParam String bgno, String no) {
+		ModelAndView mav = new ModelAndView("t_sub_expr");
+		System.out.println(bgno);
+		System.out.println(no);
+		Map map = exdao.readOne(no);
+		mav.addObject("title", "글쓰기");
+		mav.addObject("section", "board/add");
+		mav.addObject("bgno", bgno);
+		mav.addObject("nav", "board/boardnav");
+		mav.addObject("data", map);
 		return mav;
 	}
 	

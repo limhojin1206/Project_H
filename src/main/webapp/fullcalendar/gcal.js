@@ -120,7 +120,7 @@ var GcalEventSource = EventSource.extend({
 			title: item.summary,
 			start: item.start.dateTime || item.start.date, // try timed. will fall back to all-day
 			end: item.end.dateTime || item.end.date, // same
-			url: url,
+			//url: url,
 			location: item.location,
 			description: item.description
 		};
