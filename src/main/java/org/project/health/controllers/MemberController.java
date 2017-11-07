@@ -234,7 +234,7 @@ public class MemberController {
 		session.setAttribute("auth", auth);
 		mav.addObject("title", "PROJECT_H");
 		mav.addObject("nav", "main/mainnav");
-		mav.addObject("section", "calendar/calendar");
+		mav.addObject("section", "calendar/view");
 		return mav;
 	}
 }
