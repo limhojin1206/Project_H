@@ -72,7 +72,7 @@ public class MemberController {
 			mav.setViewName("t_sub_expr");
 			mav.addObject("title", "PROJECT_H");
 			mav.addObject("nav", "main/mainnav");
-			mav.addObject("section", "calendar/calendar");
+			mav.addObject("section", "calendar/view");
 		}else {
 			System.out.println("회원가입 실패");
 			mav.setViewName("redirect:member/join");
@@ -81,31 +81,31 @@ public class MemberController {
 	}
 
 	// 회원가입 체크
-	@PostMapping(path="/signup_check/{mode}")
-	@ResponseBody
-	public String signupHandle(@PathVariable String mode, @RequestParam(required=false) String param) {
-		String msg="";
-		System.out.println("mode : " + mode);
-		System.out.println("param : " + param);
-		if(mode.equals("id")) {
-			int r = mdao.idcheck(param);
-			System.out.println("r : " + r);
-			if(r == 1) {
-				msg = "true";
-			}else {
-				msg = "false";
+		@PostMapping(path="/signup_check/{mode}")
+		@ResponseBody
+		public String signupHandle(@PathVariable String mode, @RequestParam(required=false) String param) {
+			String msg="";
+			//System.out.println("mode : " + mode);
+			//System.out.println("param : " + param);
+			if(mode.equals("id")) {
+				int r = mdao.idcheck(param);
+				System.out.println("r : " + r);
+				if(r == 1) {
+					msg = "true";
+				}else {
+					msg = "false";
+				}
 			}
-		}
-		if(mode.equals("email")) {
-			int r = mdao.emailcheck(param);
-			if(r == 1) {
-				msg = "true";
-			}else {
-				msg = "false";
+			if(mode.equals("email")) {
+				int r = mdao.emailcheck(param);
+				if(r == 1) {
+					msg = "true";
+				}else {
+					msg = "false";
+				}
 			}
+			return msg;
 		}
-		return msg;
-	}
 		
 	// 로그인
 	@GetMapping("/login")
@@ -137,7 +137,7 @@ public class MemberController {
 			mav.setViewName("t_sub_expr");
 			mav.addObject("title", "PROJECT_H");
 			mav.addObject("nav", "main/mainnav");
-			mav.addObject("section", "calendar/calendar");
+			mav.addObject("section", "calendar/view");
 		}
 		return mav;
 	}

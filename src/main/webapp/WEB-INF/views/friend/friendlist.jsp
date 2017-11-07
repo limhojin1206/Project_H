@@ -27,8 +27,8 @@
 						<c:forEach var="t" items="${viewlist}" varStatus="tn">
 							<tr>
 								<td style="padding: 0;"><a href="/memo/send?target=${t.OTHER }">${t.OTHER }</a></td>
-								<td style="padding: 0;"><button class="pbt" role="${t.OTHER }">친구정보</button></td>
-								<td style="padding: 0;"><button class="ebt" role="${t.OTHER }">친구취소</button></td>
+								<td style="padding: 0;"><button class="pbt btn btn-primary" role="${t.OTHER }" data-toggle="modal" data-target="#myModal">친구정보</button></td>
+								<td style="padding: 0;"><button class="ebt btn btn-danger" role="${t.OTHER }">친구취소</button></td>
 								<td style="padding: 0;"><fmt:formatDate value="${t.FDATE}" pattern="yy.MM.dd HH:mm" /></td>
 							</tr>
 						</c:forEach>
@@ -73,10 +73,68 @@
 		
 		<div align="center" id="list" ></div>		
 	</div>
-	
+<!-- 친구 정보 모달-->
+<div id="myModal" class="modal fade" role="dialog" >
+  <div class="modal-dialog" align="center">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><h1><b>친구 정보</b></h1></h4>
+      </div>
+      <div class="modal-body" >
+        <div id="friendinfoview"></div>
+        <!-- 사진 -->
+		<div id="view">
+				<img id="furl" style="width: 200; height: 200" class="img-circle"/>
+		</div><br/>
+		<!-- 개인정보 -->
+		<table class="table">
+			<tbody>
+				<tr>
+					<td><b>ID</b></td>
+					<td id="fid"></td>
+				</tr>
+				<tr>
+					<td><b>Email</b></td>
+					<td id="femail"></td>
+				</tr>
+				<tr>
+					<td><b>GENDER</b></td>
+					<td id="fgender"></td>
+				</tr>
+				<tr>
+					<td><b>AGE</b></td>
+					<td id="fage"></td>
+				</tr>
+			</tbody>
+		</table>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 	$(".pbt").click(function(){
-		window.alert($(this).attr("role") + " 프로필 보기");
+		//window.alert($(this).attr("role") + " 프로필 보기");
+		$.ajax({
+			"type" : "post",
+			"async" : false,
+			"url" : "/friend/info",
+			"data" : {
+				"ID" : $(this).attr("role")
+			}
+		}).done(function(map) {
+			if(map.URL != null){
+				$("#furl").attr("src",map.URL);
+			}else{
+				$("#furl").attr("src", "/profiles/default.png");
+			}
+			$("#fid").html(map.ID);
+			$("#femail").html(map.EMAIL);
+			$("#fgender").html(map.GENDER);
+			$("#fage").html(map.AGE);
+		});
 	});
 </script>
 
@@ -99,9 +157,9 @@
 			}
 		}).done(function(r) {
 			if (r == 2) {
-				window.alert("친구 취소");
+				//window.alert("친구 취소");
 			} else {
-				window.alert("친구취소 실패");
+				//window.alert("친구취소 실패");
 			}
 		});
 		location.reload();

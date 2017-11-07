@@ -37,44 +37,49 @@
 		}).done(function(obj) {
 			var title = "<h3><b>검색결과</b></h3><br/>";
 			$("#list").append(title);
-			for (var i = 0; i < obj.length; i++) {
-				var t = "<span class=\"friend\" role=\""+ obj[i].ID+"\"><b>"+ obj[i].ID+ "</b> ("+ obj[i].EMAIL+ ")</span><br/>";
+			if(obj.length == 0){
+				var t = "검색결과가 없습니다.";
 				$("#list").append(t);
-				}
-			$(".friend").click(function() {
-				if (window.confirm("친구 요청하시겠습니까?")) {
-					if ("${auth.ID}" == $(this).attr("role")) {
-						window.alert("자신을 친구 초대할 수 없습니다.");
-					} else {
-						$.ajax({
-							"type" : "post",
-							"async" : false,
-							"url" : "/friend/makefriend",
-							"data" : {
-								"one" : "${auth.ID}",
-								"other" : $(this).attr("role"),
-								"sender" : "${auth.ID}",
-								"receiver" : $(this).attr("role"),
-								"content" : "<button class=\"abt\" role=${auth.ID}>수락</button><button class=\"rbt\" role=${auth.ID}>거절</button>",
-								"readck" : "n"
-							}
-						}).done(function(r) {
-							if (r == 1) {
-								window.alert("요청 전송 성공");
-							} else {
-								if (r == -1) {
-									window.alert("이미 친구 입니다.");
-								} else if(r == -2){
-									window.alert("이미 요청 전송 하였습니다.");
-								} else {
-									window.alert("요청 전송 실패");
-								}
-							}
-						});
-						location.reload();
+			}else{
+				for (var i = 0; i < obj.length; i++) {
+					var t = "<span class=\"friend\" role=\""+ obj[i].ID+"\"><b>"+ obj[i].ID+ "</b> ("+ obj[i].EMAIL+ ")</span><br/>";
+					$("#list").append(t);
 					}
-				}
-			});
+				$(".friend").click(function() {
+					if (window.confirm("친구 요청하시겠습니까?")) {
+						if ("${auth.ID}" == $(this).attr("role")) {
+							window.alert("자신을 친구 초대할 수 없습니다.");
+						} else {
+							$.ajax({
+								"type" : "post",
+								"async" : false,
+								"url" : "/friend/makefriend",
+								"data" : {
+									"one" : "${auth.ID}",
+									"other" : $(this).attr("role"),
+									"sender" : "${auth.ID}",
+									"receiver" : $(this).attr("role"),
+									"content" : "<button class=\"abt\" role=${auth.ID} class=\"btn btn-primary\">수락</button><button class=\"rbt\" role=${auth.ID} class=\"btn btn-danger\">거절</button>",
+									"readck" : "n"
+								}
+							}).done(function(r) {
+								if (r == 1) {
+									window.alert("요청 전송 성공");
+								} else {
+									if (r == -1) {
+										window.alert("이미 친구 입니다.");
+									} else if(r == -2){
+										window.alert("이미 요청 전송 하였습니다.");
+									} else {
+										window.alert("요청 전송 실패");
+									}
+								}
+							});
+							location.reload();
+						}
+					}
+				});
+			}
 		});
 	});
 </script>

@@ -24,23 +24,23 @@ public class MainController {
 	@RequestMapping({"/","/index"})
 	public ModelAndView indexHandle(HttpServletRequest request, HttpSession session) {
 		ModelAndView mav = new ModelAndView("t_expr");
-		mav.addObject("title", "PROJECT_H");
+		mav.addObject("title", "D.U.EXERCISE");
 		if(session.getAttribute("auth") == null) {
 			if(request.getSession().getAttribute("auth_id") == null){
 				mav.setViewName("index");
 			}else {
 				String id = (String)request.getSession().getAttribute("auth_id");
 				Map auth = mydao.myinfo(id);
-				System.out.println(auth);
+				//System.out.println(auth);
 				session.setAttribute("auth", auth);
 				mav.setViewName("t_sub_expr");
-				mav.addObject("title", "PROJECT_H");
+				mav.addObject("title", "D.U.EXERCISE");
 				mav.addObject("nav", "main/mainnav");
 				mav.addObject("section", "calendar/view");
 			}
 		}else {
 			mav.setViewName("t_sub_expr");
-			mav.addObject("title", "PROJECT_H");
+			mav.addObject("title", "D.U.EXERCISE");
 			mav.addObject("nav", "main/mainnav");
 			mav.addObject("section", "calendar/view");
 		}
@@ -50,7 +50,7 @@ public class MainController {
 	@RequestMapping("/main")
 	public ModelAndView mainHomeHandle() {
 		ModelAndView mav = new ModelAndView("t_sub_expr");
-		mav.addObject("title", "PROJECT_H");
+		mav.addObject("title", "D.U.EXERCISE");
 		mav.addObject("nav", "main/mainnav");
 		mav.addObject("section", "calendar/view");
 		
