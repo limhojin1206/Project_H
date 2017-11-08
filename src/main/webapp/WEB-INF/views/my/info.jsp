@@ -8,12 +8,9 @@
 	<div>
 		<h2>회원정보 조회</h2>
 	</div>
-
-	<div class="row">
-	  <!-- 좌측 -->
-	  <div class="col-sm-6">
-		<!-- 사진 -->
-		<div>
+	<div style="width: 50%">
+	<!-- 사진 -->
+		<div >
 			<c:choose>
 				<c:when test="${! empty myinfo.URL }">
 					<img id="infopre" src="${myinfo.URL}" style="width: 200; height: 200" class="img-circle"/>
@@ -46,19 +43,7 @@
 		</table>
 		<!-- 정보수정 -->
 		<div>
-			<a href="/my/adjust"><button type="submit" style="width: 200px;">정보수정</button></a>
+			<a href="/my/adjust"><button type="submit" class="btn btn-info btn-block">정보수정</button></a>
 		</div>
-	  </div>
-	  
-	  <!-- 우측 -->
-	  <div class="col-sm-6">
-		<div>
-			<h2>오늘의 일정</h2>
-		</div>
-	
-	
-	
-	  
-	  </div>
 	</div>
 </div>

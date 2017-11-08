@@ -75,4 +75,9 @@
 	<select id="searchfriendlist" resultType="java.util.HashMap">
 		select other from friend where one=#{one, jdbcType=VARCHAR} and other like #{other, jdbcType=VARCHAR}
 	</select>
+	
+	<!-- 친구 정보 가져오기 -->
+	<select id="friendinfo" resultType="java.util.HashMap">
+		select * from (select m.*, p.url from member m left join profile p on m.id = p.id where m.id=#{ID} order by regdate desc ) where rownum=1
+	</select>
 </mapper>

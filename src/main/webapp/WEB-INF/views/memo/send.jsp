@@ -38,7 +38,7 @@
 </div>
 <script>
 $("#idck").click(function(){
-	window.alert($("#receiver").val());
+	//window.alert($("#receiver").val());
 	$.ajax({
 		"type" : "post",
 		"async" : false,
@@ -48,7 +48,7 @@ $("#idck").click(function(){
 		}
 		//왜 데이터 반대쪽에 "="이 붙는가?
 	}).done(function(r) {
-		window.alert("r : " +r);
+		//window.alert("r : " +r);
 		if(r=="true"){
 			window.alert("전송성공");
 			$("#sendbt").trigger('click');

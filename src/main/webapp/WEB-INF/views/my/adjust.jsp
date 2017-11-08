@@ -61,7 +61,7 @@
 						</c:when>
 					</c:choose>
 					<h5>생년 ${myinfo.AGE}</h5>
-					<select name="age">
+					<select name="age" class="form-control">
 						<c:forEach begin="10" end="100" step="10" var="y">
 							<option ${ fn:substring(myinfo.AGE, 0 ,2 ) == y ? 'selected' : ''}>${y}대</option>
 						</c:forEach>
@@ -83,17 +83,18 @@
 							style="width: 200; height: 200" />
 					</c:otherwise>
 				</c:choose>
+				<br/><br/>
 				<form action="/my/changepic" method="post" style="display: block;" id="pform">
 					<input id="changpic" name="changpic" type="file" style="display: none" />
-					<button type="button" class="bt" id="changepicbt">사진 변경</button>
-					<button type="button" class="bt" onclick="javascript:location.reload()">적용 취소</button>
+					<button type="button" id="changepicbt" class="btn btn-default">사진 변경</button>
+					<button type="button" onclick="javascript:location.reload()" class="btn btn-default">적용 취소</button>
 				</form>
 			</div>
-			
+			<br/><br/>
 			<div >
 				<div align=center>
-					<button id="changeinfo">수정완료</button><br /> 
-					<a href="/my/info"><button type="button" style="width: 140px;">수정취소</button></a>
+					<button id="changeinfo" class="btn btn-primary btn-block">수정완료</button><br /> 
+					<a href="/my/info"><button type="button" class="btn btn-danger btn-block">수정취소</button></a>
 				</div>
 			</div>
 			

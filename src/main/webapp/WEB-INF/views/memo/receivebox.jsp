@@ -6,9 +6,9 @@
 <div>
 	<h2>받은 쪽지함</h2>
 	<div>
-		<button id="removebt">선택 삭제</button>
+		<button id="removebt" class="btn btn-danger">선택 삭제</button>
 		<a href="send">
-		<button id="sendbt">쪽지보내기</button>
+		<button id="sendbt" class="btn btn-primary">쪽지보내기</button>
 		</a>
 		<table class="table table-hover">
 			<thead>
@@ -94,29 +94,37 @@
 	});
 
 	$("#removebt").click(function() {
-		if (window.confirm("삭제하시겠습니까?")) {
-			var no = "";
-			for (var i = 0; i < $(".item").length; i++) {
-				if ($(".item").eq(i).prop("checked")) {
-					no += $($(".item").eq(i)).val() + ",";
-				}
+		var cnt = 0;
+		for (var i = 0; i < $(".item").length; i++) {
+			if ($(".item").eq(i).prop("checked")) {
+				cnt++;
 			}
-			no = no.slice(0, -1);
-			$.ajax({
-				"type" : "post",
-				"async" : false,
-				"url" : "/memo/remove",
-				"data" : {
-					"no" : no
+		}
+		if(cnt != 0){
+			if (window.confirm("삭제하시겠습니까?")) {
+				var no = "";
+				for (var i = 0; i < $(".item").length; i++) {
+					if ($(".item").eq(i).prop("checked")) {
+						no += $($(".item").eq(i)).val() + ",";
+					}
 				}
-			}).done(function(r) {
-				if (r == 1) {
-					window.alert("삭제 성공");
-				} else {
-					window.alert("삭제 실패");
-				}
-			});
-			location.reload();
+				no = no.slice(0, -1);
+				$.ajax({
+					"type" : "post",
+					"async" : false,
+					"url" : "/memo/remove",
+					"data" : {
+						"no" : no
+					}
+				}).done(function(r) {
+					if (r == 1) {
+						window.alert("삭제 성공");
+					} else {
+						window.alert("삭제 실패");
+					}
+				});
+				location.reload();
+			}
 		}
 	});
 </script>

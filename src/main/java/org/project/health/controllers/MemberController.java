@@ -61,7 +61,7 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		int r = mdao.join(map);
 		//성공은 r=1 실패는 r=0
-		System.out.println("회원가입 결과 : " + r);
+		//System.out.println("r : " + r);
 		if(r == 1) {
 			System.out.println("회원가입 성공");
 		// 2. session auth에 id 등록하기
@@ -81,31 +81,31 @@ public class MemberController {
 	}
 
 	// 회원가입 체크
-	@PostMapping(path="/signup_check/{mode}")
-	@ResponseBody
-	public String signupHandle(@PathVariable String mode, @RequestParam(required=false) String param) {
-		String msg="";
-		//System.out.println("mode : " + mode);
-		//System.out.println("param : " + param);
-		if(mode.equals("id")) {
-			int r = mdao.idcheck(param);
-			System.out.println("r : " + r);
-			if(r == 1) {
-				msg = "true";
-			}else {
-				msg = "false";
+		@PostMapping(path="/signup_check/{mode}")
+		@ResponseBody
+		public String signupHandle(@PathVariable String mode, @RequestParam(required=false) String param) {
+			String msg="";
+			//System.out.println("mode : " + mode);
+			//System.out.println("param : " + param);
+			if(mode.equals("id")) {
+				int r = mdao.idcheck(param);
+				System.out.println("r : " + r);
+				if(r == 1) {
+					msg = "true";
+				}else {
+					msg = "false";
+				}
 			}
-		}
-		if(mode.equals("email")) {
-			int r = mdao.emailcheck(param);
-			if(r == 1) {
-				msg = "true";
-			}else {
-				msg = "false";
+			if(mode.equals("email")) {
+				int r = mdao.emailcheck(param);
+				if(r == 1) {
+					msg = "true";
+				}else {
+					msg = "false";
+				}
 			}
+			return msg;
 		}
-		return msg;
-	}
 		
 	// 로그인
 	@GetMapping("/login")
