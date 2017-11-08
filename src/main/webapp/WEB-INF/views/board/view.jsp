@@ -41,75 +41,85 @@
 		</c:otherwise>
 	</c:choose>
 	<hr />
-					<div class="col-sm-2">
-						<br />
-						<div class="radio">
-							<label><input type="radio" name="optradio" id="type01" class="form" checked>유산소</label>
-						</div>
-						<div class="radio">
-							<label><input type="radio" name="optradio" id="type02" class="form">근력</label>
-						</div>
-					</div>
-
-					<div class="col-sm-6">
-						<br />
-						<div class="type" id="type01ctg">5대 유산소 운동 <br /> 
-							<select class="form-control" id="sel1" name="oxygen">
-								<option selected="selected">걷기</option>
-								<option>달리기</option>
-								<option>줄넘기</option>
-								<option>수영</option>
-								<option>자전거</option>
-							</select>
-						</div>
-						<div class="type" style="display: none" id="type02ctg">10개 근력 운동<br /> 
-							<select class="form-control" id="sel2" name="muscle">
-								<option selected="selected">가슴</option>
-								<option>어깨</option>
-								<option>등</option>
-								<option>허리</option>
-								<option>위팔 앞</option>
-								<option>위팔 뒤</option>
-								<option>아래팔</option>
-								<option>복부</option>
-								<option>허벅지 앞</option>
-								<option>허벅지 뒤</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div>
-							시간(분) <select class="form-control" id="time">
-								<option selected="selected">0</option>
-								<option>30</option>
-								<option>60</option>
-								<option>90</option>
-								<option>120</option>
-								<option>150</option>
-								<option>180</option>
-							</select>
-						</div>
-						<div>
-							횟수 <select class="form-control" id="cnt">
-								<option selected="selected">0</option>
-								<option>5</option>
-								<option>10</option>
-								<option>15</option>
-								<option>20</option>
-							</select>
-						</div>
-						<div>
-							세트수 <select class="form-control" id="set">
-								<option selected="selected">0</option>
-								<option>3</option>
-								<option>5</option>
-								<option>7</option>
-							</select>
-						</div>
-					</div>
-	<button type="button">운동법 저장</button>				
-	
+	<div>
+	<c:if test="${!empty data or param.bgno eq 2 }">
+	<h3><span class="label label-info">운동법</span></h3>
+	<input type="hidden" name="exno" value="${data.NO }">
+	<div class="row" style="width: 85%;" align="left">
+	<div class="col-sm-2">
+		<br />
+		<div class="radio">
+			<label><input type="radio" name="optradio" id="type01"
+				class="form" checked>유산소</label>
+		</div>
+		<div class="radio">
+			<label><input type="radio" name="optradio" id="type02"
+				class="form">근력</label>
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<br />
+		<div class="type" id="type01ctg">
+			5대 유산소 운동 <br /> <select class="form-control" id="sel1"
+				name="oxygen">
+				<option selected="selected">걷기</option>
+				<option>달리기</option>
+				<option>줄넘기</option>
+				<option>수영</option>
+				<option>자전거</option>
+			</select>
+		</div>
+		<div class="type" style="display: none" id="type02ctg">
+			10개 근력 운동<br /> <select class="form-control" id="sel2" name="muscle">
+				<option selected="selected">가슴</option>
+				<option>어깨</option>
+				<option>등</option>
+				<option>허리</option>
+				<option>위팔 앞</option>
+				<option>위팔 뒤</option>
+				<option>아래팔</option>
+				<option>복부</option>
+				<option>허벅지 앞</option>
+				<option>허벅지 뒤</option>
+			</select>
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<div>
+			시간(분) <select class="form-control" id="time">
+				<option selected="selected">0</option>
+				<option>30</option>
+				<option>60</option>
+				<option>90</option>
+				<option>120</option>
+				<option>150</option>
+				<option>180</option>
+			</select>
+		</div>
+		<div>
+			횟수 <select class="form-control" id="cnt">
+				<option selected="selected">0</option>
+				<option>5</option>
+				<option>10</option>
+				<option>15</option>
+				<option>20</option>
+			</select>
+		</div>
+		<div>
+			세트수 <select class="form-control" id="set">
+				<option selected="selected">0</option>
+				<option>3</option>
+				<option>5</option>
+				<option>7</option>
+			</select>
+		</div>
+	</div>
+	</div>
+	<button id="exadd" type="button">운동법 바로추가</button>
+	<button id="exsave" type="button">운동법 저장</button>
 	<hr/>
+	</c:if>
+	</div>			
 	<c:if test="${empty check and view.ID ne auth.ID }">
 		<a><button id="rbt" type="submit">추천하기</button></a>
 	</c:if>
@@ -133,7 +143,7 @@
 			<input id="writer" type="hidden" value="${auth.ID }" placeholder="작성자" style="width: 40%;" />
 		</p>
 		<p>
-			<textarea id="content" rows="3" placeholder="댓글내용" style="width: 40%; resize: none;" required></textarea>
+			<textarea id="content" rows="3" placeholder="댓글내용" style="width: 50%; resize: none;" required></textarea>
 			
 		</p>
 		<p>
@@ -143,6 +153,25 @@
 	<hr/>
 </div>
 <script>
+	$(function(){
+		$(".form-control").attr("disabled",true);
+		$('.form').attr("disabled", true);
+		if("${exview.EXMU}" == "유산소"){
+			$('#type01').attr("checked", true);
+			$("#type02ctg").hide();
+			$("#type01ctg").show();
+			$('#sel1').val("${exview.EXPART}");
+		}else{
+			$('#type02').attr("checked", true);
+			$("#type01ctg").hide();
+			$("#type02ctg").show();
+			$('#sel2').val("${exview.EXPART}");
+		}
+		$('#time').val("${exview.EXTIME}");
+		$('#cnt').val("${exview.EXCNT}");
+		$('#set').val("${exview.EXSET}");
+	});
+	
 	$("#del").click(function(){
 		if(confirm("정말 삭제 하시겠습니까?")){
 			$.ajax({
@@ -226,20 +255,4 @@
 	};
 	list();
 	
-	$("#sbt").click(function(){
-		if(confirm("정말 삭제 하시겠습니까?")){
-			$.ajax({
-				"type" : "post",
-				"async" : true,
-				"url" : "/reply/delete/${view.NO}",
-			}).done(function(r){
-				if(r == "YYYY"){
-					window.alert("삭제 완료~");
-					$(location).attr('href', '/board/list?bgno=${param.bgno}&page=1');
-				}else{
-					window.alert("삭제 실패~");
-				}
-			});
-		}
-	});
 </script>

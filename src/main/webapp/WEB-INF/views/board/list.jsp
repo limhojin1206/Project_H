@@ -129,9 +129,11 @@
 		</c:forEach>
 		</tbody>
 	</table>
-	<p align="right" style="margin-right: 30px;">
-		<a href="/board/add?bgno=${param.bgno }"><button type="button">글작성</button></a>
-	</p>
+	<c:if test="${param.bgno eq 1 or (auth.ID eq 'asd' and param.bgno eq 0)}">
+		<p align="right" style="margin-right: 30px;">
+			<a href="/board/add?bgno=${param.bgno }"><button type="button">글작성</button></a>
+		</p>
+	</c:if>
 	<div>
 		<%-- 
 		<!-- 현재 페이지 블럭이 1보다 크면 처음으로 이동 -->

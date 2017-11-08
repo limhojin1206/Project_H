@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import aj.org.objectweb.asm.Type;
+
 
 @Controller
 @RequestMapping("/board")
@@ -212,14 +214,18 @@ public class BoardController {
 		map.put("bgno", bgno);
 		Map view = dao.readOne(no);
 		Map pnPage = dao.prevAndNext(map);
-		
 		List<Map> check = dao.checkRecommend(map);
-		
+		Object exno = view.get("EXNO");
+		if(exno != null) {
+		Map exview = exdao.readOne(exno);
+		mav.addObject("exview", exview);
+		System.out.println("exview = "+exview);
+		}
 		System.out.println("view = "+view);
 		System.out.println("pnPage = "+pnPage);
 		System.out.println("check = "+check);
 		System.out.println("map = "+map);
-		mav.addObject("view", view);	
+		mav.addObject("view", view);
 		mav.addObject("title", "상세보기");
 		mav.addObject("section", "board/view");
 		mav.addObject("pnPage", pnPage);
@@ -232,7 +238,7 @@ public class BoardController {
 	@PostMapping("/add")
 	public ModelAndView addPostHandle(@RequestParam Map map) {
 		ModelAndView mav = new ModelAndView("redirect:/board/list?bgno="+map.get("bgno")+"&page=1");
-		System.out.println(map);
+		System.out.println("test = "+map);
 		int rst = dao.addOne(map);
 		//mav.addObject("rst", rst);
 		return mav;
@@ -249,12 +255,12 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/exAdd")
-	public ModelAndView exAddGetHandle(@RequestParam String bgno, @RequestParam String no) {
+	public ModelAndView exAddGetHandle(@RequestParam String bgno, String no) {
 		ModelAndView mav = new ModelAndView("t_sub_expr");
-		System.out.println("bgno = "+bgno);
-		System.out.println("no ="+no);
+	//	System.out.println("bgno = "+bgno);
+	//	System.out.println("no ="+no);
 		Map map = exdao.readOne(no);
-		System.out.println("map = "+map);
+	//	System.out.println("test = "+map);
 		mav.addObject("title", "운동 공유");
 		mav.addObject("section", "board/add");
 		mav.addObject("bgno", bgno);
@@ -262,10 +268,4 @@ public class BoardController {
 		mav.addObject("data", map);
 		return mav;
 	}
-	
-//	@RequestMapping("/submit")
-//	public void submit(@RequestParam Map param){
-//		dao.addOne(param);
-//	    System.out.println("占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙:"+param);
-//	}
 }

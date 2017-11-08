@@ -20,7 +20,7 @@ public class ExerciseDao {
 		return template.selectList("exercise.readAll", parent);
 	}
 	
-	public Map readOne(String no) {
+	public Map readOne(Object no) {
 		return template.selectOne("exercise.readOne", no);
 	}
 }
