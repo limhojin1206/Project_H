@@ -27,10 +27,38 @@ public class CalendarController {
 	
 	@Autowired
 	ObjectMapper mapper;
+	
+	@PostMapping("exList")
+	@ResponseBody
+	public List<Map> exListHandle(HttpSession session) {
+		String id = (String)((Map)session.getAttribute("auth")).get("ID");
+		List<Map> exList = dao.exList(id);		
+		
+		return exList;
+	}
+	
+	@PostMapping("/addList")
+	@ResponseBody
+	public String addListHandle(@RequestParam Map map) {
+		System.out.println(map);
+		Map cList = dao.checkList(map);
+		if(cList == null) {
+			int rst = dao.addList(map);
+			if(rst == 1) {
+				return "YYYYY";
+			}else {
+				return "NNNNN";
+			}
+		}else {
+			return "NNNN";
+		}
+	}
 		
 	@PostMapping("/add")
 	@ResponseBody
-	public String addHandle(@RequestParam Map map) {
+	public String addHandle(@RequestParam Map map, HttpSession session) {
+		String id = (String)((Map)session.getAttribute("auth")).get("ID");
+		map.put("id", id);
 		//System.out.println(map);
 		int rst = dao.addOne(map);
 		if(rst == 1) {
@@ -55,6 +83,7 @@ public class CalendarController {
 		json = json.replaceAll("EXED", "end");
 		json = json.replaceAll("TITLE", "title");
 		json = json.replaceAll("NO", "id");
+		json = json.replaceAll("COLOR", "color");
 		//System.out.println(json);
 		return json;
 	}
