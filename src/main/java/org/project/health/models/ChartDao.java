@@ -24,16 +24,16 @@ public class ChartDao {
 		return sql.selectList("exercise.TotalRatioExPart02");
 	}
 	
-	public List<Map> MyRatioExMu(){
-		return sql.selectList("exercise.MyRatioExMu");
+	public List<Map> MyRatioExMu(String id){
+		return sql.selectList("exercise.MyRatioExMu", id);
 	}
 	
-	public List<Map> MyOxeygenExPart(){
-		return sql.selectList("exercise.MyOxeygenExPart");
+	public List<Map> MyOxeygenExPart(String id){
+		return sql.selectList("exercise.MyOxeygenExPart", id);
 	}
 	
-	public List<Map> MyMucsleExPart(){
-		return sql.selectList("exercise.MyMucsleExPart");
+	public List<Map> MyMucsleExPart(String id){
+		return sql.selectList("exercise.MyMucsleExPart", id);
 	}
 
 }

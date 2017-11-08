@@ -5,7 +5,7 @@
 		<div class="container-fluid" align="center">
 			<li><a href="/my/info"><button class="btn btn-default">MYinfo</button></a></li>
 			<br />
-			<li><a href="/chart/01"><button class="btn btn-success">CHART</button></a></li>
+			<li><a href="/chart/mychart"><button class="btn btn-success">CHART</button></a></li>
 			<br />
 			<li><a href="/#" style="color: silver;"><button class="btn btn-info">MY</button></a></li>
 			<br />

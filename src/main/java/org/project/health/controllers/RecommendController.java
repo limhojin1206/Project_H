@@ -34,19 +34,17 @@ public class RecommendController {
 
 	@GetMapping("/view")
 	public ModelAndView contentHandle() {
-		ModelAndView mav = new ModelAndView("t_sub_expr");
+		ModelAndView mav = new ModelAndView("t_expr");
 		mav.addObject("title", "view page");
 		mav.addObject("section", "recommend/view");
-		mav.addObject("nav", "recommend/recommendnav");
 		return mav;
 	}
 
 	@RequestMapping("/content/{vno}")
 	public ModelAndView recommemdHandle(HttpServletRequest request, @PathVariable String vno) {
-		ModelAndView mav = new ModelAndView("t_sub_expr");
+		ModelAndView mav = new ModelAndView("t_expr");
 		mav.addObject("title", "추천운동법");
 		mav.addObject("section", "recommend/content");
-		mav.addObject("nav", "recommend/recommendnav");
 		System.out.println(vno);
 		
 		if(vno.equals("938862")) {

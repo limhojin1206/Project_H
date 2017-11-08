@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<div class="container" align="center">
+<div class="container" align="center" style="width:70%">
 	<br/><br/>
-	<h2>${str00 }</h2>
-	<p>${et }</p><hr/>
-	<table border="1">
+	<h2><b>${str00 }</b></h2>
+	<p>${et }</p><br/><hr/>
+	<table border="1" >
 		<tr>
 			<th width="150">${str01 }</th>
 			<th>${str02 }</th>
@@ -22,7 +22,7 @@
 			<th width="150">${str07 }</th>
 			<th>${str08 }</th>
 		<tr>
-	</table><br/>
+	</table><br/><hr/>
 	<h3>${str09 } <br /></h3>
 	<table width="500" cellpadding="2" cellspacing="0" align="center">
 		<tr>
@@ -32,10 +32,10 @@
 			<th>${str13 }</th>
 		</tr>
 	</table>
-	<hr/>
+	<br/><hr/>
 	<h3>${str14 }</h3><br/>
 	<div align="left">
-	 	${str15 }<br/>
+	 	${str15 }<br/><br/>
 	</div>
 	<h3>${str16 }</h3><br/>
 	<div align="left">
@@ -47,7 +47,7 @@
 		${str19 }<br/>
 		<p align="center"><img src="${img04 }"></p><br/>
 		${str20 }<br/>
-	</div>
+	</div><br/>
 	
 	<h3>${str21 }</h3><br/>
 	<div align="left">
@@ -55,7 +55,7 @@
 		${str23 }<br/>
 		${str29 }<br/>
 		${str30 }<br/>
-	</div>
+	</div><br/>
 	
 	<h3>${str24 }</h3><br/>
 	<div align="left">

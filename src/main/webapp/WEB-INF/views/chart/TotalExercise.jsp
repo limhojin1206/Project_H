@@ -3,21 +3,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div align="center" style="width: 100%; height:100%">
 <div>
-	<h2>전체운동 비율 분석 차트표</h2>
+	<h2><b>전체운동 비율 분석 차트표</b></h2>
 	<div id="total01" style="width: 600px; height: 400px"></div>
-</div><hr/>
-
+</div><hr/><br/>
+<div class="row">
 <div class="col-sm-4">
-		<h3>유산소운동 비율 분석</h3>
+		<h3><b>· 유산소운동 비율 분석</b></h3><br/><br/>
 		<div id="total02" style="height:500px"></div>
-		<small>oxeygen exercise ratio chart</small>
+		<small>total oxeygen exercise ratio chart</small>
 </div>
 <div class="col-sm-8">
-		<h3>근력운동 비율 분석</h3>
+		<h3><b>· 근력운동 비율 분석</b></h3><br/><br/>
 		<div id="total03" style="height:500px"></div>
-		<small>total exercise ratio chart</small>
+		<small>total mucsle exercise ratio chart</small>
 </div>
 </div>
+</div><hr/>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 	google.charts.load("current", {"packages":["corechart"]});
@@ -38,7 +39,7 @@
 	 
 	 var options = {
 			 
-			    "title" : "전체인원 운동비율",
+			    "title" : "회원전체 인원의 운동비율",
 			    "sliceVisibilityThreshold": .2,
 				"is3D" : true
 			  };

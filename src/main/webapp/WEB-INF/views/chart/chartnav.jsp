@@ -3,7 +3,7 @@
 <nav class="navbar navbar-inverse">
 	<ul class="nav navbar-nav">
 		<div class="container-fluid" align="center">
-			<li><a href="/chart/mychart" style="color: silver;">전체</a></li>
+			<li><a href="/chart/mychart" style="color: silver;"></a></li>
 			<br />
 			<li><a href="/chart/GenderAge" style="color: silver;">전체 성별 / 연령대 차트</a></li>
 			<br />

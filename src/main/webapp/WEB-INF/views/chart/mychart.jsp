@@ -3,19 +3,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div align="center" style="width: 100%; height:100%">
 <div>
-	<h2>개인운동 비율 분석 차트표</h2>
+	<h2><b><i>${auth.ID }</i>님의 운동 비율 분석 차트표</b></h2>
 	<div id="mychart01" style="width: 600px; height: 400px"></div>
-</div><hr/>
-
+</div><hr/><br/>
+<div class="row">
 <div class="col-sm-4">
-		<h3>유산소운동 비율 분석</h3>
+		<h3><b>· 유산소운동 비율 분석</b></h3><br/>
 		<div id="mychart02" style="height:500px"></div>
 		<small>oxeygen exercise ratio chart</small>
 </div>
 <div class="col-sm-8">
-		<h3>근력운동 비율 분석</h3>
+		<h3><b>· 근력운동 비율 분석</b></h3><br/>
 		<div id="mychart03" style="height:500px"></div>
-		<small>total exercise ratio chart</small>
+		<small>mucsle exercise ratio chart</small>
+</div>
 </div>
 </div><hr/>
 <script type="text/javascript"
