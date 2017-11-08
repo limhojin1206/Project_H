@@ -23,8 +23,17 @@
 					<c:if test="${fn:length(obj.TITLE) ge 17 }">
 						<c:set target="${obj }" property="TITLE" value="${fn:substring(obj.TITLE, 0, 17) }.." />
 					</c:if>
-					<td><a href="/board/view/${obj.NO}?bgno=${param.bgno }"><b style="color: red;">${obj.TITLE }</b></a> <c:if test="${obj.C ne null }">[${obj.C }]</c:if></td>
-					<td>${obj.ID }</td>
+					<td><a href="/board/view/${obj.NO}?bgno=0&page=${param.page}&mode=free"><b style="color: red;">${obj.TITLE }</b></a> <c:if test="${obj.C ne null }">[${obj.C }]</c:if></td>
+					<td>
+						<c:choose>
+							<c:when test="${auth.ID ne obj.ID }">
+								<a href="/memo/send?target=${obj.ID }">${obj.ID }</a>
+							</c:when>
+							<c:otherwise>
+								${obj.ID }
+							</c:otherwise>
+						</c:choose>
+					</td>
 					<td><fmt:formatDate value="${obj.WDATE }" pattern="yyyy.MM.dd HH:mm"/></td>
 					<td><fmt:formatNumber value="${obj.CNT }" pattern="#,###" /></td>
 					<td><fmt:formatNumber value="${obj.RECOMMEND }" pattern="#,###" /></td>
@@ -39,8 +48,17 @@
 					<c:if test="${fn:length(obj.TITLE) ge 17 }">
 						<c:set target="${obj }" property="TITLE" value="${fn:substring(obj.TITLE, 0, 17) }.." />
 					</c:if>
-					<td><a href="/board/view/${obj.NO}?bgno=${param.bgno }"><b style="color: gray;">${obj.TITLE }</b></a> <c:if test="${obj.C ne null }">[${obj.C }]</c:if></td>
-					<td>${obj.ID }</td>
+					<td><a href="/board/view/${obj.NO}?bgno=${param.bgno }&page=${param.page}"><b style="color: gray;">${obj.TITLE }</b></a> <c:if test="${obj.C ne null }">[${obj.C }]</c:if></td>
+					<td>
+						<c:choose>
+							<c:when test="${auth.ID ne obj.ID }">
+								<a href="/memo/send?target=${obj.ID }">${obj.ID }</a>
+							</c:when>
+							<c:otherwise>
+								${obj.ID }
+							</c:otherwise>
+						</c:choose>
+					</td>
 					<td><fmt:formatDate value="${obj.WDATE }" pattern="yyyy.MM.dd HH:mm"/></td>
 					<td><fmt:formatNumber value="${obj.CNT }" pattern="#,###" /></td>
 					<td><fmt:formatNumber value="${obj.RECOMMEND }" pattern="#,###" /></td>
@@ -59,11 +77,20 @@
 						<c:set var="ch" value="<b>${w }</b>"/>
 						<c:set target="${obj }" property="TITLE" value="${fn:replace(obj.TITLE, w, ch) }" />
 					</c:forEach>
-					<td><a href="/board/view/${obj.NO}?bgno=${param.bgno }"><b style="color: red;">${obj.TITLE }</b></a> <c:if test="${obj.C ne null }">[${obj.C }]</c:if></td>
+					<td><a href="/board/view/${obj.NO}?bgno=${param.bgno }&page=${param.page}"><b style="color: red;">${obj.TITLE }</b></a> <c:if test="${obj.C ne null }">[${obj.C }]</c:if></td>
 										<!-- 
 					<td><a href="/board/view/${obj.NO}">${fn:substring(obj.TITLE, 0, 12) }</a> <c:if test="${obj.C ne null }">[${obj.C }]</c:if></td>
 					 -->
-					<td>${obj.ID }</td>
+					<td>
+						<c:choose>
+							<c:when test="${auth.ID ne obj.ID }">
+								<a href="/memo/send?target=${obj.ID }">${obj.ID }</a>
+							</c:when>
+							<c:otherwise>
+								${obj.ID }
+							</c:otherwise>
+						</c:choose>
+					</td>
 					<td><fmt:formatDate value="${obj.WDATE }" pattern="yyyy.MM.dd HH:mm"/></td>
 					<td><fmt:formatNumber value="${obj.CNT }" pattern="#,###" /></td>
 					<td><fmt:formatNumber value="${obj.RECOMMEND }" pattern="#,###" /></td>
@@ -79,11 +106,20 @@
 						<c:set var="ch" value="<b>${w }</b>"/>
 						<c:set target="${obj }" property="TITLE" value="${fn:replace(obj.TITLE, w, ch) }" />
 					</c:forEach>
-					<td><a href="/board/view/${obj.NO}?bgno=${param.bgno }">${obj.TITLE }</a> <c:if test="${obj.C ne null }">[${obj.C }]</c:if></td>
+					<td><a href="/board/view/${obj.NO}?bgno=${param.bgno }&page=${param.page}">${obj.TITLE }</a> <c:if test="${obj.C ne null }">[${obj.C }]</c:if></td>
 					<!-- 
 					<td><a href="/board/view/${obj.NO}">${fn:substring(obj.TITLE, 0, 12) }</a> <c:if test="${obj.C ne null }">[${obj.C }]</c:if></td>
 					 -->
-					<td>${obj.ID }</td>
+					<td>
+						<c:choose>
+							<c:when test="${auth.ID ne obj.ID }">
+								<a href="/memo/send?target=${obj.ID }">${obj.ID }</a>
+							</c:when>
+							<c:otherwise>
+								${obj.ID }
+							</c:otherwise>
+						</c:choose>
+					</td>
 					<td><fmt:formatDate value="${obj.WDATE }" pattern="yyyy.MM.dd HH:mm"/></td>
 					<td><fmt:formatNumber value="${obj.CNT }" pattern="#,###" /></td>
 					<td><fmt:formatNumber value="${obj.RECOMMEND }" pattern="#,###" /></td>
@@ -93,9 +129,11 @@
 		</c:forEach>
 		</tbody>
 	</table>
-	<p align="right" style="margin-right: 30px;">
-		<a href="/board/add?bgno=${param.bgno }"><button type="button">글작성</button></a>
-	</p>
+	<c:if test="${param.bgno eq 1 or (auth.ID eq 'asd' and param.bgno eq 0)}">
+		<p align="right" style="margin-right: 30px;">
+			<a href="/board/add?bgno=${param.bgno }"><button type="button">글작성</button></a>
+		</p>
+	</c:if>
 	<div>
 		<%-- 
 		<!-- 현재 페이지 블럭이 1보다 크면 처음으로 이동 -->

@@ -9,4 +9,7 @@
 	<select id="readAll" resultType="java.util.HashMap">
 		select r.*, TO_CHAR(rdate, 'YYYY/MM/DD HH24:MI:SS') crdate from replynotice r where bno = #{bno} order by r.no desc
 	</select>
+	<delete id="delete">
+		delete replynotice where no=#{no}
+	</delete>
 </mapper>

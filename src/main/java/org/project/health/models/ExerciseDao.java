@@ -6,22 +6,21 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Repository
-public class ReplyDao {
+public class ExerciseDao {
 	@Autowired
 	SqlSessionTemplate template;
 	
 	public int addOne(Map map) {
-		return template.insert("reply.addOne", map);
+		return template.insert("exercise.addOne", map);
 	}
 	
-	public List<Map> readAll(String bno){
-		return template.selectList("reply.readAll", bno);
+	public List<Map> readAll(String parent){
+		return template.selectList("exercise.readAll", parent);
 	}
 	
-	public int delete(String no) {
-		return template.delete("reply.delete", no);
+	public Map readOne(Object no) {
+		return template.selectOne("exercise.readOne", no);
 	}
 }

@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.project.health.models.BoardDao;
+import org.project.health.models.ExerciseDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,12 +18,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import aj.org.objectweb.asm.Type;
+
 
 @Controller
 @RequestMapping("/board")
 public class BoardController {
 	@Autowired
 	BoardDao dao;
+	
+	@Autowired
+	ExerciseDao exdao;
 	
 	@RequestMapping("/edit/{no}")
 	public ModelAndView editGetHandle(@PathVariable String no) {
@@ -30,7 +38,6 @@ public class BoardController {
 		mav.addObject("section", "board/edit");
 		mav.addObject("view", view);
 		mav.addObject("nav", "board/boardnav");
-		
 		return mav;
 	}
 	
@@ -72,7 +79,6 @@ public class BoardController {
 	public ModelAndView searchHandle(@RequestParam(name="page", defaultValue="1") int page, @RequestParam Map map) {
 		ModelAndView mav = new ModelAndView("t_sub_expr");
 		//System.out.println(map);
-		
 		String search = (String) map.get("search");
 		String[] searchs = search.split("\\s");
 		String sql = "";
@@ -170,34 +176,12 @@ public class BoardController {
 		
 		int blockSize = 10;
 		int totBlock = (int)Math.ceil(size / blockSize);
-		 // *占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占승� 占쏙옙占쏙옙占쏙옙 占쏙옙臼占� 占쏙옙占싹댐옙占쏙옙 占쏙옙占�
-        // (占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙-1)/占쏙옙占쏙옙占쏙옙 占쏙옙求占쏙옙占�+1
-        // 1占쏙옙占쏙옙占쏙옙 => 1占쏙옙占� (1-1)/10 + 1 => 1
-        // 9占쏙옙占쏙옙占쏙옙 =>     1占쏙옙占� (9-1)/10 + 1 => 1
-        // 11占쏙옙占쏙옙占쏙옙 => 2占쏙옙占� (11-1)/10 + 1 => 2
-        // 57占쏙옙占쏙옙占쏙옙 => 6占쏙옙占� (57-1)/10 + 1 => 6 
         int curBlock = (int)Math.ceil((page-1) / blockSize)+1;
-        // *占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占� 占쏙옙占쏙옙, 占쏙옙 占쏙옙호 占쏙옙占�
-        // 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占� 占쏙옙占쌜뱄옙호
-        // (占쏙옙占쏙옙占쏙옙-1)*占쏙옙求占쏙옙占�+1
-        // 1占쏙옙占� => (1-1)*10 + 1 => 1
-        // 2占쏙옙占� => (2-1)*10 + 1 => 11
-        // 6占쏙옙占� => (6-1)*10 + 1 => 51
         int blockBegin = (curBlock-1)*blockSize+1;
-        // 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占� 占쏙옙占쏙옙호
-        // 占쏙옙絿占쏙옙膀占싫�+占쏙옙求占쏙옙占�-1;
-        // 1占쏙옙占� => 1+10-1 => 10
-        // 2占쏙옙占� => 11+10-1 => 20
-        // 6占쏙옙占� => 51+10-1 => 60     
         int blockEnd = blockBegin+blockSize-1;
-        // *占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙 占십곤옙占쏙옙占쏙옙 占십듸옙占쏙옙 占쏙옙占�
-        // [占쏙옙占쏙옙] 61 62 => 占싱뤄옙占쏙옙 占쏙옙占� 70占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占십듸옙占쏙옙占싹깍옙 占쏙옙占쌔쇽옙
         if(blockEnd > tot) blockEnd = tot;
-        // *占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙 占싱듸옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙호
         int prevPage = (page == 1)? 1:(curBlock-1)*blockSize;
-        // *占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙 占싱듸옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙호
         int nextPage = curBlock > totBlock ? (curBlock*blockSize) : (curBlock*blockSize)+1;
-        // 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占십곤옙占쏙옙占쏙옙 占십듸옙占쏙옙 처占쏙옙
         if(nextPage >= tot) nextPage = size;
 		mav.addObject("totBlock",totBlock);
 		mav.addObject("curBlock",curBlock);
@@ -205,7 +189,6 @@ public class BoardController {
 		mav.addObject("blockEnd",blockEnd);
 		mav.addObject("prevPage",prevPage);
 		mav.addObject("nextPage",nextPage);
-		
         
 		Map map = new HashMap();
 		map.put("start", (page - 1) * pageSize + 1 );
@@ -223,22 +206,26 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/view/{no}")
-	public ModelAndView viewHandel(@PathVariable String no, @RequestParam String bgno) {
+	public ModelAndView viewHandel(@PathVariable String no, @RequestParam String bgno, HttpSession session) {
 		ModelAndView mav = new ModelAndView("t_sub_expr");
 		Map map = new HashMap();
 		map.put("bno", no);
-		map.put("id", "qwe");
+		map.put("id", (String)((Map)session.getAttribute("auth")).get("ID"));
 		map.put("bgno", bgno);
 		Map view = dao.readOne(no);
 		Map pnPage = dao.prevAndNext(map);
-		
 		List<Map> check = dao.checkRecommend(map);
-		
-		System.out.println(view);
-		System.out.println(pnPage);
-		System.out.println(check);
-		System.out.println(map);
-		mav.addObject("view", view);	
+		Object exno = view.get("EXNO");
+		if(exno != null) {
+		Map exview = exdao.readOne(exno);
+		mav.addObject("exview", exview);
+		System.out.println("exview = "+exview);
+		}
+		System.out.println("view = "+view);
+		System.out.println("pnPage = "+pnPage);
+		System.out.println("check = "+check);
+		System.out.println("map = "+map);
+		mav.addObject("view", view);
 		mav.addObject("title", "상세보기");
 		mav.addObject("section", "board/view");
 		mav.addObject("pnPage", pnPage);
@@ -251,7 +238,7 @@ public class BoardController {
 	@PostMapping("/add")
 	public ModelAndView addPostHandle(@RequestParam Map map) {
 		ModelAndView mav = new ModelAndView("redirect:/board/list?bgno="+map.get("bgno")+"&page=1");
-		System.out.println(map);
+		System.out.println("test = "+map);
 		int rst = dao.addOne(map);
 		//mav.addObject("rst", rst);
 		return mav;
@@ -267,9 +254,18 @@ public class BoardController {
 		return mav;
 	}
 	
-//	@RequestMapping("/submit")
-//	public void submit(@RequestParam Map param){
-//		dao.addOne(param);
-//	    System.out.println("占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙:"+param);
-//	}
+	@RequestMapping("/exAdd")
+	public ModelAndView exAddGetHandle(@RequestParam String bgno, String no) {
+		ModelAndView mav = new ModelAndView("t_sub_expr");
+	//	System.out.println("bgno = "+bgno);
+	//	System.out.println("no ="+no);
+		Map map = exdao.readOne(no);
+	//	System.out.println("test = "+map);
+		mav.addObject("title", "운동 공유");
+		mav.addObject("section", "board/add");
+		mav.addObject("bgno", bgno);
+		mav.addObject("nav", "board/boardnav");
+		mav.addObject("data", map);
+		return mav;
+	}
 }

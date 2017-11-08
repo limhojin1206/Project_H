@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="exercise">
+	<insert id="addOne">
+		insert into exercise values(boardexercise_seq.nextval, #{title}, #{id}, 0, sysdate+(9/24), #{content}, 0,
+		#{parent}, #{exmu}, #{expart}, #{excnt}, #{extime}, #{exset})	
+	</insert>
+	<select id="readAll" resultType="java.util.HashMap">
+		select * from exercise where parent=#{parent}
+	</select>
+	<select id="readOne" resultType="java.util.HashMap">
+		select * from exercise where no=#{no}
+	</select>
+</mapper>

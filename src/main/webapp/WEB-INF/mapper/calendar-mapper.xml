@@ -8,7 +8,8 @@
 			values(exercise_seq.nextval, #{title}, #{type}, #{part}, #{cnt}, #{time}, #{id, jdbcType=VARCHAR}, #{start}, #{end}, #{set}, #{content})
 	</insert>
 	<select id="readAll" resultType="java.util.HashMap">
-		select no, exmu, exname as title, TO_CHAR(exst, 'YYYY-MM-DD') exst, TO_CHAR(exed, 'YYYY-MM-DD') exed  from exercise
+		select no, exmu, exname as title, id as userid, TO_CHAR(exst, 'YYYY-MM-DD') exst, 
+		TO_CHAR(exed, 'YYYY-MM-DD') exed from exercise where id=#{id}
 	</select>
 	<select id="readOne" resultType="java.util.HashMap">
 		select no as id, exname, exmu, expart, excmplt, excnt, extime, id as userid, exset, content, 

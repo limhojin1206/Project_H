@@ -6,8 +6,6 @@
 <meta charset='utf-8' />
 <script>
 	var url;
-	var start;
-	var end;
 	$(document).ready(function() {
 		$('#calendar').fullCalendar({
 			header : {
@@ -20,12 +18,14 @@
 			editable : true,
 			googleCalendarApiKey : "AIzaSyDcnW6WejpTOCffshGDDb4neIrXVUA1EAE",
 			eventLimit : true,
+			eventStartEditable: false,
 			eventSources : [{
 			// 대한민국의 공휴일
 				googleCalendarId : "ko.south_korea#holiday@group.v.calendar.google.com"
 				, className : "koHolidays"
 				, color : "#FF0000"
 				, textColor : "#FFFFFF"
+				
 			}],
 			loading: function(bool) {
 				jQuery("#loading").toggle(bool);
@@ -44,6 +44,7 @@
 					}else{
 						$("#success").css("display","");
 					}
+					$("#shbt").css("display","");
 					$("#bt").css("display","none");
 					$("#dbt").css("display","");
 					$("#ebt").css("display","");
@@ -51,29 +52,29 @@
 					$('.form').attr("disabled", true);
 					$('#modalTitle').html("상세보기");
 					$('#title').val(r.EXNAME);
-					type = r.EXMU;
 					if(r.EXMU == "유산소"){
 						$('#type01').attr("checked", true);
 						$("#type02ctg").hide();
 						$("#type01ctg").show();
-						$('#sel1').val(part = r.EXPART);
+						$('#sel1').val(r.EXPART);
 					}else{
 						$('#type02').attr("checked", true);
 						$("#type01ctg").hide();
 						$("#type02ctg").show();
-						$('#sel2').val(part = r.EXPART);
+						$('#sel2').val(r.EXPART);
 					}
-					$('#time').val(time = r.EXTIME);
-					$('#cnt').val(cnt = r.EXCNT);
-					$('#set').val(set = r.EXSET);
-					$('#start').val(start = r.EXST);
-					$('#end').val(end = r.EXED);
-					$('#content').val(content = r.CONTENT);
+					$('#time').val(r.EXTIME);
+					$('#cnt').val(r.EXCNT);
+					$('#set').val(r.EXSET);
+					$('#start').val(r.EXST);
+					$('#end').val(r.EXED);
+					$('#content').val(r.CONTENT);
 					$('#addModal').modal();
 					$("#cbt").click(function(){
 						location.reload();
 					});
 					$("#ebt").click(function(){
+						$("#shbt").css("display","none");
 						$("#bt").css("display","none");
 						$("#dbt").css("display","none");
 						$("#ebt").css("display","none");
@@ -85,6 +86,12 @@
 						url = '/calendar/edit/'+no;
 						console.log(url);
 					});
+				});
+				$("#shbt").click(function(){
+					if(confirm("일정을 공유 하시겠습니까?")){
+						$("#cno").val(no);
+						$("#fm").submit();
+					}
 				});
 				$("#sbt").click(function(){
 					if(confirm("정말 일정을 수정 하시겠습니까?")){
@@ -189,8 +196,12 @@ body {
 					<h4 id="modalTitle" class="modal-title"></h4><span id="success" class="label label-success" style="display: none">달성!</span>
 				</div>
 				<div id="modalBody" class="modal-body">
-										<p>
-						<b>Title :</b> <input id="title" type="text" class="form-control">
+					<form action="/board/exAdd" method="post" id="fm">
+						<input type="hidden" id="cno" name="no">
+						<input type="hidden" name="bgno" value="2">
+					</form>
+					<p>
+						<b>Title :</b> <input id="title" name="exname" type="text" class="form-control">
 					</p>
 					<div class="col-sm-1">
 						<b>Exercise:</b>
@@ -271,10 +282,9 @@ body {
 						<b>Content :</b><br />
 						<textarea id="content" cols="60" rows="7" class="form-control" style="resize: none"></textarea>
 					</p>
-
-			
 				</div>
 				<div class="modal-footer">
+					<button id="shbt" type="button" class="btn btn-default" style="display: none;">운동 공유</button>
 					<button id="obt" type="button" class="btn btn-default" style="display: none;">달성</button>
 					<button id="ebt" type="button" class="btn btn-default" style="display: none;">edit</button>
 					<button id="dbt" type="button" class="btn btn-default" style="display: none;">delete</button>

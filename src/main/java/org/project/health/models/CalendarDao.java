@@ -12,8 +12,8 @@ public class CalendarDao {
 	@Autowired
 	SqlSessionTemplate template;
 	
-	public List<Map> readAll(){
-		return template.selectList("calendar.readAll");
+	public List<Map> readAll(String id){
+		return template.selectList("calendar.readAll", id);
 	}
 	
 	public int addOne(Map map) {
