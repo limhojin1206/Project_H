@@ -3,6 +3,7 @@
 <tiles-definitions>
 	<!-- tile 등록 -->
 	<definition name="t_base" template="/WEB-INF/views/template/template.jsp">
+		<put-attribute name="title" value="D.U.EXERCISE"/>
 		<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
 		<put-attribute name="nav" value="/WEB-INF/views/template/nav.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
@@ -10,7 +11,6 @@
 
 	<!-- el -->
 	<definition name="t_expr" extends="t_base">
-		<put-attribute name="title" expression="${title}"/>
 		<put-attribute name="section" expression="/WEB-INF/views/${section}.jsp"/>
 	</definition>
 	
@@ -19,7 +19,6 @@
 	section, nav, title 만 설절하면 됨
 	 -->
 	<definition name="t_sub_expr" extends="t_base">
-		<put-attribute name="title" expression="${title}"/>
 		<put-attribute name="section">
 			<definition template="/WEB-INF/views/template/template_sub.jsp">
 				<put-attribute name="sub_nav" expression="/WEB-INF/views/${nav}.jsp"/>

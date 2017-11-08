@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 @Controller
 @RequestMapping("/friend")
@@ -35,6 +38,9 @@ public class FriendController {
 	WSHandler ws;
 	@Autowired
 	pagingUtil pu;
+	@Autowired
+	ObjectMapper mapper;
+	
 	
 	// 친구 요청 리스트
 	@GetMapping("/makefriend")
@@ -44,18 +50,18 @@ public class FriendController {
 		Map map = new HashMap<>();
 		map.put("id", id);
 		// 현재 페이지
-		System.out.println("page : " + page);
+		//System.out.println("page : " + page);
 		// 전체 글 수
 		int totalCount = fdao.mftotalCount( map); 
-		System.out.println("totalCount : " + totalCount);
+		//System.out.println("totalCount : " + totalCount);
 
 		// 현재페이지 리스트
 		List<Map> viewlist = fdao.mfviewpage(pu.list(page, id));
-		System.out.println("viewlist : " + viewlist);
+		//System.out.println("viewlist : " + viewlist);
 		
 		// 페이징 번호
 		Map viewpage = pu.paging(page, totalCount);
-		System.out.println("viewpage : " + viewpage);
+		//System.out.println("viewpage : " + viewpage);
 		
 		mav.addObject("viewpage",viewpage);
 		mav.addObject("viewlist",viewlist);
@@ -93,8 +99,8 @@ public class FriendController {
 	@PostMapping("/agreefriend")
 	@ResponseBody
 	public int agreefriendHandle(@RequestParam Map map) {
-		System.out.println("친구인지 확인 : " + fdao.existfriend(map));
-		System.out.println(map.toString());
+		//System.out.println("친구인지 확인 : " + fdao.existfriend(map));
+		//System.out.println(map.toString());
 		if(fdao.existfriend(map) != 0) {
 			fdao.deleteremsg(map);
 			return -1;
@@ -118,7 +124,7 @@ public class FriendController {
 	@PostMapping("/rejectfriend")
 	@ResponseBody
 	public int rejectfriendHandle(@RequestParam Map map) {
-		System.out.println(map.toString());
+		//System.out.println(map.toString());
 		int r = fdao.deleteremsg(map);
 		if(r==1) {
 			map.put("mode", "alert");
@@ -138,7 +144,7 @@ public class FriendController {
 	@ResponseBody
 	public int endfriendHandle(@RequestParam Map map) {
 		int r = fdao.endfriend(map); 
-		System.out.println("r : " +r);
+		//System.out.println("r : " +r);
 		if(r==2) {
 			map.put("mode", "alert");
 			map.put("content", map.get("sender")+"님께서 친구를 취소하셨습니다.");
@@ -160,18 +166,18 @@ public class FriendController {
 		Map map = new HashMap<>();
 		map.put("id", id);
 		// 현재 페이지
-		System.out.println("page : " + page);
+		//System.out.println("page : " + page);
 		// 전체 글 수
 		int totalCount = fdao.ftotalCount(map); 
-		System.out.println("totalCount : " + totalCount);
+		//System.out.println("totalCount : " + totalCount);
 
 		// 현재페이지 리스트
 		List<Map> viewlist = fdao.fviewpage(pu.list(page, id));
-		System.out.println("viewlist : " + viewlist);
+		//System.out.println("viewlist : " + viewlist);
 		
 		// 페이징 번호
 		Map viewpage = pu.paging(page, totalCount);
-		System.out.println("viewpage : " + viewpage);
+		//System.out.println("viewpage : " + viewpage);
 		
 		mav.addObject("viewpage",viewpage);
 		mav.addObject("viewlist",viewlist);
@@ -199,5 +205,12 @@ public class FriendController {
 		List viewlist = fdao.searchfriendlist(map);
 		
 		return viewlist;
+	}
+	
+	// 친구 정보
+	@PostMapping("/info")
+	@ResponseBody
+	public Map infoHandle(@RequestParam Map map) throws JsonProcessingException {
+		return fdao.friendinfo(map);
 	}
 }

@@ -5,8 +5,6 @@
 		<div class="container-fluid" align="center">
 			<li><a href="/my/info" style="color: silver;">내 정보</a></li>
 			<br />
-			<li><a href="/#" style="color: silver;">저장한 운동법</a></li>
-			<br />
 			<li><a href="/friend/friendlist" style="color: silver;">내 친구</a></li>
 			<br />
 			<li><a href="/friend/makefriend" style="color: silver;">요청받은 친구</a></li>
@@ -15,7 +13,7 @@
 			<br />
 			<li></li>
 			<br />
-			<li id="drop" style="color: silver;">회원탈퇴</li>
+			<li><button type="button" class="btn btn-danger" id="drop" >회원탈퇴</button></li>
 			<br />
 		</div>
 	</ul>
@@ -23,8 +21,7 @@
 <script>
 $("#drop").click(function() {
 	if(window.confirm("정말 탈퇴하시겠습니까?")){
-		
-		
+		$(location).attr('href',"/my/drop");
 	}
 });
 

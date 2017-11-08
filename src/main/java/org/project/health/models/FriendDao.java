@@ -13,6 +13,11 @@ public class FriendDao {
 	@Autowired
 	SqlSessionTemplate template;
 	
+	// 친구정보
+	public Map friendinfo(Object obj) {
+		return template.selectOne("friend.friendinfo", obj);
+	}
+	
 	// 친구 요청
 	public int send(Map map) {
 		return template.insert("friend.send", map);

@@ -19,31 +19,33 @@ b {
 				<br /> <input type="text"  id="ick"  name=id required id="id" autocomplete="off"/><br />
 			    <span id="idck"></span><br/>
 <script>
-	document.getElementById("ick").onkeyup = function() {
-		var xhr = new XMLHttpRequest();
-		console.log(document.getElementById("ick").value);
-		xhr.open("post","/member/signup_check/id" ,true);
-		xhr.send(document.getElementById("ick").value);
-		xhr.onreadystatechange = function() {
-			if(this.readyState==4){
-				if(document.getElementById("ick").value.length==0){
-					document.getElementById("idck").innerHTML="<b>아이디를 입력해주세요</b>";
-				}else{
-					if(this.responseText == "true"){
-						flag1=true;
-						console.log(flag1);
-						valid();
-						document.getElementById("idck").innerHTML= "<span style=\"color:blue\"><b>사용가능한 아이디입니다.</b></span>";
-					}else{
-						flag1=false;
-						console.log(flag1);
-						valid();
-						document.getElementById("idck").innerHTML= "<span style=\"color:red\"><b>사용할수 없는 아이디입니다.</b></span>";
-					}
-				}
+$("#ick").keyup(function(){
+	$.ajax({
+		"type" : "post",
+		"async" : false,
+		"url" : "/member/signup_check/id",
+		"data" : {
+			"param" : $("#ick").val()
+		}
+	}).done(function(r) {
+		if(document.getElementById("ick").value.length==0){
+			document.getElementById("idck").innerHTML="<b>아이디를 입력해주세요</b>";
+		}else{
+			if(r=="false"){
+				flag1=true;
+				console.log(flag1);
+				valid();
+				document.getElementById("idck").innerHTML= "<span style=\"color:blue\"><b>사용가능한 아이디입니다.</b></span>";
+			}else{
+				flag1=false;
+				console.log(flag1);
+				valid();
+				document.getElementById("idck").innerHTML= "<span style=\"color:red\"><b>사용할수 없는 아이디입니다.</b></span>";
 			}
 		}
-	}
+	});
+});
+
 </script>
 		<b>PASS</b><br/>
 		<input id="p" type="password" name="password" required="required"/><br/>
@@ -94,7 +96,7 @@ b {
 </script>
 		<p>
 		<b>YEAR </b><br/>
-			<select>
+			<select name="age">
 				<c:forEach begin="10" end="100" step="10" var="age">
 					<option>${age}대</option>
 				</c:forEach>
@@ -114,36 +116,38 @@ b {
 		</p>
 		
 <script>
-	document.getElementById("eck").onkeyup = function() {
-		var xhr = new XMLHttpRequest();
-			console.log(document.getElementById("eck").value);
-			var regExp = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/; 
-			if(!regExp.test(document.getElementById("eck").value)) {
-				document.getElementById("eckv").innerHTML="<b>메일주소를 입력해주세요.</b>";
-				return;
-			} 
-			xhr.open("post","/member/signup_check/email" ,true);
-			xhr.send(document.getElementById("eck").value);
-			xhr.onreadystatechange = function() {
-				if(this.readyState==4){
-					if(document.getElementById("eck").value.length==0){
-						document.getElementById("eckv").innerHTML="<b>이메일을 입력해주세요</b>";
-					}else{
-						if(this.responseText == "true"){
-							flag3=true;
-							console.log(flag3);
-							valid();
-							document.getElementById("eckv").innerHTML= "<span style=\"color:blue\"><b>사용가능한 이메일주소입니다.</b></span>";
-						}else{
-							flag3=false;
-							console.log(flag3);
-							valid();
-							document.getElementById("eckv").innerHTML= "<span style=\"color:red\"><b>사용할수 없는 이메일주소입니다.</b></span>";
-						}
-					}
-				}
+$("#eck").keyup(function(){
+	var regExp = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/; 
+	if(!regExp.test(document.getElementById("eck").value)) {
+		document.getElementById("eckv").innerHTML="<b>메일주소를 입력해주세요.</b>";
+		return;
+	} 
+	
+	$.ajax({
+		"type" : "post",
+		"async" : false,
+		"url" : "/member/signup_check/email",
+		"data" : {
+			"param" : $("#eck").val()
+		}
+	}).done(function(r) {
+		if(document.getElementById("eck").value.length==0){
+			document.getElementById("eckv").innerHTML="<b>이메일을 입력해주세요</b>";
+		}else{
+			if(r=="false"){
+				flag3=true;
+				console.log(flag3);
+				valid();
+				document.getElementById("eckv").innerHTML= "<span style=\"color:blue\"><b>사용가능한 이메일입니다.</b></span>";
+			}else{
+				flag3=false;
+				console.log(flag3);
+				valid();
+				document.getElementById("eckv").innerHTML= "<span style=\"color:red\"><b>사용할수 없는 이메일입니다.</b></span>";
 			}
 		}
+	});
+});
 </script>
 		<button type="reset" id="reset">R E S E T </button><br/><br/>
 		<button id="join" type="submit" disabled="disabled">C R E A T E</button><br/>

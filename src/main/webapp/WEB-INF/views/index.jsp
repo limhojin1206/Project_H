@@ -14,6 +14,9 @@
 
 
 <html>
+<head>
+	<title>D.U.EXERCISE</title>
+</head>
 <style>
 input, button {
 	width: 100%;
@@ -88,7 +91,7 @@ b {
 	<div class="modal-dialog modal-lg" align="center" >
 		<div class="modal-content" style="width: 50%;">
 			<div class="modal-body" >
-				<h4 class="modal-title">타이틀</h4>
+				<h4 class="modal-title">D.U.EXERCISE</h4>
 				<!-- 오류시 -->
 					<b style="color: red;display: none;"  id="temp">로그인에 실패하였습니다.</b>
 				<!-- 입력칸 -->
