@@ -149,8 +149,8 @@ $("#eck").keyup(function(){
 	});
 });
 </script>
-		<button type="reset" id="reset">R E S E T </button><br/><br/>
-		<button id="join" type="submit" disabled="disabled">C R E A T E</button><br/>
+		<button type="reset" id="reset" class="btn btn-info" >R E S E T </button><br/><br/>
+		<button id="join" type="submit" disabled="disabled" class="btn btn-info">C R E A T E</button><br/>
 		</form>
  	</div>
 </div>

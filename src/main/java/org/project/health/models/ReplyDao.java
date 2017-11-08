@@ -20,4 +20,8 @@ public class ReplyDao {
 	public List<Map> readAll(String bno){
 		return template.selectList("reply.readAll", bno);
 	}
+	
+	public int delete(String no) {
+		return template.delete("reply.delete", no);
+	}
 }

@@ -25,7 +25,7 @@
 				, className : "koHolidays"
 				, color : "#FF0000"
 				, textColor : "#FFFFFF"
-				, url : false
+				
 			}],
 			loading: function(bool) {
 				jQuery("#loading").toggle(bool);

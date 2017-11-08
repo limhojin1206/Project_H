@@ -47,4 +47,15 @@ public class ReplyController {
 		
 		return list;
 	}
+	
+	@RequestMapping("/delete/{no}")
+	@ResponseBody
+	public String deleteHandle(@PathVariable String no) {
+		int drst = dao.delete(no);
+		if(drst == 1) {
+			return "YYYY";
+		}else {
+			return "NNNN";
+		}
+	}
 }

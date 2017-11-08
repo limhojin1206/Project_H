@@ -33,8 +33,15 @@
 							<td><input type="checkbox" class="item" name="no"
 								value="${t.NO}" /></td>
 	
-							<td><a href="/memo/send?target=${t.SENDER }">${t.SENDER }</a></td>
-	
+<td>
+	<div class="dropdown">
+	    <span data-toggle="dropdown">${t.SENDER }</span>
+	    <ul class="dropdown-menu">
+	    	<li><a href="/memo/send?target=${t.SENDER }">쪽지보내기</a></li>
+	    	<li><a href="/friend/info" class="pbt" role="${t.SENDER }"data-toggle="modal" data-target="#myModal">프로필</a></li>
+	    </ul>
+	</div>	
+</td>
 							<td>${t.CONTENT }</td>
 							<td><fmt:formatDate value="${t.MDATE}"
 									pattern="yy.MM.dd HH:mm" /></td>
@@ -72,6 +79,21 @@
 			</tbody>
 		</table>
 	</div>
+</div>
+<!-- 친구정보 -->
+<div id="myModal" class="modal fade" role="dialog" >
+  <div class="modal-dialog" align="center">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><h1><b>친구 정보</b></h1></h4>
+      </div>
+      <div class="modal-body" >
+        <jsp:include page="../member/profile.jsp" flush="false" />
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>

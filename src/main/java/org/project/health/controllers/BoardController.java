@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.project.health.models.BoardDao;
 import org.project.health.models.ExerciseDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,17 +25,8 @@ public class BoardController {
 	@Autowired
 	BoardDao dao;
 	
+	@Autowired
 	ExerciseDao exdao;
-	
-	@RequestMapping("/exList")
-	public ModelAndView exerciseListHandle() {
-		ModelAndView mav = new ModelAndView("t_sub_expr");
-		mav.addObject("title", "게시판");
-		mav.addObject("section", "board/list");
-		mav.addObject("nav", "board/boardnav");
-		
-		return mav;
-	}
 	
 	@RequestMapping("/edit/{no}")
 	public ModelAndView editGetHandle(@PathVariable String no) {
@@ -211,21 +204,21 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/view/{no}")
-	public ModelAndView viewHandel(@PathVariable String no, @RequestParam String bgno) {
+	public ModelAndView viewHandel(@PathVariable String no, @RequestParam String bgno, HttpSession session) {
 		ModelAndView mav = new ModelAndView("t_sub_expr");
 		Map map = new HashMap();
 		map.put("bno", no);
-		map.put("id", "qwe");
+		map.put("id", (String)((Map)session.getAttribute("auth")).get("ID"));
 		map.put("bgno", bgno);
 		Map view = dao.readOne(no);
 		Map pnPage = dao.prevAndNext(map);
 		
 		List<Map> check = dao.checkRecommend(map);
 		
-		System.out.println(view);
-		System.out.println(pnPage);
-		System.out.println(check);
-		System.out.println(map);
+		System.out.println("view = "+view);
+		System.out.println("pnPage = "+pnPage);
+		System.out.println("check = "+check);
+		System.out.println("map = "+map);
 		mav.addObject("view", view);	
 		mav.addObject("title", "상세보기");
 		mav.addObject("section", "board/view");
@@ -256,12 +249,13 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/exAdd")
-	public ModelAndView exAddGetHandle(@RequestParam String bgno, String no) {
+	public ModelAndView exAddGetHandle(@RequestParam String bgno, @RequestParam String no) {
 		ModelAndView mav = new ModelAndView("t_sub_expr");
-		System.out.println(bgno);
-		System.out.println(no);
+		System.out.println("bgno = "+bgno);
+		System.out.println("no ="+no);
 		Map map = exdao.readOne(no);
-		mav.addObject("title", "글쓰기");
+		System.out.println("map = "+map);
+		mav.addObject("title", "운동 공유");
 		mav.addObject("section", "board/add");
 		mav.addObject("bgno", bgno);
 		mav.addObject("nav", "board/boardnav");

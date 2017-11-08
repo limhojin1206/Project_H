@@ -6,15 +6,8 @@
 <!-- action : 에디터에 입력한 html 코드를 전달받을 Controller페이지 URL -->
 <form action="/board/add?bgno=${param.bgno }" method="post" id="frm">
 	<b>제목 </b><input type="text" name="title" style="margin: 8px;"/>
-	<b>작성자 </b><input type="text" name="id" style="margin: 8px;" />
+	<input type="hidden" name="id" value="${auth.ID }" style="margin: 8px;" />
     <textarea name="content" id="editor" rows="10" cols="100" style="width:766px; height:412px;">${boardVO.content}</textarea>
-    <div id="modalBody" class="modal-body">
-					<p>
-						<b>Title :</b> <input id="title" type="text" class="form-control">
-					</p>
-					<div class="col-sm-1">
-						<b>Exercise:</b>
-					</div>
 					<div class="col-sm-2">
 						<br />
 						<div class="radio">
@@ -51,7 +44,7 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-sm-3">
+					<div class="col-sm-4">
 						<div>
 							시간(분) <select class="form-control" id="time">
 								<option selected="selected">0</option>
@@ -81,18 +74,6 @@
 							</select>
 						</div>
 					</div>
-					<p>
-						<b>startDate :</b> <input type="date" id="start" class="form-control">
-					</p>
-					<p>
-						<b>endDate :</b> <input type="date" id="end" class="form-control">
-					</p>
-					<p>
-						<b>Content :</b><br />
-						<textarea id="content" cols="60" rows="7" class="form-control" style="resize: none"></textarea>
-					</p>
-			
-				</div>
     <input type="button" id="savebutton" value="글쓰기" style="margin-top: 8px;" />
 </form>
 

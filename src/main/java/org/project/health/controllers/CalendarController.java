@@ -3,6 +3,8 @@ package org.project.health.controllers;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.project.health.models.CalendarDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,8 +42,9 @@ public class CalendarController {
 	
 	@PostMapping(path="/view", produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String viewHandle() {
-		List<Map> list = dao.readAll();
+	public String viewHandle(HttpSession session) {
+		String id = (String)((Map)session.getAttribute("auth")).get("ID");
+		List<Map> list = dao.readAll(id);
 		String json = "";
 		try {
 			json = mapper.writeValueAsString(list);
