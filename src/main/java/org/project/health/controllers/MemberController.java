@@ -72,7 +72,7 @@ public class MemberController {
 			mav.setViewName("t_sub_expr");
 			mav.addObject("title", "PROJECT_H");
 			mav.addObject("nav", "main/mainnav");
-			mav.addObject("section", "calendar/calendar");
+			mav.addObject("section", "calendar/view");
 		}else {
 			System.out.println("회원가입 실패");
 			mav.setViewName("redirect:member/join");
@@ -137,7 +137,7 @@ public class MemberController {
 			mav.setViewName("t_sub_expr");
 			mav.addObject("title", "PROJECT_H");
 			mav.addObject("nav", "main/mainnav");
-			mav.addObject("section", "calendar/calendar");
+			mav.addObject("section", "calendar/view");
 		}
 		return mav;
 	}

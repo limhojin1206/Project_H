@@ -3,11 +3,28 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="exercise">
-	<select id="MyRatioExMu" resultType="java.util.HashMap">
+	<select id="TotalRatioExMu" resultType="java.util.HashMap">
 		select exmu, count(*) as cnt from exercise group by exmu
 	</select>
 	
-	<select id="MyRatioExPart" resultType="java.util.HashMap">
-		select nvl(expart ,'미설정') expart, count(*) as cnt from exercise group by expart
+	<select id="TotalRatioExPart01" resultType="java.util.HashMap">
+		select nvl(expart ,'미설정') expart, count(*) as cnt from exercise where expart in('걷기','달리기','줄넘기','수영','자전거') group by expart
+	</select>
+	
+	<select id="TotalRatioExPart02" resultType="java.util.HashMap">
+		select nvl(expart ,'미설정') expart, count(*) as cnt from exercise where expart in('가슴','어깨','등','허리','위팔 앞','위팔 뒤','아래팔','복부','허벅지 앞','허벅지 뒤') group by expart
+	</select>
+	
+	<select id="MyRatioExMu" resultType="java.util.HashMap">
+		select exmu, count(*) as cnt from exercise where id='asd' group by exmu 
+	</select>
+	
+	<!-- 나의 유산소 운동 -->
+	<select id="MyOxeygenExPart" resultType="java.util.HashMap">
+		select nvl(expart ,'미설정') expart, count(*) as cnt from exercise where id='asd' and expart in('걷기','달리기','줄넘기','수영','자전거') group by expart 
+	</select>
+	<!-- 나의 근력 운동 -->
+	<select id="MyMucsleExPart" resultType="java.util.HashMap">
+		select nvl(expart ,'미설정') expart, count(*) as cnt from exercise where id='asd' and expart in('가슴','어깨','등','허리','위팔 앞','위팔 뒤','아래팔','복부','허벅지 앞','허벅지 뒤') group by expart 
 	</select>
 </mapper>

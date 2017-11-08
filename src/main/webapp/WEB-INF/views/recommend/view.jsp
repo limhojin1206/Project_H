@@ -4,7 +4,7 @@
 	<div class="contents03">
 		<div id="header">
 			<h3>근력·헬스</h3>
-		</div>
+		</div><hr/>
 		<div class="contents03_sub">
 			<div class="cs_produce">
 				<div class="prcs_mid_tit"></div>
