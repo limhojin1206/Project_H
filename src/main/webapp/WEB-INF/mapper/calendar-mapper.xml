@@ -35,6 +35,6 @@
 		select * from	EXERCISELIST where id=#{id}
 	</select>
 	<update id="update">
-		update exercise set color='#f39999' where exed &lt; sysdate and color is null
+		update exercise set color='#f39999' where exed &lt; to_char(sysdate+(9/24)-1,'YYYY-MM-DD') and color is null
 	</update>	
 </mapper>

@@ -171,12 +171,12 @@
 				"data" : {
 					"title" : $("#extitle").val(), 
 					"id" : "${auth.ID}",
-					"exno" : ${exview.NO},
+					"exno" : "${exview.NO}",
 					"exmu" : "${exview.EXMU}",
 					"expart" : "${exview.EXPART}",
-					"extime" : ${exview.EXTIME},
-					"excnt" : ${exview.EXCNT},
-					"exset" : ${exview.EXSET}
+					"extime" : "${exview.EXTIME}",
+					"excnt" : "${exview.EXCNT}",
+					"exset" : "${exview.EXSET}"
 				}
 			}).done(function(r){
 				if(r == "YYYYY"){
@@ -275,6 +275,7 @@
 		xhr.open("post","/reply/add", true);
 		xhr.send(JSON.stringify(data));
 	};
+	var rno;
 	var list = function() {
 		var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange= function(){
@@ -282,7 +283,12 @@
 				var obj = JSON.parse(this.responseText);
 				var rst ="";
 				for(i in obj){
-					rst += "<pre><span><b>"+obj[i].ID+"</b></span> -<small>"+obj[i].CRDATE+"</small><br/><span>"+obj[i].CONTENT+"</span></pre><br/>";
+					rst += "<pre><span><b>"+obj[i].ID+"</b></span> -<small>"+obj[i].CRDATE+"</small>";
+					if(obj[i].ID == "${auth.ID}"){
+						rst += "<a onclick=\"replyDelete("+obj[i].NO+");\"> 삭제 </a>";
+					}
+					rst += "<br/><span>"+obj[i].CONTENT+"</span></pre><br/>";
+					rno = obj[i].NO;
 				}
 				document.getElementById("view").innerHTML = rst;
 			}
@@ -291,5 +297,17 @@
 		xhr.send();
 	};
 	list();
-	
+	//댓글 삭제
+	function replyDelete(rno){
+	    $.ajax({
+	        url : "/reply/delete/"+rno,
+	        type : 'post',
+	        success : function(data){
+	            if(data == "YYYY"){
+	            	window.alert("댓글 삭제 완료~.");
+	            	list(); 
+	            }
+	        }
+	    });
+	}
 </script>
