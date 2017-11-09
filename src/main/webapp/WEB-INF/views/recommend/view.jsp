@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<br/>
 <div>
 	<div class="contents03">
 		<div id="header">
-			<h3>근력·헬스</h3>
-		</div>
+			<h3><b>·  대표적인 운동 부위를 위한 10가지 기본 근력운동법  · </b></h3>
+		</div><br/><hr/>
 		<div class="contents03_sub">
 			<div class="cs_produce">
 				<div class="prcs_mid_tit"></div>
 				<ul class="lst_img hori_2">
-					<table width=70% border="0" cellpadding="0" cellspacing="0"
-						align="center">
+					<table width=70% border="0" cellpadding="0" cellspacing="0" align="center">
 						<tr>
 						<td>
 								<div class="thumb">

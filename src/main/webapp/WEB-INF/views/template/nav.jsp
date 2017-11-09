@@ -5,7 +5,7 @@
 	<ul class="nav navbar-nav" >
 		<li class="active"><a href="/main">Home</a></li>
 		<li><a href="/calendar/view" style="padding-top: 0;padding-bottom: 0;"><button class="btn btn-info navbar-btn">일정</button></a></li>	
-		<li><a href="/chart/chart" style="padding-top: 0;padding-bottom: 0;"><button class="btn btn-info navbar-btn">활동분석</button></a></li>	
+		<li><a href="/chart/mychart" style="padding-top: 0;padding-bottom: 0;"><button class="btn btn-info navbar-btn">활동분석</button></a></li>	
 		<li><a href="/board/list?page=1&bgno=1" style="padding-top: 0;padding-bottom: 0;"><button class="btn btn-info navbar-btn">게시판</button></a></li>
 	</ul>
 
