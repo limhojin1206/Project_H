@@ -104,6 +104,18 @@
 </form>
 
 <script>
+
+$("#test11").keyup(function(){
+	var ta = $("#test11").val().length
+	log(ta);
+	if(ta > 200){
+		window.alert("200자 이상 작성 불가");
+		$("#test11").val($("#test11").val().substring(0,200));
+	}
+});
+
+
+	
 	$(function(){
 		$("#type01").change(function() {
 			if ($("#type01").prop("checked")) {

@@ -129,7 +129,7 @@
 		</c:forEach>
 		</tbody>
 	</table>
-	<c:if test="${param.bgno eq 1 or (auth.ID eq 'asd' and param.bgno eq 0)}">
+	<c:if test="${param.bgno eq 1 or (auth.ID eq 'admin' and param.bgno eq 0)}">
 		<p align="right" style="margin-right: 30px;">
 			<a href="/board/add?bgno=${param.bgno }&page=${param.page}"><button type="button">글작성</button></a>
 		</p>

@@ -9,7 +9,7 @@
 	</insert>
 	<select id="readAll" resultType="java.util.HashMap">
 		select no, exmu, exname as title, id as userid, color, TO_CHAR(exst, 'YYYY-MM-DD') exst, 
-		TO_CHAR(exed, 'YYYY-MM-DD') exed from exercise where id=#{id}
+		TO_CHAR(exed, 'YYYY-MM-DD') exed from exercise where id=#{id} 
 	</select>
 	<select id="readOne" resultType="java.util.HashMap">
 		select no as id, exname, exmu, expart, excmplt, excnt, extime, id as userid, exset, content, 
@@ -33,5 +33,8 @@
 	</select>
 	<select id="exList" resultType="java.util.HashMap">
 		select * from	EXERCISELIST where id=#{id}
-	</select>	
+	</select>
+	<update id="update">
+		update exercise set color='#f39999' where exed &lt; sysdate and color is null
+	</update>	
 </mapper>

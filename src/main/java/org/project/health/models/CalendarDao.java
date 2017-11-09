@@ -13,6 +13,7 @@ public class CalendarDao {
 	SqlSessionTemplate template;
 	
 	public List<Map> readAll(String id){
+		template.update("calendar.update");
 		return template.selectList("calendar.readAll", id);
 	}
 	
@@ -47,4 +48,5 @@ public class CalendarDao {
 	public List<Map> exList(String id){
 		return template.selectList("calendar.exList", id);
 	}
+	
 }
