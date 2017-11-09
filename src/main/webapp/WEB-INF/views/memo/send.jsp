@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div>
+<div align="center">
 	<h2>쪽지 보내기</h2>
 	<form action="/memo/send" method="post">
 		<input type="hidden" name="sender" value="${auth.ID}"/>
@@ -22,12 +22,15 @@
 				</tr>
 				<tr>
 					<td colspan="2"><textarea rows="6" cols="50" name="content"
-							placeholder="보내는 내용" style="resize: none"></textarea></td>
+							placeholder="보내는 내용" style="resize: none" id="ta"></textarea></td>
 				</tr>
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="2" align="right"><button type="submit" style="width: 173px;display: none" id="sendbt">보내기</button></td>
+					<td><button type="submit" style="width: 173px;display: none" id="sendbt">보내기</button></td>
+					<td align="right">
+						<span id="sendlength" >0</span> / 200<br/>
+					</td>
 				</tr>
 			</tfoot>
 		</table>
@@ -57,6 +60,16 @@ $("#idck").click(function(){
 			$("#receiver").val("");
 		}
 	});
+});
+
+$("#ta").keyup(function(){
+	var ta = $("#ta").val().length
+	$("#sendlength").html(ta);
+	if(ta > 200){
+		window.alert("200자 이상 작성 불가");
+		$("#ta").val($("#ta").val().substring(0,200));
+		$("#sendlength").html($("#ta").val().length);
+	}
 });
 
 </script>
