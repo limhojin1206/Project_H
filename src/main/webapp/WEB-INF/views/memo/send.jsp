@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div>
-	<h2>쪽지 보내기</h2>
 	<form action="/memo/send" method="post">
 		<input type="hidden" name="sender" value="${auth.ID}"/>
 		<table>

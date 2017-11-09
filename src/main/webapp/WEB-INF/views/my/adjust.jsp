@@ -24,11 +24,17 @@
 							var pck = document.getElementById("pck");
 							if (p.value.length != 0 && pck.value.length != 0) {
 								if (p.value == pck.value) {
+									flag1 = true;
+									valid();
 									document.getElementById("passck").innerHTML = "<b style=\"color:blue\">일치합니다</b>";
 								} else {
+									flag1 = false;
+									valid();
 									document.getElementById("passck").innerHTML = "<b style=\"color:red\">불일치합니다</b>";
 								}
 							} else {
+								flag1 = false;
+								valid();
 								document.getElementById("passck").innerHTML = "<b>입력이 필요합니다.</b>";
 							}
 						}
@@ -38,11 +44,17 @@
 							var pck = document.getElementById("pck");
 							if (p.value.length != 0 && pck.value.length != 0) {
 								if (p.value == pck.value) {
+									flag1 = true;
+									valid();
 									document.getElementById("passck").innerHTML = "<b style=\"color:blue\">일치합니다</b>";
 								} else {
+									flag1 = false;
+									valid();
 									document.getElementById("passck").innerHTML = "<b style=\"color:red\">불일치합니다</b>";
 								}
 							} else {
+								flag1 = false;
+								valid();
 								document.getElementById("passck").innerHTML = "<b>입력이 필요합니다.</b>";
 							}
 						}
@@ -156,3 +168,16 @@
 		</script>
 	</div>
 </div>
+
+<script>
+	var flag1= true;
+	
+	var valid = function() { 
+		console.log("flag1 : "+flag1);
+		if(flag1){
+			document.getElementById("changeinfo").disabled=false;
+		}else{
+			document.getElementById("changeinfo").disabled=true;
+		}
+	}
+</script>

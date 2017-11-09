@@ -37,6 +37,7 @@ public class MemoController {
 	}
 	
 	//===================================================== 쪽지보내기
+	
 	@GetMapping("/send")
 	public String sendGetHandle(Map map) {
 		map.put("title", "MEMO");
@@ -46,7 +47,7 @@ public class MemoController {
 	}
 	
 	@PostMapping("/send")
-	public String sendPostHandle(@RequestParam Map map) {
+	public int sendPostHandle(@RequestParam Map map) {
 		int rst = mdao.send(map);
 		if(rst == 1) {
 			System.out.println("쪽지 전송 성공");
@@ -61,7 +62,7 @@ public class MemoController {
 		}else{
 			System.out.println("쪽지 전송 실패");
 		}
-		return "redirect:/memo/receivebox";
+		return rst;
 	}
 	
 	//===================================================== 받은 쪽지함
