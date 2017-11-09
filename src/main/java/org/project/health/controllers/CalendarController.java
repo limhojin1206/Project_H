@@ -140,11 +140,15 @@ public class CalendarController {
 	}
 	
 	@GetMapping("/view")
-	public ModelAndView viewgetHandle() {
+	public ModelAndView viewgetHandle(HttpSession session) {
 		ModelAndView mav = new ModelAndView("t_sub_expr");
+		String id = (String)((Map)session.getAttribute("auth")).get("ID");
+		List<Map> exList = dao.exList(id);
 		mav.addObject("title", "캘린더");
 		mav.addObject("section", "calendar/view");
 		mav.addObject("nav", "calendar/calendarnav");
+		mav.addObject("exList", exList);
+		
 		return mav;
 	}
 }

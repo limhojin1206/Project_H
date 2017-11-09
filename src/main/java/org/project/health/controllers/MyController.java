@@ -116,7 +116,7 @@ public class MyController {
 
 			if(r == 1) { 
 				session.invalidate();
-				mav.setViewName("/redirect:/index");
+				mav.setViewName("redirect:/index");
 			}else { 
 				 System.out.println("회원탈퇴에 실패하였습니다.");
 				

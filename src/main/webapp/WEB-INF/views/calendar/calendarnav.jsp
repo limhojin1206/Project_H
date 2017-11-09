@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <nav class="navbar navbar-inverse">
 	<ul class="nav navbar-nav">
 		<div class="container-fluid" align="center">
@@ -12,7 +13,7 @@
 		</div>
 	</ul>
 </nav>
-
+	
 <!-- Modal -->
 	<div id="readModal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -23,33 +24,21 @@
 					<h4 id="rmodalTitle" class="modal-title"></h4>
 				</div>
 				<div id="modalBody" class="modal-body">
-					<div>
+					<c:forEach var="ex" items="${exList }">
 					  <div class="alert alert-info">
-					    <strong id="rtitle"></strong><a href="#" class="alert-link" style="color: red;"> 삭제 </a> 
-					    <a href="#" class="alert-link" style="color: #0100FF;"> 일정 추가 </a>
+					    <strong>${ex.EXMU }</strong><small><a href="" class="alert-link dl" style="color: red;"> | 삭제</a></small> 
+					    <small><a href="" class="alert-link al" style="color: #0100FF;"> | 일정 추가</a></small>
 					  </div>
-					  <div class="alert alert-info">
-					    <strong id="rtitle"></strong><a href="#" class="alert-link" style="color: red;"> 삭제 </a> 
-					    <a href="#" class="alert-link" style="color: #0100FF;"> 일정 추가 </a>
-					  </div>
-					  <div class="alert alert-info">
-					    <strong id="rtitle"></strong><a href="#" class="alert-link" style="color: red;"> 삭제 </a> 
-					    <a href="#" class="alert-link" style="color: #0100FF;"> 일정 추가 </a>
-					  </div>
-					  <div class="alert alert-info">
-					    <strong id="rtitle"></strong><a href="#" class="alert-link" style="color: red;"> 삭제 </a> 
-					    <a href="#" class="alert-link" style="color: #0100FF;"> 일정 추가 </a>
-					  </div>
-					  <div class="alert alert-info">
-					    <strong id="rtitle"></strong><a href="#" class="alert-link" style="color: red;"> 삭제 </a> 
-					    <a href="#" class="alert-link" style="color: #0100FF;"> 일정 추가 </a>
-					  </div>
-					</div>
+					</c:forEach>
 				</div>
 			</div>
 		</div>
 	</div>
 <script>
+	$(".dl").click(function(){
+		alert('adsf');
+	})
+
 	$("#addbt").click(function(){
 		var dt = new Date();
 		var m = dt.getMonth()+1;
