@@ -131,7 +131,7 @@
 	</table>
 	<c:if test="${param.bgno eq 1 or (auth.ID eq 'asd' and param.bgno eq 0)}">
 		<p align="right" style="margin-right: 30px;">
-			<a href="/board/add?bgno=${param.bgno }"><button type="button">글작성</button></a>
+			<a href="/board/add?bgno=${param.bgno }&page=${param.page}"><button type="button">글작성</button></a>
 		</p>
 	</c:if>
 	<div>
@@ -165,14 +165,16 @@
                 </c:if>
              --%>   
  
-		<c:if test="${param.page gt 1 }">
+		<c:if test="${curBlock > 1}">
 			<c:choose>
 				<c:when test="${empty mode }">
-					<a href="/board/list?bgno=${param.bgno }&page=${param.page -1 }" style="text-decoration: none">
+					<a href="/board/list?bgno=${param.bgno }&page=1" style="text-decoration: none"><b>[처음]</b></a>
+					<a href="/board/list?bgno=${param.bgno }&page=${prevPage}" style="text-decoration: none">
 						<b>◀ 이전</b></a>
 				</c:when>
 				<c:otherwise>
-					<a href="/board/search?bgno=${param.bgno }&page=${param.page -1 }&type=${mode.type}&search=${mode.search}" style="text-decoration: none">
+					<a href="/board/search?bgno=${param.bgno }&page=1&type=${mode.type}&search=${mode.search}" style="text-decoration: none"><b>[처음]</b></a>
+					<a href="/board/search?bgno=${param.bgno }&page=${prevPage}&type=${mode.type}&search=${mode.search}" style="text-decoration: none">
 						<b>◀ 이전</b></a>
 				</c:otherwise>
 			</c:choose>
@@ -191,15 +193,17 @@
 			</c:choose>
 			<c:if test="${!vs.last }">|</c:if>
 		</c:forEach>
-		<c:if test="${param.page lt last }">
+		<c:if test="${curBlock <= totBlock}">
 			<c:choose>
 				<c:when test="${empty mode }">
-					<a href="/board/list?bgno=${param.bgno }&page=${param.page +1 }" style="text-decoration: none">
+					<a href="/board/list?bgno=${param.bgno }&page=${nextPage}" style="text-decoration: none">
 						<b>다음 ▶</b></a>	
+					<a href="/board/list?bgno=${param.bgno }&page=${last}" style="text-decoration: none"><b>[끝]</b></a>
 				</c:when>
 				<c:otherwise>
-					<a href="/board/search?bgno=${param.bgno }&page=${param.page +1 }&type=${mode.type}&search=${mode.search}" style="text-decoration: none">
+					<a href="/board/search?bgno=${param.bgno }&page=${nextPage}&type=${mode.type}&search=${mode.search}" style="text-decoration: none">
 						<b>다음 ▶</b></a>
+					<a href="/board/search?bgno=${param.bgno }&page=${last}&type=${mode.type}&search=${mode.search}" style="text-decoration: none"><b>[끝]</b></a>
 				</c:otherwise>
 			</c:choose>
 		</c:if>

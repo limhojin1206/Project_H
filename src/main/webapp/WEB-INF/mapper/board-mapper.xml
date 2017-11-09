@@ -26,7 +26,11 @@
 		select * from boardnotice where no=#{no}
 	</select>
 	<insert id="addOne">
+<<<<<<< HEAD
 		insert into boardnotice values(boardnotice_seq.nextval, #{title}, #{id}, 0, sysdate+(9/24), #{content}, 0, #{bgno}, #{exno})
+=======
+		insert into boardnotice values(boardnotice_seq.nextval, #{title}, #{id}, 0, sysdate+(9/24), #{content}, 0, #{bgno}, #{exno, jdbcType=VARCHAR })
+>>>>>>> refs/heads/master
 	</insert>
 	<select id="countAll" resultType="java.lang.Integer">
 		select count(*) cnt from boardnotice where bgno=#{bgno}
@@ -59,7 +63,7 @@
     		select rownum r, t.* from (
         		select b.*, r.c from boardnotice b left join (
             		select bno, count(*) c from REPLYNOTICE group by bno) r on b.no = r.bno 
-                		where b.recommend > 2 order by b.recommend desc) t ) where r between 1 and 3
+                		where b.recommend > 0 and b.bgno=1 order by b.recommend desc) t ) where r between 1 and 3
 	</select>
 	<select id="prevAndNext" resultType="java.util.HashMap">
 		select * from (

@@ -8,7 +8,7 @@
 
 <!-- action : 에디터에 입력한 html 코드를 전달받을 Controller페이지 URL -->
 <form action="/board/add?bgno=${param.bgno }" method="post" id="frm">
-	<b>제목 </b><input type="text" name="title" style="margin: 8px;" /> <input
+	<b>제목 </b><input type="text" name="title" style="margin: 8px;" required="required" /> <input
 		type="hidden" name="id" value="${auth.ID }" style="margin: 8px;" />
 	<textarea name="content" id="editor" rows="10" cols="100"
 		style="width: 766px; height: 412px;">${boardVO.content}</textarea>
@@ -91,6 +91,14 @@
 	<div>
 		<input type="button" id="savebutton" value="글쓰기"
 			style="margin-top: 8px;" />
+		<c:choose>
+			<c:when test="${!empty data or param.bgno eq 2 }">
+				<a href="/calendar/view"><button type="button">취소</button></a>
+			</c:when>
+			<c:otherwise>
+				<a href="/board/list?bgno=${param.bgno }&page=${param.page}"><button type="button">취소</button></a>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	
 </form>

@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.project.health.models.BoardDao;
+import org.project.health.models.CalendarDao;
 import org.project.health.models.ExerciseDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,9 @@ public class BoardController {
 	
 	@Autowired
 	ExerciseDao exdao;
+	
+	@Autowired
+	CalendarDao cdao;
 	
 	@RequestMapping("/edit/{no}")
 	public ModelAndView editGetHandle(@PathVariable String no) {
@@ -216,6 +220,9 @@ public class BoardController {
 		Map pnPage = dao.prevAndNext(map);
 		List<Map> check = dao.checkRecommend(map);
 		Object exno = view.get("EXNO");
+		map.put("exno", exno);
+		Map cList = cdao.checkList(map);
+		mav.addObject("cList", cList);
 		if(exno != null) {
 		Map exview = exdao.readOne(exno);
 		mav.addObject("exview", exview);
@@ -236,8 +243,9 @@ public class BoardController {
 	}
 	
 	@PostMapping("/add")
-	public ModelAndView addPostHandle(@RequestParam Map map) {
+	public ModelAndView addPostHandle(@RequestParam Map map, HttpSession session) {
 		ModelAndView mav = new ModelAndView("redirect:/board/list?bgno="+map.get("bgno")+"&page=1");
+		map.put("id", (String)((Map)session.getAttribute("auth")).get("ID"));
 		System.out.println("test = "+map);
 		int rst = dao.addOne(map);
 		//mav.addObject("rst", rst);

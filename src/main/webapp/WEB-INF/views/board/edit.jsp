@@ -9,11 +9,11 @@
 	<b>작성자 </b><input type="text" id="id" name="id" value="${view.ID }" style="margin: 8px;" />
     <textarea name="content" id="editor" rows="10" cols="100" style="width:766px; height:412px;">${view.CONTENT }</textarea>
     <input type="button" id="savebutton" value="수정" style="margin-top: 8px;" />
-	<button id="bt" type="button">목록</button>
+	<button id="bt" type="button">취소</button>
 </form>
 <script>
 	$("#bt").click(function(){
-		$(location).attr('href', '/board/list?bgno=${param.bgno}&page=1');
+		$(location).attr('href', '/board/list?bgno=${param.bgno}&page=${param.page}');
 	});
 	
 	$(function(){

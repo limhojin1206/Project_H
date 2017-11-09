@@ -185,7 +185,9 @@ body {
 	<div id="loading">loading...</div>
 
 	<div id='calendar'></div>
-
+	
+	
+ 
 	<!-- Modal -->
 	<div id="addModal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -201,7 +203,7 @@ body {
 						<input type="hidden" name="bgno" value="2">
 					</form>
 					<p>
-						<b>Title :</b> <input id="title" name="exname" type="text" class="form-control">
+						<b>Title :</b> <input id="title" name="exname" type="text" class="form-control" >
 					</p>
 					<div class="col-sm-1">
 						<b>Exercise:</b>

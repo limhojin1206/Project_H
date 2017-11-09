@@ -42,9 +42,9 @@
 	</c:choose>
 	<hr />
 	<div>
-	<c:if test="${!empty data or param.bgno eq 2 }">
+	<c:if test="${!empty exview or param.bgno eq 2 }">
 	<h3><span class="label label-info">운동법</span></h3>
-	<input type="hidden" name="exno" value="${data.NO }">
+	<input type="hidden" name="exno" value="${exview.NO }">
 	<div class="row" style="width: 85%;" align="left">
 	<div class="col-sm-2">
 		<br />
@@ -115,8 +115,16 @@
 		</div>
 	</div>
 	</div>
-	<button id="exadd" type="button">운동법 바로추가</button>
-	<button id="exsave" type="button">운동법 저장</button>
+	<c:if test="${view.ID ne auth.ID and empty cList }">
+		<div>
+			<button id="exsave" type="button">운동법 추가하기</button>
+		</div>
+	</c:if>
+	<br/>
+	<div id="ext" style="display: none">
+		TITLE : <input type="text" id="extitle">
+		<button id="okbt" type="button">확인</button>
+	</div>
 	<hr/>
 	</c:if>
 	</div>			
@@ -132,7 +140,7 @@
 		</c:otherwise>
 	</c:choose>
 	<c:if test="${auth.ID eq view.ID }">
-		<a href="/board/edit/${view.NO }?bgno=${param.bgno}"><button>수정</button></a>
+		<a href="/board/edit/${view.NO }?bgno=${param.bgno}&page=${param.page}"><button>수정</button></a>
 		<a><button id="del">삭제</button></a>
 	</c:if>
 	<hr/>
@@ -153,6 +161,36 @@
 	<hr/>
 </div>
 <script>
+	$("#exsave").click(function(){
+		$("#ext").css("display","");
+		$("#okbt").click(function(){
+			$.ajax({
+				"type" : "post",
+				"async" : true,
+				"url" : "/calendar/addList",
+				"data" : {
+					"title" : $("#extitle").val(), 
+					"id" : "${auth.ID}",
+					"exno" : ${exview.NO},
+					"exmu" : "${exview.EXMU}",
+					"expart" : "${exview.EXPART}",
+					"extime" : ${exview.EXTIME},
+					"excnt" : ${exview.EXCNT},
+					"exset" : ${exview.EXSET}
+				}
+			}).done(function(r){
+				if(r == "YYYYY"){
+					window.alert("저장 완료~");
+					$("#ext").css("display","none");
+					$("#exsave").css("display","none");
+				}else{
+					window.alert("저장 실패~");
+					$("#ext").css("display","none");
+				};
+			});
+		})
+	})
+
 	$(function(){
 		$(".form-control").attr("disabled",true);
 		$('.form').attr("disabled", true);
@@ -244,8 +282,7 @@
 				var obj = JSON.parse(this.responseText);
 				var rst ="";
 				for(i in obj){
-					rst += "<pre><span><b>"+obj[i].ID+"</b></span> -<small>"+obj[i].CRDATE+"</small><br/><span>"+obj[i].CONTENT
-						+"</span><button id=\"sbt\">삭제</button></pre><br/>";
+					rst += "<pre><span><b>"+obj[i].ID+"</b></span> -<small>"+obj[i].CRDATE+"</small><br/><span>"+obj[i].CONTENT+"</span></pre><br/>";
 				}
 				document.getElementById("view").innerHTML = rst;
 			}
