@@ -8,7 +8,7 @@
 			values(exercise_seq.nextval, #{title}, #{type}, #{part}, #{cnt}, #{time}, #{id, jdbcType=VARCHAR}, #{start}, #{end}, #{set}, #{content})
 	</insert>
 	<select id="readAll" resultType="java.util.HashMap">
-		select no, exmu, exname as title, id as userid, TO_CHAR(exst, 'YYYY-MM-DD') exst, 
+		select no, exmu, exname as title, id as userid, color, TO_CHAR(exst, 'YYYY-MM-DD') exst, 
 		TO_CHAR(exed, 'YYYY-MM-DD') exed from exercise where id=#{id}
 	</select>
 	<select id="readOne" resultType="java.util.HashMap">
@@ -23,6 +23,15 @@
 			exst=#{start}, exed=#{end}, exset=#{set}, content=#{content} where no=#{no}
 	</update>
 	<update id="success">
-		update exercise set excmplt='y' where no=#{no}
-	</update>	
+		update exercise set excmplt='y', color='#86E57F' where no=#{no}
+	</update>
+	<insert id="addList">
+		insert into EXERCISELIST values(EXERCISELIST_seq.nextval, #{title}, #{exno}, #{id}, sysdate+(9/24), #{exmu}, #{expart}, #{extime}, #{excnt}, #{exset})
+	</insert>
+	<select id="checkList" resultType="java.util.HashMap">
+		select * from EXERCISELIST where exno=#{exno, jdbcType=VARCHAR} and id=#{id} 
+	</select>
+	<select id="exList" resultType="java.util.HashMap">
+		select * from	EXERCISELIST where id=#{id}
+	</select>	
 </mapper>

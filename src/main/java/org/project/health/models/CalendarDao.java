@@ -35,4 +35,16 @@ public class CalendarDao {
 	public int success(String no) {
 		return template.update("calendar.success", no);
 	}
+	
+	public int addList(Map map) {
+		return template.insert("calendar.addList", map);
+	}
+	
+	public Map checkList(Map map) {
+		return template.selectOne("calendar.checkList", map);
+	}
+	
+	public List<Map> exList(String id){
+		return template.selectList("calendar.exList", id);
+	}
 }
