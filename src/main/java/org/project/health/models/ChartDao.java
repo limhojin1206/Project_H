@@ -19,6 +19,13 @@ public class ChartDao {
 	public List<Map> TotalRatioExPart01(){
 		return sql.selectList("exercise.TotalRatioExPart01");
 	}
+	public List<Map> nullExPart(){
+		return sql.selectList("exercise.nullExPart");
+	}
+	
+	public List<Map> nulllExPart(){
+		return sql.selectList("exercise.nulllExPart");
+	}
 	
 	public List<Map> TotalRatioExPart02(){
 		return sql.selectList("exercise.TotalRatioExPart02");

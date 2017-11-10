@@ -102,7 +102,46 @@ public class ChartController {
 		}
 		return mapper.writeValueAsString(json);
 	}
-
+	
+	@RequestMapping(path="/nullbardata1", produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String nullbardataJSONHandle01(HttpSession session) throws JsonProcessingException {
+		List<Map> nlist01 = cdao.nullExPart();
+		session.setAttribute("nlist01", nlist01);
+		List json = new ArrayList<>();
+		List<String> ctg =new ArrayList<>(Arrays.asList("걷기","달리기","줄넘기","수영","자전거"));
+		json.add(new Object[] {"유산소 운동 종류", "운동 횟수"});
+		for(Map m : nlist01) {
+			ctg.remove(m.get("EXPART"));
+			Object[] ar = new Object[] {m.get("EXPART"),m.get("CNT")};
+			json.add(ar);
+		}
+		for(String m : ctg) {
+			Object[] ar = new Object[] {m , 0};
+			json.add(ar);
+		}
+		return mapper.writeValueAsString(json);
+	}
+	
+	@RequestMapping(path="/nullbardata2", produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String testbardataJSONHandle02(HttpSession session) throws JsonProcessingException {
+		List<Map> testlist02 = cdao.nulllExPart();
+		session.setAttribute("testlist02", testlist02);
+		List json = new ArrayList<>();
+		List<String> ctg =new ArrayList<>(Arrays.asList("가슴","어깨","등","허리","위팔 앞", "위팔 뒤","아래팔","복부","허벅지 앞","허벅지 뒤"));
+		json.add(new Object[] {"근력 운동 종류", "운동 횟수"});
+		for(Map m : testlist02) {
+			ctg.remove(m.get("EXPART"));
+			Object[] ar = new Object[] {m.get("EXPART"),m.get("CNT")};
+			json.add(ar);
+		}
+		for(String m : ctg) {
+			Object[] ar = new Object[] {m , 0};
+			json.add(ar);
+		}
+		return mapper.writeValueAsString(json);
+	}
 	@RequestMapping(path="/totalbardata1", produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String totalbardataJSONHandle01(HttpSession session) throws JsonProcessingException {
@@ -130,7 +169,7 @@ public class ChartController {
 		session.setAttribute("tlist02", tlist02);
 		List json = new ArrayList<>();
 		List<String> ctg =new ArrayList<>(Arrays.asList("가슴","어깨","등","허리","위팔 앞", "위팔 뒤","아래팔","복부","허벅지 앞","허벅지 뒤"));
-		json.add(new Object[] {"유산소 운동 종류", "운동 횟수"});
+		json.add(new Object[] {"근력 운동 종류", "운동 횟수"});
 		for(Map m : tlist02) {
 			ctg.remove(m.get("EXPART"));
 			Object[] ar = new Object[] {m.get("EXPART"),m.get("CNT")};

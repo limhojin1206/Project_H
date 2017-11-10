@@ -31,7 +31,7 @@
 		});
 	 
 	 var options = {
-			 
+			 	colors: ['#FF66FF','#3366FF'],
 			    "title" : "회원 남/녀 성비율",
 			    "sliceVisibilityThreshold": .2,
 				"is3D" : true
@@ -58,9 +58,9 @@
 		});
 	 
 	 var options = {
-			 
+			 	colors: ['red','orange','yellow','green','blue','navy','purple'],
 			    "title" : "회원전체 연령대 비율",
-			    "sliceVisibilityThreshold": .2,
+			    "sliceVisibilityThreshold": .0,
 				"is3D" : true
 				
 			  };
