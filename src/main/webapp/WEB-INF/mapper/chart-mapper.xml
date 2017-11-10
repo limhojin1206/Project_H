@@ -10,10 +10,17 @@
 	<select id="TotalRatioExPart01" resultType="java.util.HashMap">
 		select nvl(expart ,'미설정') expart, count(*) as cnt from exercise where expart in('걷기','달리기','줄넘기','수영','자전거') group by expart
 	</select>
+	<select id="nullExPart" resultType="java.util.HashMap">
+		select nvl(expart ,'미설정') expart, count(*) as cnt from exercise where id='sss' and expart in('걷기','달리기','줄넘기','수영','자전거') group by expart 
+	</select>
 	
 	<select id="TotalRatioExPart02" resultType="java.util.HashMap">
 		select nvl(expart ,'미설정') expart, count(*) as cnt from exercise where expart in('가슴','어깨','등','허리','위팔 앞','위팔 뒤','아래팔','복부','허벅지 앞','허벅지 뒤') group by expart
 	</select>
+	<select id="nulllExPart" resultType="java.util.HashMap">
+		select nvl(expart ,'미설정') expart, count(*) as cnt from exercise where id='sss' and expart in('가슴','어깨','등','허리','위팔 앞','위팔 뒤','아래팔','복부','허벅지 앞','허벅지 뒤') group by expart 
+	</select>
+	
 	
 	<select id="MyRatioExMu" resultType="java.util.HashMap">
 		select exmu, count(*) as cnt from exercise where id=#{id } group by exmu 
@@ -27,4 +34,5 @@
 	<select id="MyMucsleExPart" resultType="java.util.HashMap">
 		select nvl(expart ,'미설정') expart, count(*) as cnt from exercise where id=#{id } and expart in('가슴','어깨','등','허리','위팔 앞','위팔 뒤','아래팔','복부','허벅지 앞','허벅지 뒤') group by expart 
 	</select>
+	
 </mapper>
