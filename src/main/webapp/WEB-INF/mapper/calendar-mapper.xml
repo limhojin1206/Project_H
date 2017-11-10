@@ -23,7 +23,7 @@
 			exst=#{start}, exed=#{end}, exset=#{set}, content=#{content} where no=#{no}
 	</update>
 	<update id="success">
-		update exercise set excmplt='y', color='#86E57F' where no=#{no}
+		update exercise set excmplt='y', color='#ccff00' where no=#{no}
 	</update>
 	<insert id="addList">
 		insert into EXERCISELIST values(EXERCISELIST_seq.nextval, #{title}, #{exno}, #{id}, sysdate+(9/24), #{exmu}, #{expart}, #{extime}, #{excnt}, #{exset})
@@ -35,6 +35,6 @@
 		select * from	EXERCISELIST where id=#{id}
 	</select>
 	<update id="update">
-		update exercise set color='#f39999' where exed &lt; to_char(sysdate+(9/24)-1,'YYYY-MM-DD') and color is null
+		update exercise set color='#ff3333' where exed &lt; to_char(sysdate+(9/24)-1,'YYYY-MM-DD') and color is null
 	</update>	
 </mapper>
