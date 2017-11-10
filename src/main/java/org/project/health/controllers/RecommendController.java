@@ -146,13 +146,13 @@ public class RecommendController {
 		String str20 = p05.text();
 		request.setAttribute("str20", str20);
 		
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140231496_7KYY9TTA3.jpg/WEIGHT_022_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/part010101.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140231735_Q8474XZUK.jpg/WEIGHT_022_pic_2.jpg?type=m4500_4500_fst&wm=N";
+		String img02 = "/images/naver18/part010102.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140232467_GRX4YV3ZW.jpg/WEIGHT_022_pic_3.jpg?type=m4500_4500_fst&wm=N";
+		String img03 = "/images/naver18/part010103.jpg";
 		request.setAttribute("img03", img03);
-		String img04 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140232555_RYINP07IT.jpg/WEIGHT_022_pic_4.jpg?type=m4500_4500_fst&wm=N";
+		String img04 = "/images/naver18/part010104.jpg";
 		request.setAttribute("img04", img04);
 		
 		Element h04 = dc.getElementsByClass("stress").get(2);
@@ -276,13 +276,13 @@ public class RecommendController {
 		String str20 = p05.text();
 		request.setAttribute("str20", str20);
 		
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140249083_CU6ZH267J.jpg/WEIGHT_029_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/part010201.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140250525_Z2ZJOURET.jpg/WEIGHT_029_pic_2.jpg?type=m4500_4500_fst&wm=N";
+		String img02 = "/images/naver18/part010202.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140250639_15IVRFJ2W.jpg/WEIGHT_029_pic_3.jpg?type=m4500_4500_fst&wm=N";
+		String img03 = "/images/naver18/part010203.jpg";
 		request.setAttribute("img03", img03);
-		String img04 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140251585_4MRSMLGB3.jpg/WEIGHT_029_pic_4.jpg?type=m4500_4500_fst&wm=N";
+		String img04 = "/images/naver18/part010204.jpg";
 		request.setAttribute("img04", img04);
 
 		Element h04 = dc.getElementsByClass("stress").get(2);
@@ -407,13 +407,13 @@ public class RecommendController {
 		String str20 = p05.text();
 		request.setAttribute("str20", str20);
 		
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140218766_NR16EFODS.jpg/WEIGHT_024_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/part010301.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140219112_9XKK8JX0H.jpg/WEIGHT_024_pic_2.jpg?type=m4500_4500_fst&wm=N";
+		String img02 = "/images/naver18/part010302.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140220218_O3XJ8O29B.jpg/WEIGHT_024_pic_3.jpg?type=m4500_4500_fst&wm=N";
+		String img03 = "/images/naver18/part010303.jpg";
 		request.setAttribute("img03", img03);
-		String img04 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140221087_YK2TFGFWD.jpg/WEIGHT_024_pic_4.jpg?type=m4500_4500_fst&wm=N";
+		String img04 = "/images/naver18/part010304.jpg";
 		request.setAttribute("img04", img04);
 
 		Element h04 = dc.getElementsByClass("stress").get(2);
@@ -541,13 +541,13 @@ public class RecommendController {
 		String str20 = p05.text();
 		request.setAttribute("str20", str20);
 		
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140309278_9FDD7DIJ2.jpg/WEIGHT_040_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/050101.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140309403_ABEE3RP51.jpg/WEIGHT_040_pic_2.jpg?type=m4500_4500_fst&wm=N";
+		String img02 = "/images/naver18/050102.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140310207_Y0KZGR067.jpg/WEIGHT_040_pic_3.jpg?type=m4500_4500_fst&wm=N";
+		String img03 = "/images/naver18/050103.jpg";
 		request.setAttribute("img03", img03);
-		String img04 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140310335_YXDBMA9PZ.jpg/WEIGHT_040_pic_4.jpg?type=m4500_4500_fst&wm=N";
+		String img04 = "/images/naver18/050104.jpg";
 		request.setAttribute("img04", img04);
 
 		Element h04 = dc.getElementsByClass("stress").get(2);
@@ -669,13 +669,13 @@ public class RecommendController {
 			String str20 = p05.text();
 			request.setAttribute("str20", str20);
 			
-			String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140305076_9PTB10GQS.jpg/WEIGHT_039_pic_1.jpg?type=m4500_4500_fst&wm=N";
+			String img01 = "/images/naver18/050201.jpg";
 			request.setAttribute("img01", img01);
-			String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140305570_BSXRUC036.jpg/WEIGHT_039_pic_2.jpg?type=m4500_4500_fst&wm=N";
+			String img02 = "/images/naver18/050202.jpg";
 			request.setAttribute("img02", img02);
-			String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140305904_SJYFGRLV5.jpg/WEIGHT_039_pic_3.jpg?type=m4500_4500_fst&wm=N";
+			String img03 = "/images/naver18/050203.jpg";
 			request.setAttribute("img03", img03);
-			String img04 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140306573_I13T2BU0U.jpg/WEIGHT_039_pic_4.jpg?type=m4500_4500_fst&wm=N";
+			String img04 = "/images/naver18/050204.jpg";
 			request.setAttribute("img04", img04);
 
 			Element h04 = dc.getElementsByClass("stress").get(2);
@@ -800,11 +800,11 @@ public class RecommendController {
 			String str19 = p04.text();
 			request.setAttribute("str19", str19);
 			
-			String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140314682_ZPHJ2KRDY.jpg/WEIGHT_043_pic_1.jpg?type=m4500_4500_fst&wm=N";
+			String img01 = "/images/naver18/050301.jpg";
 			request.setAttribute("img01", img01);
-			String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140314928_9B0ESJLCS.jpg/WEIGHT_043_pic_2.jpg?type=m4500_4500_fst&wm=N";
+			String img02 = "/images/naver18/050302.jpg";
 			request.setAttribute("img02", img02);
-			String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140316103_87AK14RB3.jpg/WEIGHT_043_pic_3.jpg?type=m4500_4500_fst&wm=N";
+			String img03 = "/images/naver18/050303.jpg";
 			request.setAttribute("img03", img03);
 			
 			Element h04 = dc.getElementsByClass("stress").get(2);
@@ -897,11 +897,11 @@ public class RecommendController {
 		String str19 = p04.text();
 		request.setAttribute("str19", str19);
 		
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140325678_OFJZJWNWS.jpg/WEIGHT_051_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/040101.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140327176_5U4YL38WI.jpg/WEIGHT_051_pic_2.jpg?type=m4500_4500_fst&wm=N";
+		String img02 = "/images/naver18/040102.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140328352_1KMEVBMKR.jpg/WEIGHT_051_pic_3.jpg?type=m4500_4500_fst&wm=N";
+		String img03 = "/images/naver18/040103.jpg";
 		request.setAttribute("img03", img03);
 
 		Element h04 = dc.getElementsByClass("stress").get(2);
@@ -1000,13 +1000,13 @@ public class RecommendController {
 		String str20 = p05.text();
 		request.setAttribute("str20", str20);
 		
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140334516_GK97G0JHM.jpg/WEIGHT_053_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/040201.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140335150_2N7P7HUWH.jpg/WEIGHT_053_pic_2.jpg?type=m4500_4500_fst&wm=N";
+		String img02 = "/images/naver18/040202.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140335341_LDZYX3CX6.jpg/WEIGHT_053_pic_3.jpg?type=m4500_4500_fst&wm=N";
+		String img03 = "/images/naver18/040203.jpg";
 		request.setAttribute("img03", img03);
-		String img04 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140335536_NYGVKNVK5.jpg/WEIGHT_053_pic_4.jpg?type=m4500_4500_fst&wm=N";
+		String img04 = "/images/naver18/040204.jpg";
 		request.setAttribute("img04", img04);
 
 		Element h04 = dc.getElementsByClass("stress").get(2);
@@ -1088,11 +1088,11 @@ public class RecommendController {
 		String str19 = p04.text();
 		request.setAttribute("str19", str19);
 		
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140329468_9XGQBN4VA.jpg/WEIGHT_052_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/040301.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140330382_NQK1J1SLH.jpg/WEIGHT_052_pic_2.jpg?type=m4500_4500_fst&wm=N";
+		String img02 = "/images/naver18/040302.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140330950_FMW60NMWF.jpg/WEIGHT_052_pic_3.jpg?type=m4500_4500_fst&wm=N";
+		String img03 = "/images/naver18/040303.jpg";
 		request.setAttribute("img03", img03);
 
 		Element h04 = dc.getElementsByClass("stress").get(2);
@@ -1175,11 +1175,11 @@ public class RecommendController {
 		String str19 = p04.text();
 		request.setAttribute("str19", str19);
 		
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140340399_LKQGR4CJV.jpg/WEIGHT_057_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/070101.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140340520_6B8WX9ILB.jpg/WEIGHT_057_pic_2.jpg?type=m4500_4500_fst&wm=N";
+		String img02 = "/images/naver18/070102.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140344232_XX7E1QNSF.jpg/WEIGHT_057_pic_3.jpg?type=m4500_4500_fst&wm=N";
+		String img03 = "/images/naver18/070103.jpg";
 		request.setAttribute("img03", img03);
 
 		Element h04 = dc.getElementsByClass("stress").get(2);
@@ -1271,13 +1271,13 @@ public class RecommendController {
 		String str20 = p05.text();
 		request.setAttribute("str20", str20);
 		
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140349307_QE2M3877E.jpg/WEIGHT_059_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/070201.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140349971_JF811OHBB.jpg/WEIGHT_059_pic_2.jpg?type=m4500_4500_fst&wm=N";
+		String img02 = "/images/naver18/070202.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140350087_K7YENC1GH.jpg/WEIGHT_059_pic_3.jpg?type=m4500_4500_fst&wm=N";
+		String img03 = "/images/naver18/070203.jpg";
 		request.setAttribute("img03", img03);
-		String img04 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140350549_Q84ZK6N93.jpg/WEIGHT_059_pic_4.jpg?type=m4500_4500_fst&wm=N";
+		String img04 = "/images/naver18/070204.jpg";
 		request.setAttribute("img04", img04);
 
 		Element h04 = dc.getElementsByClass("stress").get(2);
@@ -1392,13 +1392,13 @@ public class RecommendController {
 		String str20 = p05.text();
 		request.setAttribute("str20", str20);
 		
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140354711_16BI76VHB.jpg/WEIGHT_062_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/070301.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140354815_0O3HS26V9.jpg/WEIGHT_062_pic_2.jpg?type=m4500_4500_fst&wm=N";
+		String img02 = "/images/naver18/070302.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140354946_GLEUMOGW3.jpg/WEIGHT_062_pic_3.jpg?type=m4500_4500_fst&wm=N";
+		String img03 = "/images/naver18/070303.jpg";
 		request.setAttribute("img03", img03);
-		String img04 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140355036_7Q0PMO25Y.jpg/WEIGHT_062_pic_4.jpg?type=m4500_4500_fst&wm=N";
+		String img04 = "/images/naver18/070304.jpg";
 		request.setAttribute("img04", img04);
 
 		Element h04 = dc.getElementsByClass("stress").get(2);
@@ -1491,13 +1491,13 @@ public class RecommendController {
 		String str20 = p05.text();
 		request.setAttribute("str20", str20);
 		
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140404383_2EXXXQLGX.jpg/WEIGHT_065_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/080101.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140404497_OAVV25RFF.jpg/WEIGHT_065_pic_2.jpg?type=m4500_4500_fst&wm=N";
+		String img02 = "/images/naver18/080102.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140405067_QF02M3QW3.jpg/WEIGHT_065_pic_3.jpg?type=m4500_4500_fst&wm=N";
+		String img03 = "/images/naver18/080103.jpg";
 		request.setAttribute("img03", img03);
-		String img04 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140405160_KMLAB86T0.jpg/WEIGHT_065_pic_4.jpg?type=m4500_4500_fst&wm=N";
+		String img04 = "/images/naver18/080104.jpg";
 		request.setAttribute("img04", img04);
 
 		Element h04 = dc.getElementsByClass("stress").get(2);
@@ -1583,13 +1583,13 @@ public class RecommendController {
 		String str20 = p05.text();
 		request.setAttribute("str20", str20);
 		
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140409157_PW7DWWHNR.jpg/WEIGHT_067_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/080201.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140409834_EFZY4C498.jpg/WEIGHT_067_pic_2.jpg?type=m4500_4500_fst&wm=N";
+		String img02 = "/images/naver18/080202.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140410152_7AI8DB36N.jpg/WEIGHT_067_pic_3.jpg?type=m4500_4500_fst&wm=N";
+		String img03 = "/images/naver18/080203.jpg";
 		request.setAttribute("img03", img03);
-		String img04 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140410544_2WDHX75CF.jpg/WEIGHT_067_pic_4.jpg?type=m4500_4500_fst&wm=N";
+		String img04 = "/images/naver18/080204.jpg";
 		request.setAttribute("img04", img04);
 
 		Element h04 = dc.getElementsByClass("stress").get(2);
@@ -1672,11 +1672,11 @@ public class RecommendController {
 		String str19 = p04.text();
 		request.setAttribute("str19", str19);
 		
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140410829_GUBA2Y2DH.jpg/WEIGHT_068_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/080301.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140411163_6NJW35Z32.jpg/WEIGHT_068_pic_2.jpg?type=m4500_4500_fst&wm=N";
+		String img02 = "/images/naver18/080302.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140411569_OUTEF1JXZ.jpg/WEIGHT_068_pic_3.jpg?type=m4500_4500_fst&wm=N";
+		String img03 = "/images/naver18/080303.jpg";
 		request.setAttribute("img03", img03);
 
 		Element h04 = dc.getElementsByClass("stress").get(2);
@@ -1791,13 +1791,13 @@ public class RecommendController {
 		String str20 = p05.text();
 		request.setAttribute("str20", str20);
 		
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140422798_DZ39YB2GA.jpg/WEIGHT_072_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/030101.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140422883_1Y30Q68FG.jpg/WEIGHT_072_pic_2.jpg?type=m4500_4500_fst&wm=N";
+		String img02 = "/images/naver18/030102.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140422918_GU2ERJOUC.jpg/WEIGHT_072_pic_3.jpg?type=m4500_4500_fst&wm=N";
+		String img03 = "/images/naver18/030103.jpg";
 		request.setAttribute("img03", img03);
-		String img04 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140426669_RVFO77LDK.jpg/WEIGHT_072_pic_4.jpg?type=m4500_4500_fst&wm=N";
+		String img04 = "/images/naver18/030104.jpg";
 		request.setAttribute("img04", img04);
 
 		Element h04 = dc.getElementsByClass("stress").get(2);
@@ -1896,13 +1896,13 @@ public class RecommendController {
 		String str20 = p05.text();
 		request.setAttribute("str20", str20);
 		
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140435424_KPNMBT0J3.jpg/WEIGHT_075_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/030201.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140435615_C7B240RAR.jpg/WEIGHT_075_pic_2.jpg?type=m4500_4500_fst&wm=N";
+		String img02 = "/images/naver18/030202.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140435615_NMN6DQSIJ.jpg/WEIGHT_075_pic_3.jpg?type=m4500_4500_fst&wm=N";
+		String img03 = "/images/naver18/030203.jpg";
 		request.setAttribute("img03", img03);
-		String img04 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140435999_W8PX7IHFS.jpg/WEIGHT_075_pic_4.jpg?type=m4500_4500_fst&wm=N";
+		String img04 = "/images/naver18/030204.jpg";
 		request.setAttribute("img04", img04);
 
 		Element h04 = dc.getElementsByClass("stress").get(2);
@@ -1995,11 +1995,11 @@ public class RecommendController {
 		String str19 = p04.text();
 		request.setAttribute("str19", str19);
 		
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140442291_EMKV9J8JD.jpg/WEIGHT_078_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/030301.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140442569_RCA5ZOCY9.jpg/WEIGHT_078_pic_2.jpg?type=m4500_4500_fst&wm=N";
+		String img02 = "/images/naver18/030302.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140442710_HJ4BPGT35.jpg/WEIGHT_078_pic_3.jpg?type=m4500_4500_fst&wm=N";
+		String img03 = "/images/naver18/030303.jpg";
 		request.setAttribute("img03", img03);
 
 		Element h04 = dc.getElementsByClass("stress").get(2);
@@ -2092,11 +2092,11 @@ public class RecommendController {
 		String str19 = p04.text();
 		request.setAttribute("str19", str19);
 		
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140443171_OZJ93AA0F.jpg/WEIGHT_079_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/030401.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140443173_VOQK0PBFN.jpg/weight_079_pic_2.jpg?type=m4500_4500_fst_n&wm=Y";
+		String img02 = "/images/naver18/030402.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140443333_L0150HGRF.jpg/weight_079_pic_3.jpg?type=m4500_4500_fst_n&wm=Y";
+		String img03 = "/images/naver18/030403.jpg";
 		request.setAttribute("img03", img03);
 
 		Element h04 = dc.getElementsByClass("stress").get(2);
@@ -2190,11 +2190,11 @@ public class RecommendController {
 		String str19 = p04.text();
 		request.setAttribute("str19", str19);
 		
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140447365_7LPDRIPLP.jpg/WEIGHT_081_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/030501.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140447467_ZOE6395D5.jpg/weight_081_pic_2.jpg?type=m4500_4500_fst_n&wm=Y";
+		String img02 = "/images/naver18/030502.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140447950_UZ0UUB8QP.jpg/weight_081_pic_3.jpg?type=m4500_4500_fst_n&wm=Y";
+		String img03 = "/images/naver18/030503.jpg";
 		request.setAttribute("img03", img03);
 
 		Element h04 = dc.getElementsByClass("stress").get(2);
@@ -2284,13 +2284,13 @@ public class RecommendController {
 		String str20 = p05.text();
 		request.setAttribute("str20", str20);
 		
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140447991_8LZ25Q6T1.jpg/WEIGHT_082_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/030601.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140448175_C3KPQ1U1R.jpg/WEIGHT_082_pic_2.jpg?type=m4500_4500_fst&wm=N";
+		String img02 = "/images/naver18/030602.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140448435_7J9RRGDEW.jpg/WEIGHT_082_pic_3.jpg?type=m4500_4500_fst&wm=N";
+		String img03 = "/images/naver18/030603.jpg";
 		request.setAttribute("img03", img03);
-		String img04 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140449678_JA09RBCI2.jpg/WEIGHT_082_pic_4.jpg?type=m4500_4500_fst&wm=N";
+		String img04 = "/images/naver18/030604.jpg";
 		request.setAttribute("img04", img04);
 
 		Element h04 = dc.getElementsByClass("stress").get(2);
@@ -2384,13 +2384,13 @@ public class RecommendController {
 		String str20 = p05.text();
 		request.setAttribute("str20", str20);
 		
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140453353_T173JF63W.jpg/WEIGHT_084_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/060101.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140453370_B52RWE1G4.jpg/WEIGHT_084_pic_2.jpg?type=m4500_4500_fst&wm=N";
+		String img02 = "/images/naver18/060102.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140453584_KZYRSINL8.jpg/WEIGHT_084_pic_3.jpg?type=m4500_4500_fst&wm=N";
+		String img03 = "/images/naver18/060103.jpg";
 		request.setAttribute("img03", img03);
-		String img04 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140453609_9SM5MNGXC.jpg/WEIGHT_084_pic_4.jpg?type=m4500_4500_fst&wm=N";
+		String img04 = "/images/naver18/060104.jpg";
 		request.setAttribute("img04", img04);
 
 		Element h04 = dc.getElementsByClass("stress").get(2);
@@ -2475,11 +2475,11 @@ public class RecommendController {
 		String str19 = p04.text();
 		request.setAttribute("str19", str19);
 
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140501158_7DJU74OKB.jpg/WEIGHT_087_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/060201.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140501336_RYAG85YP7.jpg/WEIGHT_087_pic_2.jpg?type=m4500_4500_fst&wm=N";
+		String img02 = "/images/naver18/060202.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140501768_320A212NQ.jpg/WEIGHT_087_pic_3.jpg?type=m4500_4500_fst&wm=N";
+		String img03 = "/images/naver18/060203.jpg";
 		request.setAttribute("img03", img03);
 		
 		Element h04 = dc.getElementsByClass("stress").get(2);
@@ -2587,11 +2587,11 @@ public class RecommendController {
 		String str19 = p04.text();
 		request.setAttribute("str19", str19);
 		
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140506969_7MBKJYONS.jpg/WEIGHT_090_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/060301.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140508274_XIUWAHJAU.jpg/WEIGHT_090_pic_2.jpg?type=m4500_4500_fst&wm=N";
+		String img02 = "/images/naver18/060302.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140510591_3F87VPIH0.jpg/WEIGHT_090_pic_3.jpg?type=m4500_4500_fst&wm=N";
+		String img03 = "/images/naver18/060303.jpg";
 		request.setAttribute("img03", img03);
 
 		Element h04 = dc.getElementsByClass("stress").get(2);
@@ -2714,13 +2714,13 @@ public class RecommendController {
 		String str20 = p05.text();
 		request.setAttribute("str20", str20);
 		
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140528124_0Z7N8RF0D.jpg/WEIGHT_098_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/part020101.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140530206_VXKIU0ZAA.jpg/WEIGHT_098_pic_2.jpg?type=m4500_4500_fst&wm=N";
+		String img02 = "/images/naver18/part020102.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140530306_LSWTKQ026.jpg/weight_098_pic_3.jpg?type=m4500_4500_fst_n&wm=Y";
+		String img03 = "/images/naver18/part020103.jpg";
 		request.setAttribute("img03", img03);
-		String img04 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140530401_NOD9J9066.jpg/weight_098_pic_4.jpg?type=m4500_4500_fst_n&wm=Y";
+		String img04 = "/images/naver18/part020104.jpg";
 		request.setAttribute("img04", img04);
 
 		Element h04 = dc.getElementsByClass("stress").get(2);
@@ -2846,13 +2846,13 @@ public class RecommendController {
 		String str20 = p05.text();
 		request.setAttribute("str20", str20);
 		
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140534111_D7ZJZGES5.jpg/WEIGHT_101_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/part020201.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140534655_F50AHAIKL.jpg/WEIGHT_101_pic_2.jpg?type=m4500_4500_fst&wm=N";
+		String img02 = "/images/naver18/part020202.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140535459_1P0VO436Y.jpg/WEIGHT_101_pic_3.jpg?type=m4500_4500_fst&wm=N";
+		String img03 = "/images/naver18/part020203.jpg";
 		request.setAttribute("img03", img03);
-		String img04 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140535570_BQ6CUZX9I.jpg/WEIGHT_101_pic_4.jpg?type=m4500_4500_fst&wm=N";
+		String img04 = "/images/naver18/part020204.jpg";
 		request.setAttribute("img04", img04);
 
 		Element h04 = dc.getElementsByClass("stress").get(2);
@@ -2978,13 +2978,13 @@ public class RecommendController {
 		String str20 = p05.text();
 		request.setAttribute("str20", str20);
 		
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140535683_7J194TI7J.jpg/WEIGHT_102_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/part020301.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140535859_TFYYDP02V.jpg/WEIGHT_102_pic_2.jpg?type=m4500_4500_fst&wm=N";
+		String img02 = "/images/naver18/part020302.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140538084_7Y9XBPM5T.jpg/WEIGHT_102_pic_3.jpg?type=m4500_4500_fst&wm=N";
+		String img03 = "/images/naver18/part020303.jpg";
 		request.setAttribute("img03", img03);
-		String img04 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140538860_59OUGC061.jpg/WEIGHT_102_pic_4.jpg?type=m4500_4500_fst&wm=N";
+		String img04 = "/images/naver18/part020304.jpg";
 		request.setAttribute("img04", img04);
 
 		Element h04 = dc.getElementsByClass("stress").get(2);
@@ -3081,11 +3081,11 @@ public class RecommendController {
 		String str19 = p04.text();
 		request.setAttribute("str19", str19);
 		
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140544054_Z8CKPK2TS.jpg/WEIGHT_105_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/090101.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140544097_1EW3YYXBV.jpg/WEIGHT_105_pic_2.jpg?type=m4500_4500_fst&wm=N";
+		String img02 = "/images/naver18/090102.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140547274_0W9A48R6V.jpg/WEIGHT_105_pic_3.jpg?type=m4500_4500_fst&wm=N";
+		String img03 = "/images/naver18/090103.jpg";
 		request.setAttribute("img03", img03);
 		return mav;
 		
@@ -3161,11 +3161,11 @@ public class RecommendController {
 		String str19 = p04.text();
 		request.setAttribute("str19", str19);
 		
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140547423_1C5BMWROB.jpg/WEIGHT_106_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/090201.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140547543_H0UYSUZ72.jpg/WEIGHT_106_pic_2.jpg?type=m4500_4500_fst&wm=N";
+		String img02 = "/images/naver18/090202.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140547817_IDG9CXHML.jpg/WEIGHT_106_pic_3.jpg?type=m4500_4500_fst&wm=N";
+		String img03 = "/images/naver18/090203.jpg";
 		request.setAttribute("img03", img03);
 
 		Element h04 = dc.getElementsByClass("stress").get(2);
@@ -3262,13 +3262,13 @@ public class RecommendController {
 		String str20 = p05.text();
 		request.setAttribute("str20", str20);
 		
-		String img01 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140549892_6QLTA5T9X.jpg/WEIGHT_108_pic_1.jpg?type=m4500_4500_fst&wm=N";
+		String img01 = "/images/naver18/090301.jpg";
 		request.setAttribute("img01", img01);
-		String img02 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140550090_05SERCTXQ.jpg/WEIGHT_108_pic_2.jpg?type=m4500_4500_fst&wm=N";
+		String img02 = "/images/naver18/090302.jpg";
 		request.setAttribute("img02", img02);
-		String img03 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140550587_BH3QM6RSO.jpg/WEIGHT_108_pic_3.jpg?type=m4500_4500_fst&wm=N";
+		String img03 = "/images/naver18/090303.jpg";
 		request.setAttribute("img03", img03);
-		String img04 = "http://dbscthumb.phinf.naver.net/2009_000_1/20120315140552720_T3RVEX314.jpg/WEIGHT_108_pic_4.jpg?type=m4500_4500_fst&wm=N";
+		String img04 = "/images/naver18/090304.jpg";
 		request.setAttribute("img04", img04);
 
 		Element h04 = dc.getElementsByClass("stress").get(2);

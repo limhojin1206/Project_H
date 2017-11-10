@@ -26,11 +26,7 @@
 		select * from boardnotice where no=#{no}
 	</select>
 	<insert id="addOne">
-<<<<<<< HEAD
-		insert into boardnotice values(boardnotice_seq.nextval, #{title}, #{id}, 0, sysdate+(9/24), #{content}, 0, #{bgno}, #{exno})
-=======
 		insert into boardnotice values(boardnotice_seq.nextval, #{title}, #{id}, 0, sysdate+(9/24), #{content}, 0, #{bgno}, #{exno, jdbcType=VARCHAR })
->>>>>>> refs/heads/master
 	</insert>
 	<select id="countAll" resultType="java.lang.Integer">
 		select count(*) cnt from boardnotice where bgno=#{bgno}

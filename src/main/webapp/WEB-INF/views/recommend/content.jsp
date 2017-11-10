@@ -5,22 +5,22 @@
 	<br/><br/>
 	<h2><b>${str00 }</b></h2>
 	<p>${et }</p><br/><hr/>
-	<table border="1" >
+	<table border="1">
 		<tr>
-			<th width="150">${str01 }</th>
-			<th>${str02 }</th>
-		<tr>
-		<tr>
-			<th width="150">${str03 }</th>
-			<th>${str04 }</th>
+			<th width="160">${str01 }</th>
+			<th width="380">${str02 }</th>
 		<tr>
 		<tr>
-			<th width="150">${str05 }</th>
-			<th>${str06 }</th>
+			<th width="160">${str03 }</th>
+			<th width="380">${str04 }</th>
 		<tr>
 		<tr>
-			<th width="150">${str07 }</th>
-			<th>${str08 }</th>
+			<th width="160">${str05 }</th>
+			<th width="380">${str06 }</th>
+		<tr>
+		<tr>
+			<th width="160">${str07 }</th>
+			<th width="380">${str08 }</th>
 		<tr>
 	</table><br/><hr/>
 	<h3>${str09 } <br /></h3>
@@ -35,19 +35,19 @@
 	<br/><hr/>
 	<h3>${str14 }</h3><br/>
 	<div align="left">
-	 	${str15 }<br/><br/>
-	</div>
+	 	${str15 }<br/>
+	</div><hr/>
 	<h3>${str16 }</h3><br/>
 	<div align="left">
 		<p align="center"><img src="${img01 }"></p><br/>
-		${str17 }<br/>
+		${str17 }<br/><br/>
 		<p align="center"><img src="${img02 }"></p><br/>
-		${str18 }<br/>
+		${str18 }<br/><br/>
 		<p align="center"><img src="${img03 }"></p><br/>
-		${str19 }<br/>
+		${str19 }<br/><br/>
 		<p align="center"><img src="${img04 }"></p><br/>
 		${str20 }<br/>
-	</div><br/>
+	</div><br/><hr/>
 	
 	<h3>${str21 }</h3><br/>
 	<div align="left">
@@ -55,7 +55,7 @@
 		${str23 }<br/>
 		${str29 }<br/>
 		${str30 }<br/>
-	</div><br/>
+	</div><br/><hr/>
 	
 	<h3>${str24 }</h3><br/>
 	<div align="left">
