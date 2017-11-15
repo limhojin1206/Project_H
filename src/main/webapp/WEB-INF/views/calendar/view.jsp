@@ -146,7 +146,7 @@
 			events: {
 				url: '/calendar/view',
 				type: 'post',
-				color: '#0099cc',   
+				color: '#5bc0de',   
 				textColor: 'black'
 			}, 
 		});

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+	<select id="readNotice" resultType="java.util.HashMap">
+		select t.* from (
+        	select b.*, r.c from boardnotice b left join (
+            	select bno, count(*) c from REPLYNOTICE group by bno) r on b.no = r.bno 
+               		where b.bgno=0 order by b.no desc) t
+	</select>
+	<update id="edit">
+		update boardnotice set title=#{title}, id=#{id}, content=#{content} where no=#{no}  
+	</update>
+	<delete id="delete">
+		delete boardnotice where no=#{no}
+	</delete>
+	<select id="readAll" resultType="java.util.HashMap">
+		select * from (
+    		select rownum r, t.* from (
+        		select b.*, r.c from boardnotice b left join (
+            		select bno, count(*) c from REPLYNOTICE group by bno) r on b.no = r.bno 
+                		where b.bgno=#{bgno} order by b.no desc) t ) where r between #{start} and #{end}
+	</select>
+	<select id="readOne" resultType="java.util.HashMap">
+		select * from boardnotice where no=#{no}
+	</select>
+	<insert id="addOne">
+		insert into boardnotice values(boardnotice_seq.nextval, #{title}, #{id}, 0, sysdate+(9/24), #{content}, 0, #{bgno}, #{exno, jdbcType=VARCHAR })
+	</insert>
+	<select id="countAll" resultType="java.lang.Integer">
+		select count(*) cnt from boardnotice where bgno=#{bgno}
+	</select>
+	<update id="countUp">
+		update boardnotice set cnt = cnt+1 where no=#{no}
+	</update>
+	<select id="search" resultType="java.util.HashMap">
+		select * from (
+    		select rownum r, t.* from (
+        		select b.*, r.c from boardnotice b left join (
+            		select bno, count(*) c from REPLYNOTICE group by bno) r on b.no = r.bno
+            			where b.bgno=#{bgno} and (${sql}) order by b.no desc) t )
+            				where r between #{start} and #{end}
+    </select>
+	<select id="countSearch" resultType="java.lang.Integer">
+		select count(*) cnt from boardnotice where bgno=#{bgno} and ${sql}
+	</select>
+	<update id="recommendUp">
+		update boardnotice set recommend = recommend+1 where no=#{bno}
+	</update>
+	<insert id="addRecommend">
+		insert into recommendnotice values(#{bno}, #{id}, sysdate+(9/24))
+	</insert>
+	<select id="checkRecommend" resultType="java.util.HashMap">
+		select * from recommendnotice where bno=#{bno} and id=#{id}
+	</select>
+	<select id="readRecommend" resultType="java.util.HashMap">
+		select * from (
+    		select rownum r, t.* from (
+        		select b.*, r.c from boardnotice b left join (
+            		select bno, count(*) c from REPLYNOTICE group by bno) r on b.no = r.bno 
+                		where b.recommend > 0 and b.bgno=1 order by b.recommend desc) t ) where r between 1 and 3
+	</select>
+	<select id="prevAndNext" resultType="java.util.HashMap">
+		select * from (
+			select no,
+				LAG(no, 1) OVER (order by no) as next,
+				LEAD(no, 1) OVER (order by no) as prev
+				from boardnotice where bgno=#{bgno}) where no=#{bno}
+	</select>
+</mapper>
