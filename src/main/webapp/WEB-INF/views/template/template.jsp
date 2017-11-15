@@ -30,7 +30,7 @@
 </head>
 
 <body>
-	<div class="container">
+	<div class="container" style="width:80%;">
 	<header>
 		<t:insertAttribute name="header"/>
 	</header>

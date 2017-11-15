@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reply">
+	<insert id="addOne">
+		insert into replynotice values(replynotice_seq.nextval, #{bno}, #{id}, #{content}, sysdate+(9/24))
+	</insert>
+	<select id="readAll" resultType="java.util.HashMap">
+		select r.*, TO_CHAR(rdate, 'YYYY/MM/DD HH24:MI:SS') crdate from replynotice r where bno = #{bno} order by r.no desc
+	</select>
+	<delete id="delete">
+		delete replynotice where no=#{no}
+	</delete>
+</mapper>

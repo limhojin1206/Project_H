@@ -137,7 +137,7 @@ public class MemberController {
 			mav.setViewName("t_sub_expr");
 			mav.addObject("title", "PROJECT_H");
 			mav.addObject("nav", "main/mainnav");
-			mav.addObject("section", "calendar/view");
+			mav.addObject("section", "main/view");
 		}
 		return mav;
 	}
