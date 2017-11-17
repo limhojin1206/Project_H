@@ -28,6 +28,45 @@ public class CalendarController {
 	@Autowired
 	ObjectMapper mapper;
 	
+	@RequestMapping("/guide")
+	public ModelAndView mainHomeviewHandle() {
+		ModelAndView mav = new ModelAndView("t_sub_expr");
+		mav.addObject("title", "D.U.EXERCISE");
+		mav.addObject("nav", "calendar/calendarnav");
+		mav.addObject("section", "main/view");
+		
+		return mav;
+	}
+	
+	@PostMapping(path="/friendView/{id}", produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String friendViewPostHandle(@PathVariable String id) {
+		System.out.println(id);
+		List<Map> list = dao.readAll(id);
+		String json = "";
+		try {
+			json = mapper.writeValueAsString(list);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		json = json.replaceAll("EXST", "start");
+		json = json.replaceAll("EXED", "end");
+		json = json.replaceAll("TITLE", "title");
+		json = json.replaceAll("NO", "id");
+		json = json.replaceAll("COLOR", "color");
+		//System.out.println(json);
+		return json;
+	}
+	
+	@RequestMapping("/friendView/{id}")
+	public ModelAndView friendViewHandle(@PathVariable String id) {
+		System.out.println(id);
+		ModelAndView mav = new ModelAndView("calendar/friendView");
+		mav.addObject("id", id);
+		
+		return mav;
+	}
+	
 	@PostMapping("exList")
 	@ResponseBody
 	public List<Map> exListHandle(HttpSession session) {

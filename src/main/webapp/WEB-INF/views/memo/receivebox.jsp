@@ -39,6 +39,9 @@
 	    <ul class="dropdown-menu">
 	    	<li><a href="/memo/send?target=${t.SENDER }">쪽지보내기</a></li>
 	    	<li><a href="/friend/info" class="pbt" role="${t.SENDER }"data-toggle="modal" data-target="#myModal">프로필</a></li>
+	    	<c:if test="${auth.ID ne t.SENDER }">
+		    	<li><a href="/calendar/friendView/${t.SENDER }" data-toggle="modal" data-target="#viewModal" data-backdrop="static">일정보기</a></li>
+	    	</c:if>
 	    </ul>
 	</div>	
 </td>
@@ -80,6 +83,16 @@
 		</table>
 	</div>
 </div>
+
+<!-- 일정 viewModal -->
+<div id="viewModal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<!-- Modal content-->
+		<div class="modal-content">
+		</div>
+	</div>
+</div>
+
 <!-- 친구정보 -->
 <div id="myModal" class="modal fade" role="dialog" >
   <div class="modal-dialog" align="center">

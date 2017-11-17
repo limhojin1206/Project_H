@@ -6,10 +6,12 @@
 		<div class="container-fluid" align="center">
 			<li><a style="color: silver;" id="addbt">일정 추가하기</a></li>
 			<br />
-			<li><a style="color: silver;" id="readbt">저장된 운동법</a></li>
+		<!-- 	<li><a style="color: silver;" id="readbt">저장된 운동법</a></li>
 			<br />
 			<li><a href="/#" style="color: silver;">추천 운동법</a></li>
-			<br />
+			<br />	 -->
+			<li><a href="/calendar/guide" style="color: silver;">캘린더 사용법 보기</a></li>
+			<br/>
 		</div>
 	</ul>
 </nav>

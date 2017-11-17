@@ -27,7 +27,14 @@
 					<td>
 						<c:choose>
 							<c:when test="${auth.ID ne obj.ID }">
-								<a href="/memo/send?target=${obj.ID }">${obj.ID }</a>
+								<div class="dropdown">
+								    <span data-toggle="dropdown">${obj.ID }</span>
+								    <ul class="dropdown-menu">
+								    	<li><a href="/memo/send?target=${obj.ID }">쪽지 보내기</a></li>
+								    	<li><a href="/friend/info" class="pbt" role="${obj.ID }"data-toggle="modal" data-target="#myModal">프로필</a></li>
+								    	<li><a href="/calendar/friendView/${obj.ID }" data-toggle="modal" data-target="#viewModal" data-backdrop="static">일정보기</a></li>
+								    </ul>
+								</div>
 							</c:when>
 							<c:otherwise>
 								${obj.ID }
@@ -52,7 +59,14 @@
 					<td>
 						<c:choose>
 							<c:when test="${auth.ID ne obj.ID }">
-								<a href="/memo/send?target=${obj.ID }">${obj.ID }</a>
+								<div class="dropdown">
+								    <span data-toggle="dropdown">${obj.ID }</span>
+								    <ul class="dropdown-menu">
+								    	<li><a href="/memo/send?target=${obj.ID }">쪽지 보내기</a></li>
+								    	<li><a href="/friend/info" class="pbt" role="${obj.ID }"data-toggle="modal" data-target="#myModal">프로필</a></li>
+								    	<li><a href="/calendar/friendView/${obj.ID }" data-toggle="modal" data-target="#viewModal" data-backdrop="static">일정보기</a></li>
+								    </ul>
+								</div>
 							</c:when>
 							<c:otherwise>
 								${obj.ID }
@@ -84,7 +98,14 @@
 					<td>
 						<c:choose>
 							<c:when test="${auth.ID ne obj.ID }">
-								<a href="/memo/send?target=${obj.ID }">${obj.ID }</a>
+								<div class="dropdown">
+								    <span data-toggle="dropdown">${obj.ID }</span>
+								    <ul class="dropdown-menu">
+								    	<li><a href="/memo/send?target=${obj.ID }">쪽지 보내기</a></li>
+								    	<li><a href="/friend/info" class="pbt" role="${obj.ID }"data-toggle="modal" data-target="#myModal">프로필</a></li>
+								    	<li><a href="/calendar/friendView/${obj.ID }" data-toggle="modal" data-target="#viewModal" data-backdrop="static">일정보기</a></li>
+								    </ul>
+								</div>
 							</c:when>
 							<c:otherwise>
 								${obj.ID }
@@ -113,7 +134,14 @@
 					<td>
 						<c:choose>
 							<c:when test="${auth.ID ne obj.ID }">
-								<a href="/memo/send?target=${obj.ID }">${obj.ID }</a>
+								<div class="dropdown">
+								    <span data-toggle="dropdown">${obj.ID }</span>
+								    <ul class="dropdown-menu">
+								    	<li><a href="/memo/send?target=${obj.ID }">쪽지 보내기</a></li>
+								    	<li><a href="/friend/info" class="pbt" role="${obj.ID }"data-toggle="modal" data-target="#myModal">프로필</a></li>
+								    	<li><a href="/calendar/friendView/${obj.ID }" data-toggle="modal" data-target="#viewModal" data-backdrop="static">일정보기</a></li>
+								    </ul>
+								</div>
 							</c:when>
 							<c:otherwise>
 								${obj.ID }
@@ -219,5 +247,14 @@
 			<input id="search" name="search" type="text" value="${search }">
 			<button type="submit">검색</button>
 		</form>
+	</div>
+</div>
+
+<!-- 일정 viewModal -->
+<div id="viewModal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<!-- Modal content-->
+		<div class="modal-content">
+		</div>
 	</div>
 </div>
